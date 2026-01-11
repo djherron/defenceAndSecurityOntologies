@@ -1,10 +1,7 @@
-# BFO (Basic Formal Ontology) {ignore}
-
-**Table of Contents**
-[TOC]
+# BFO (Basic Formal Ontology)
 
 
-# BFO description - from Wikipedia
+## BFO description - from Wikipedia
 
 https://en.wikipedia.org/wiki/Basic_Formal_Ontology
 * a top-level ontology developed by *Barry Smith* and his associates for the purposes of promoting interoperability among domain ontologies
@@ -25,7 +22,7 @@ https://philpapers.org/rec/MORJDO
 **NOTE:** We tried but were unable to find a downloadable OWL file for the *Joint Doctrine Ontology*!
 
 
-# website
+## website
 
 https://basic-formal-ontology.org/
 > The Basic Formal Ontology (BFO) is a small, upper-level ontology that is designed for use in supporting information retrieval, analysis and integration in scientific and other domains. BFO is a genuine upper ontology.
@@ -34,7 +31,7 @@ BFO Documentation page
 https://basic-formal-ontology.org/bfo-2020.html
 
 
-# GitHub
+## GitHub
 
 Current (latest) repo
 https://github.com/bfo-ontology/BFO-2020

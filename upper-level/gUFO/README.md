@@ -10,7 +10,7 @@ https://nemo-ufes.github.io/gufo/
 
 > The objective of gUFO is to provide a lightweight implementation of the Unified Foundational Ontology (UFO) suitable for Semantic Web OWL 2 DL applications.
 
-## UFO 
+---
 
 **UFO: The Unified Foundational Ontology**
 

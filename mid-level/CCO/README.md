@@ -40,7 +40,7 @@ The CCO distribution (on GitHub) also contains a **merged** ontology (`CommonCor
 > A stand-alone file containing the eleven mid-level Common Core Ontologies plus BFO. Provided for use-cases where one file representing a specific release of CCO and its imports is desirable.
 
 
-## CCO connection with defence and security domains
+## CCO connection with defence, intelligence and security domains
 
 According to `The Common Core Ontologies` (Jensen et al., 2024):
 * The CCO project was initiated by [CUBRC](https://www.cubrc.org/), a not-for-profit R&D company associated with the University of Buffalo and Barry Smith, in 2010, using a grant from IARPA (Intelligencee Advanced Research Projects Activity), the R&D arm of the U.S. intelligence community.
@@ -52,7 +52,6 @@ Per the CUBRC website:
 > **to help solve some of the most critical and challenging problems facing [the] Defense, Intelligence and Homeland Security communities**.
 * CUBRC's projects:
 > Using the BFO and CCO as a foundation, CUBRC is a leading developer of **domain level ontologies** that are tailored for specific use across a wide variety of **defense, intelligence, law enforcement, and commercial applications**. 
-
 
 **CUBRC: Calspan-University of Buffalo Research Centre**
 * formed from a relationship between the University of Buffalo and Calspan, a former Cornell Aeronautical Laboratory

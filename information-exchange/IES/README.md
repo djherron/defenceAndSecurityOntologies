@@ -54,3 +54,11 @@ Each of the 3 component ontologies of IES v5 arguably belongs in a different sub
 
 However, rather than distribute IES assets throughout DISO, we have chosen to keep all IES assets together, in one place, and to use README files in the `upper-level` and `mid-level` folders to direct users to the `information-exchange` folder to find the IES top-level and mid-level ontologies, respectively.
 
+
+## IES and Situation Awareness
+
+The IES **information exchange** data model supports **situational awareness** (SA) even though it wasn't designed specifically with SA in mind.  That is, it supports the exchange of SA information along with other categories and domains of information as well.
+
+There may be interesting overlaps between IES and JC3IEDM in this respect, and between IES and the SA-specific ontologies in the `situation-awareness` subdomain (cluster).
+
+

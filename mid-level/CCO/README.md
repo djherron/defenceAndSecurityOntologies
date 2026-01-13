@@ -36,7 +36,7 @@ There are 11 CCO modules (component ontologies).
 
 ## The CCO merged ontology
 
-The **merged** ontology (`CommonCoreOntologiesMerged.ttl`) contains all 11 CCO modules, plus BFO (`bfo-core.ttl`).
+The CCO distribution (on GitHub) also contains a **merged** ontology (`CommonCoreOntologiesMerged.ttl`) that contains all 11 CCO modules, plus BFO (`bfo-core.ttl`).
 > A stand-alone file containing the eleven mid-level Common Core Ontologies plus BFO. Provided for use-cases where one file representing a specific release of CCO and its imports is desirable.
 
 
@@ -45,7 +45,7 @@ The **merged** ontology (`CommonCoreOntologiesMerged.ttl`) contains all 11 CCO m
 According to `The Common Core Ontologies` (Jensen et al., 2024):
 * The CCO project was initiated by [CUBRC](https://www.cubrc.org/), a not-for-profit R&D company associated with the University of Buffalo and Barry Smith, in 2010, using a grant from IARPA (Intelligencee Advanced Research Projects Activity), the R&D arm of the U.S. intelligence community.
 * The CUBRC made the CCO publicly available in 2017.
-* The CCOs are **"widly used in defense and intelligence sectors to support data standardization, interoperability, reproducibility, and automated reasoning across numerous domains"**.
+* The CCO modules are **"widely used in defense and intelligence sectors to support data standardization, interoperability, reproducibility, and automated reasoning across numerous domains"**.
 
 Per the CUBRC website:
 * CUBRC's mission:

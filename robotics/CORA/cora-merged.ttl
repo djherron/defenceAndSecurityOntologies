@@ -1,0 +1,1096 @@
+@prefix : <http://www.semanticweb.org/dave/ontologies/corafull#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/dave/ontologies/corafull#> .
+
+<http://www.semanticweb.org/dave/ontologies/corafull#> rdf:type owl:Ontology ;
+                                                        <http://purl.org/dc/elements/1.1/contributor> "Sandro Rama Fiorini"@en ,
+                                                                                                      "Vitor Fortes Rey"@en ;
+                                                        <http://purl.org/dc/elements/1.1/creator> "Sandro Rama Fiorini" ;
+                                                        <http://purl.org/dc/elements/1.1/rights> """IEEE 1872-2015 copyright is property of IEEE Standards Association.
+
+The ontologies in IEEE1872-owl are CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)"""@en ,
+                                                                                                 "https://creativecommons.org/licenses/by/4.0/" ;
+                                                        rdfs:comment "Ontology for  annotation properties used in IEEE1872-owl." ,
+                                                                     """This is the OWL implementation of CORA in IEEE 1872-2015. It only includes  the taxonomy of concepts and relations, with some few axioms reggarding disjointness, property characteristics and property ranges/domains. 
+
+The OWL implementation is an underspecified version of the SUO-KIF implementation in IEEE 1872-2015. That is, the set of allowed models of the SUO-KIF implementation is a proper subset of the allowed models by the OWL implementation.
+
+Concept definitions in natural language and othe clarifications can be found in the  IEEE 1872-2015 standard."""@en ,
+                                                                     """This is the OWL implementation of CORAX in IEEE 1872-2015. It only includes  the taxonomy of concepts and relations, with some few axioms reggarding disjointness, property characteristics and property ranges/domains. 
+
+The OWL implementation is an underspecified version of the SUO-KIF implementation in IEEE 1872-2015. That is, the set of allowed models of the SUO-KIF implementation is a proper subset of the allowed models by the OWL implementation.
+
+Concept definitions in natural language and othe clarifications can be found in the  IEEE 1872-2015 standard."""@en ,
+                                                                     """This is the OWL implementation of RPARTS in IEEE 1872-2015. It only includes  the taxonomy of concepts and relations, with some few axioms reggarding disjointness, property characteristics and property ranges/domains. 
+
+The OWL implementation is an underspecified version of the SUO-KIF implementation in IEEE 1872-2015. That is, the set of allowed models of the SUO-KIF implementation is a proper subset of the allowed models by the OWL implementation.
+
+Concept definitions in natural language and othe clarifications can be found in the  IEEE 1872-2015 standard.""" ,
+                                                                     """This is the OWL implementation of SUMO as used by IEEE 1872-2015. It only includes  a taxonomy of concepts and relations, with some few axioms reggarding disjointness, property characteristics and property ranges/domains. 
+
+We only added propeties and axioms that were needed for IEEE 1872-2015, as well as related concepts/relations when needed. We also added a solution for reifying functions, as well as ternary and quaternary relations. 
+
+The OWL implementation is an underspecified version of the SUO-KIF implementation in IEEE 1872-2015. That is, the set of allowed models of the SUO-KIF implementation is a proper subset of the allowed models by the OWL implementation.
+
+Concept definitions in natural language and othe clarifications can be found in the  IEEE 1872-2015 standard."""@en ,
+                                                                     """This is the base OWL implementation of CORA in IEEE 1872-2015. It is a bare implementation of CORA only. It only includes  the taxonomy of concepts and relations defined in CORA, isolated from other ontologies. It includes some few axioms reggarding disjointness, property characteristics and property ranges/domains. 
+
+The OWL implementation is an underspecified version of the SUO-KIF implementation in IEEE 1872-2015. That is, the set of allowed models of the SUO-KIF implementation is a proper subset of the allowed models by the OWL implementation.
+
+Concept definitions in natural language and othe clarifications can be found in the  IEEE 1872-2015 standard."""@en ;
+                                                        rdfs:seeAlso "https://github.com/srfiorini/IEEE1872-owl" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/contributor
+<http://purl.org/dc/elements/1.1/contributor> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/rights
+<http://purl.org/dc/elements/1.1/rights> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber
+<http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> rdf:type owl:AnnotationProperty ;
+                                                                  rdfs:comment """Link to an specific axiom in IEEE 1872-2015. The axiom code is formed by <SectionNumber>.<AxiomNumber>, where AxiomNumber is the sequence number of the axiom from the beggining of the section where it is defined. 
+
+For example, the axiom code of \"(subclass Robot Device)\" is 7.1.1 and the axiom code of \"(domain robotPart 2 Robot)\" is 7.2.3"""@en ;
+                                                                  rdfs:label "IEEE 1872-2015 axiom code" .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/ieee1872-owl/cora-bare#agentRobot
+<http://purl.org/ieee1872-owl/cora-bare#agentRobot> rdf:type owl:ObjectProperty ;
+                                                    rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#agent> ;
+                                                    rdfs:domain <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+                                                    rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Process> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#agentRobot> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#agent> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.4.1"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#agentRobot> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.4.2"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#agentRobot> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+   rdfs:comment "7.4.3"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#automatedRobot
+<http://purl.org/ieee1872-owl/cora-bare#automatedRobot> rdf:type owl:ObjectProperty ;
+                                                        rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#agentRobot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#automatedRobot> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#agentRobot> ;
+   rdfs:comment "7.4.8"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#equippedWith
+<http://purl.org/ieee1872-owl/cora-bare#equippedWith> rdf:type owl:ObjectProperty ,
+                                                               owl:AsymmetricProperty ;
+                                                      rdfs:domain <http://purl.org/ieee1872-owl/cora-bare#RoboticEnvironment> ;
+                                                      rdfs:range <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#equippedWith> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#RoboticEnvironment> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.7.4"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#equippedWith> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.7.5"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#fullyautonomousRobot
+<http://purl.org/ieee1872-owl/cora-bare#fullyautonomousRobot> rdf:type owl:ObjectProperty ;
+                                                              rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#agentRobot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#fullyautonomousRobot> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#agentRobot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.4.4"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#remotecontrolledRobot
+<http://purl.org/ieee1872-owl/cora-bare#remotecontrolledRobot> rdf:type owl:ObjectProperty ;
+                                                               rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#agentRobot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#remotecontrolledRobot> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#agentRobot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.4.7"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#robotPart
+<http://purl.org/ieee1872-owl/cora-bare#robotPart> rdf:type owl:ObjectProperty ;
+                                                   rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#part> ;
+                                                   rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+                                                   rdfs:range <http://purl.org/ieee1872-owl/cora-bare#Robot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.2.2"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+   rdfs:comment "7.2.3"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#part> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.2.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#semiautonomousRobot
+<http://purl.org/ieee1872-owl/cora-bare#semiautonomousRobot> rdf:type owl:ObjectProperty ;
+                                                             rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#agentRobot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#semiautonomousRobot> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#agentRobot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.4.5"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#support
+<http://purl.org/ieee1872-owl/cora-bare#support> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+                                                 rdfs:range <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#support> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.6.3"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#support> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.6.4"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#teleoperatedRobot
+<http://purl.org/ieee1872-owl/cora-bare#teleoperatedRobot> rdf:type owl:ObjectProperty ;
+                                                           rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#agentRobot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#teleoperatedRobot> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#agentRobot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.4.6"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#about
+<http://purl.org/ieee1872-owl/corax#about> rdf:type owl:ObjectProperty ,
+                                                    owl:AsymmetricProperty ;
+                                           rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Proposition> ;
+                                           rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Entity> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#about> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Proposition> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.9"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#about> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Entity> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.10"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#dependsOn
+<http://purl.org/ieee1872-owl/corax#dependsOn> rdf:type owl:ObjectProperty ;
+                                               rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Entity> ;
+                                               rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Entity> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#dependsOn> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Entity> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.2.3"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#dependsOn> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Entity> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.2.4"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#designAttribute
+<http://purl.org/ieee1872-owl/corax#designAttribute> rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf <http://purl.org/ieee1872-owl/corax#property> ,
+                                                                        <http://purl.org/ieee1872-owl/sumo-cora#property> ;
+                                                     rdf:type owl:AsymmetricProperty ;
+                                                     rdfs:domain <http://purl.org/ieee1872-owl/corax#DesignObject> ;
+                                                     rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Attribute> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#designAttribute> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/corax#property> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.13"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#designAttribute> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/corax#DesignObject> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.16"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#designAttribute> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Attribute> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.17"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#designMeasure
+<http://purl.org/ieee1872-owl/corax#designMeasure> rdf:type owl:ObjectProperty ,
+                                                            owl:AsymmetricProperty ;
+                                                   rdfs:domain <http://purl.org/ieee1872-owl/corax#DesignObject> ;
+                                                   rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#PhysicalQuantity> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#designMeasure> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/corax#DesignObject> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.20"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#designMeasure> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#PhysicalQuantity> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.21"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#idealizes
+<http://purl.org/ieee1872-owl/corax#idealizes> rdf:type owl:ObjectProperty ,
+                                                        owl:AsymmetricProperty ;
+                                               rdfs:domain <http://purl.org/ieee1872-owl/corax#Design> ;
+                                               rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Artifact> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#idealizes> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/corax#Design> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.4"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#idealizes> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Artifact> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.4"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#interactsWith
+<http://purl.org/ieee1872-owl/corax#interactsWith> rdf:type owl:ObjectProperty ,
+                                                            owl:SymmetricProperty ;
+                                                   rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Object> ;
+                                                   rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Object> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#interactsWith> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Object> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.3.6"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#interactsWith> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Object> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.3.7"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#property
+<http://purl.org/ieee1872-owl/corax#property> rdf:type owl:ObjectProperty ;
+                                              owl:equivalentProperty <http://purl.org/ieee1872-owl/sumo-cora#property> ;
+                                              rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Entity> ;
+                                              rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Attribute> ;
+                                              rdfs:comment "This property should be defined in sumo-cora. Use http://purl.org/ieee1872-owl/sumo-cora#property instead." ;
+                                              owl:deprecated "true"^^xsd:boolean .
+
+
+###  http://purl.org/ieee1872-owl/pos#_instance
+<http://purl.org/ieee1872-owl/pos#_instance> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#_Relation> ;
+                                             rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Relation> .
+
+
+###  http://purl.org/ieee1872-owl/rparts#robotActuatingPart
+<http://purl.org/ieee1872-owl/rparts#robotActuatingPart> rdf:type owl:ObjectProperty ;
+                                                         rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+                                                         rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+                                                         rdfs:range <http://purl.org/ieee1872-owl/cora-bare#Robot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotActuatingPart> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.2.1"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotActuatingPart> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.2.2"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotActuatingPart> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.2.3"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/rparts#robotCommunicatingPart
+<http://purl.org/ieee1872-owl/rparts#robotCommunicatingPart> rdf:type owl:ObjectProperty ;
+                                                             rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+                                                             rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+                                                             rdfs:range <http://purl.org/ieee1872-owl/cora-bare#Robot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotCommunicatingPart> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.3.1"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotCommunicatingPart> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.3.2"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotCommunicatingPart> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.3.3"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/rparts#robotProcessingPart
+<http://purl.org/ieee1872-owl/rparts#robotProcessingPart> rdf:type owl:ObjectProperty ;
+                                                          rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+                                                          rdfs:domain <http://purl.org/ieee1872-owl/corax#ProcessingDevice> ;
+                                                          rdfs:range <http://purl.org/ieee1872-owl/cora-bare#Robot> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotProcessingPart> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.4.1"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotProcessingPart> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/corax#ProcessingDevice> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.4.2"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotProcessingPart> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.4.3"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/rparts#robotSensingPart
+<http://purl.org/ieee1872-owl/rparts#robotSensingPart> rdf:type owl:ObjectProperty ;
+                                                       rdfs:subPropertyOf <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+                                                       rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+                                                       rdfs:range <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+                                                       rdfs:comment "In IEEE 1872-2015, the domain of class is MeasuringDevice, which is not present in SUMO 1.52. That is probably a mistake in IEEE 1872-2015." .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotSensingPart> ;
+   owl:annotatedProperty rdfs:subPropertyOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#robotPart> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.1.1"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotSensingPart> ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.1.2"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/rparts#robotSensingPart> ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "8.1.3"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_domain
+<http://purl.org/ieee1872-owl/sumo-cora#_domain> rdf:type owl:ObjectProperty ,
+                                                          owl:AsymmetricProperty ;
+                                                 rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Relation> ;
+                                                 rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Entity> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_domain1
+<http://purl.org/ieee1872-owl/sumo-cora#_domain1> rdf:type owl:ObjectProperty ;
+                                                  rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#_domain> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_domain2
+<http://purl.org/ieee1872-owl/sumo-cora#_domain2> rdf:type owl:ObjectProperty ;
+                                                  rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#_domain> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_domain3
+<http://purl.org/ieee1872-owl/sumo-cora#_domain3> rdf:type owl:ObjectProperty ;
+                                                  rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#_domain> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_domain4
+<http://purl.org/ieee1872-owl/sumo-cora#_domain4> rdf:type owl:ObjectProperty ;
+                                                  rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#_domain> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_range
+<http://purl.org/ieee1872-owl/sumo-cora#_range> rdf:type owl:ObjectProperty ;
+                                                rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#_Function> ;
+                                                rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Entity> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#agent
+<http://purl.org/ieee1872-owl/sumo-cora#agent> rdf:type owl:ObjectProperty ,
+                                                        owl:AsymmetricProperty ;
+                                               rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+                                               rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Agent> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#causes
+<http://purl.org/ieee1872-owl/sumo-cora#causes> rdf:type owl:ObjectProperty ;
+                                                rdfs:subPropertyOf owl:topObjectProperty ;
+                                                rdf:type owl:AsymmetricProperty ;
+                                                rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+                                                rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Process> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#located
+<http://purl.org/ieee1872-owl/sumo-cora#located> rdf:type owl:ObjectProperty ;
+                                                 rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#partlyLocated> ;
+                                                 rdf:type owl:TransitiveProperty .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#measure
+<http://purl.org/ieee1872-owl/sumo-cora#measure> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Object> ;
+                                                 rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#PhysicalQuantity> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#member
+<http://purl.org/ieee1872-owl/sumo-cora#member> rdf:type owl:ObjectProperty ;
+                                                rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#part> ;
+                                                rdf:type owl:AsymmetricProperty .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#part
+<http://purl.org/ieee1872-owl/sumo-cora#part> rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#partlyLocated
+<http://purl.org/ieee1872-owl/sumo-cora#partlyLocated> rdf:type owl:ObjectProperty ;
+                                                       rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Physical> ;
+                                                       rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Object> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#patient
+<http://purl.org/ieee1872-owl/sumo-cora#patient> rdf:type owl:ObjectProperty ,
+                                                          owl:AsymmetricProperty ;
+                                                 rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+                                                 rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Entity> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#property
+<http://purl.org/ieee1872-owl/sumo-cora#property> rdf:type owl:ObjectProperty ;
+                                                  rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Entity> ;
+                                                  rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#Attribute> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#result
+<http://purl.org/ieee1872-owl/sumo-cora#result> rdf:type owl:ObjectProperty ;
+                                                rdfs:subPropertyOf <http://purl.org/ieee1872-owl/sumo-cora#patient> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#time
+<http://purl.org/ieee1872-owl/sumo-cora#time> rdf:type owl:ObjectProperty ,
+                                                       owl:AsymmetricProperty ;
+                                              rdfs:domain <http://purl.org/ieee1872-owl/sumo-cora#Physical> ;
+                                              rdfs:range <http://purl.org/ieee1872-owl/sumo-cora#TimePosition> .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/ieee1872-owl/cora-bare#CollectiveRoboticSystem
+<http://purl.org/ieee1872-owl/cora-bare#CollectiveRoboticSystem> rdf:type owl:Class ;
+                                                                 rdfs:subClassOf <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> ;
+                                                                 owl:disjointWith <http://purl.org/ieee1872-owl/cora-bare#SingleRoboticSystem> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#CollectiveRoboticSystem> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.8.2"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#CollectiveRoboticSystem> ;
+   owl:annotatedProperty owl:disjointWith ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#SingleRoboticSystem> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.8.3"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#Robot
+<http://purl.org/ieee1872-owl/cora-bare#Robot> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Agent> ,
+                                                               <http://purl.org/ieee1872-owl/sumo-cora#Device> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Agent> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.1.2"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#Robot> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.1.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#RobotGroup
+<http://purl.org/ieee1872-owl/cora-bare#RobotGroup> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Group> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#RobotGroup> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Group> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.5.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#RobotInterface
+<http://purl.org/ieee1872-owl/cora-bare#RobotInterface> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Device> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#RobotInterface> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.3.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#RoboticEnvironment
+<http://purl.org/ieee1872-owl/cora-bare#RoboticEnvironment> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://purl.org/ieee1872-owl/corax#PhysicalEnvironment> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#RoboticEnvironment> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/corax#PhysicalEnvironment> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.7.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#RoboticSystem
+<http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> rdf:type owl:Class ;
+                                                       owl:equivalentClass _:genid48 ;
+                                                       rdfs:subClassOf <http://purl.org/ieee1872-owl/corax#ArtificialSystem> .
+
+_:genid48 rdf:type owl:Class ;
+           owl:unionOf ( <http://purl.org/ieee1872-owl/cora-bare#CollectiveRoboticSystem>
+                         <http://purl.org/ieee1872-owl/cora-bare#SingleRoboticSystem>
+                       ) .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> ;
+   owl:annotatedProperty owl:equivalentClass ;
+   owl:annotatedTarget _:genid48 ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.8.3"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/corax#ArtificialSystem> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.6.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/cora-bare#SingleRoboticSystem
+<http://purl.org/ieee1872-owl/cora-bare#SingleRoboticSystem> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/cora-bare#SingleRoboticSystem> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/cora-bare#RoboticSystem> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "7.8.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#ArtificialSystem
+<http://purl.org/ieee1872-owl/corax#ArtificialSystem> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Artifact> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#ArtificialSystem> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Artifact> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.4.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#Design
+<http://purl.org/ieee1872-owl/corax#Design> rdf:type owl:Class ;
+                                            rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Proposition> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#Design> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Proposition> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#DesignObject
+<http://purl.org/ieee1872-owl/corax#DesignObject> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Abstract> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#DesignObject> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Abstract> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.1.6"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#HumanRobotCommunication
+<http://purl.org/ieee1872-owl/corax#HumanRobotCommunication> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+                                                             rdfs:comment "In IEEE 1872-2015, this class is subclass of ContentBearingProcess, which is not present in SUMO 1.52. That is probably a mistake in IEEE 1872-2015." .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#HumanRobotCommunication> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.7.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#Interaction
+<http://purl.org/ieee1872-owl/corax#Interaction> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Process> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#Interaction> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.3.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#PhysicalEnvironment
+<http://purl.org/ieee1872-owl/corax#PhysicalEnvironment> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Object> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#PhysicalEnvironment> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Object> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.2.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#ProcessingDevice
+<http://purl.org/ieee1872-owl/corax#ProcessingDevice> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#ElectricDevice> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#ProcessingDevice> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#ElectricDevice> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.5.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#RobotMotion
+<http://purl.org/ieee1872-owl/corax#RobotMotion> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Motion> .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#RobotMotion> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Motion> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.6.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/corax#RobotRobotCommunication
+<http://purl.org/ieee1872-owl/corax#RobotRobotCommunication> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+                                                             rdfs:comment "In IEEE 1872-2015, this class is subclass of ContentBearingProcess, which is not present in SUMO 1.52. That is probably a mistake in IEEE 1872-2015." .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/ieee1872-owl/corax#RobotRobotCommunication> ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget <http://purl.org/ieee1872-owl/sumo-cora#Process> ;
+   <http://purl.org/ieee1872-owl/annotation#ieee18722015AxiomNumber> "6.8.1"
+ ] .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Abstract
+<http://purl.org/ieee1872-owl/sumo-cora#Abstract> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Entity> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Agent
+<http://purl.org/ieee1872-owl/sumo-cora#Agent> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Object> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Artifact
+<http://purl.org/ieee1872-owl/sumo-cora#Artifact> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#CorpuscularObject> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Attribute
+<http://purl.org/ieee1872-owl/sumo-cora#Attribute> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Abstract> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#CognitiveAgent
+<http://purl.org/ieee1872-owl/sumo-cora#CognitiveAgent> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#SentientAgent> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Collection
+<http://purl.org/ieee1872-owl/sumo-cora#Collection> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Object> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#ConstantQuantity
+<http://purl.org/ieee1872-owl/sumo-cora#ConstantQuantity> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#PhysicalQuantity> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#CorpuscularObject
+<http://purl.org/ieee1872-owl/sumo-cora#CorpuscularObject> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#SelfConnectedObject> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Creation
+<http://purl.org/ieee1872-owl/sumo-cora#Creation> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#InternalChange> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Device
+<http://purl.org/ieee1872-owl/sumo-cora#Device> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Artifact> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#ElectricDevice
+<http://purl.org/ieee1872-owl/sumo-cora#ElectricDevice> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Device> ;
+                                                        rdfs:comment "This concept is from in SUMO Mid-level." .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Entity
+<http://purl.org/ieee1872-owl/sumo-cora#Entity> rdf:type owl:Class ;
+                                                owl:disjointUnionOf ( <http://purl.org/ieee1872-owl/sumo-cora#Abstract>
+                                                                      <http://purl.org/ieee1872-owl/sumo-cora#Physical>
+                                                                    ) .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Function
+<http://purl.org/ieee1872-owl/sumo-cora#Function> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#SingleValuedRelation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Group
+<http://purl.org/ieee1872-owl/sumo-cora#Group> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Agent> ,
+                                                               <http://purl.org/ieee1872-owl/sumo-cora#Collection> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#IntentionalProcess
+<http://purl.org/ieee1872-owl/sumo-cora#IntentionalProcess> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Process> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#InternalChange
+<http://purl.org/ieee1872-owl/sumo-cora#InternalChange> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Process> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#List
+<http://purl.org/ieee1872-owl/sumo-cora#List> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Relation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Making
+<http://purl.org/ieee1872-owl/sumo-cora#Making> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Creation> ,
+                                                                <http://purl.org/ieee1872-owl/sumo-cora#IntentionalProcess> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Motion
+<http://purl.org/ieee1872-owl/sumo-cora#Motion> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Process> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Object
+<http://purl.org/ieee1872-owl/sumo-cora#Object> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Physical> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Physical
+<http://purl.org/ieee1872-owl/sumo-cora#Physical> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Entity> ;
+                                                  owl:disjointUnionOf ( <http://purl.org/ieee1872-owl/sumo-cora#Object>
+                                                                        <http://purl.org/ieee1872-owl/sumo-cora#Process>
+                                                                      ) .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#PhysicalQuantity
+<http://purl.org/ieee1872-owl/sumo-cora#PhysicalQuantity> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Quantity> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Predicate
+<http://purl.org/ieee1872-owl/sumo-cora#Predicate> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Relation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Process
+<http://purl.org/ieee1872-owl/sumo-cora#Process> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Physical> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Proposition
+<http://purl.org/ieee1872-owl/sumo-cora#Proposition> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Abstract> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Quantity
+<http://purl.org/ieee1872-owl/sumo-cora#Quantity> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Abstract> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#QuaternaryPredicate
+<http://purl.org/ieee1872-owl/sumo-cora#QuaternaryPredicate> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Predicate> ,
+                                                                             <http://purl.org/ieee1872-owl/sumo-cora#QuaternaryRelation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#QuaternaryRelation
+<http://purl.org/ieee1872-owl/sumo-cora#QuaternaryRelation> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Relation> ;
+                                                            owl:disjointWith <http://purl.org/ieee1872-owl/sumo-cora#TernaryRelation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#Relation
+<http://purl.org/ieee1872-owl/sumo-cora#Relation> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Abstract> ;
+                                                  owl:disjointUnionOf ( <http://purl.org/ieee1872-owl/sumo-cora#Function>
+                                                                        <http://purl.org/ieee1872-owl/sumo-cora#List>
+                                                                        <http://purl.org/ieee1872-owl/sumo-cora#Predicate>
+                                                                      ) .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#SelfConnectedObject
+<http://purl.org/ieee1872-owl/sumo-cora#SelfConnectedObject> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Object> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#SentientAgent
+<http://purl.org/ieee1872-owl/sumo-cora#SentientAgent> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Agent> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#SetOrClass
+<http://purl.org/ieee1872-owl/sumo-cora#SetOrClass> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Abstract> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#SingleValuedRelation
+<http://purl.org/ieee1872-owl/sumo-cora#SingleValuedRelation> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Relation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#TernaryPredicate
+<http://purl.org/ieee1872-owl/sumo-cora#TernaryPredicate> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Predicate> ,
+                                                                          <http://purl.org/ieee1872-owl/sumo-cora#TernaryRelation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#TernaryRelation
+<http://purl.org/ieee1872-owl/sumo-cora#TernaryRelation> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Relation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#TimeMeasure
+<http://purl.org/ieee1872-owl/sumo-cora#TimeMeasure> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#ConstantQuantity> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#TimePosition
+<http://purl.org/ieee1872-owl/sumo-cora#TimePosition> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#TimeMeasure> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#UnaryFunction
+<http://purl.org/ieee1872-owl/sumo-cora#UnaryFunction> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Function> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_Function
+<http://purl.org/ieee1872-owl/sumo-cora#_Function> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#_Relation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_Predicate
+<http://purl.org/ieee1872-owl/sumo-cora#_Predicate> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#_Relation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_QuaternaryPredicate
+<http://purl.org/ieee1872-owl/sumo-cora#_QuaternaryPredicate> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#_Predicate> ,
+                                                                              <http://purl.org/ieee1872-owl/sumo-cora#_QuaternaryRelation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_QuaternaryRelation
+<http://purl.org/ieee1872-owl/sumo-cora#_QuaternaryRelation> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#_Relation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_Relation
+<http://purl.org/ieee1872-owl/sumo-cora#_Relation> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#_VariableAssignment> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_TernaryPredicate
+<http://purl.org/ieee1872-owl/sumo-cora#_TernaryPredicate> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#_Predicate> ,
+                                                                           <http://purl.org/ieee1872-owl/sumo-cora#_TernaryRelation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_TernaryRelation
+<http://purl.org/ieee1872-owl/sumo-cora#_TernaryRelation> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#_Relation> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_UnaryFunction
+<http://purl.org/ieee1872-owl/sumo-cora#_UnaryFunction> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#_Function> .
+
+
+###  http://purl.org/ieee1872-owl/sumo-cora#_VariableAssignment
+<http://purl.org/ieee1872-owl/sumo-cora#_VariableAssignment> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://purl.org/ieee1872-owl/sumo-cora#Entity> .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://purl.org/ieee1872-owl/sumo-cora#Attribute>
+                <http://purl.org/ieee1872-owl/sumo-cora#Proposition>
+                <http://purl.org/ieee1872-owl/sumo-cora#Quantity>
+                <http://purl.org/ieee1872-owl/sumo-cora#Relation>
+                <http://purl.org/ieee1872-owl/sumo-cora#SetOrClass>
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://purl.org/ieee1872-owl/sumo-cora#Function>
+                <http://purl.org/ieee1872-owl/sumo-cora#List>
+                <http://purl.org/ieee1872-owl/sumo-cora#Predicate>
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

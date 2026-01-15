@@ -1,0 +1,319 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns="http://lpis.csd.auth.gr/ontologies/CoDAMoS/CoDAMoS.owl#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://lpis.csd.auth.gr/ontologies/CoDAMoS/CoDAMoS.owl">
+  <owl:Ontology rdf:about="">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >CoDAMoS context ontology</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Profile"/>
+  <owl:Class rdf:ID="Middleware">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Software"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Noise">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="EnvironmentalCondition"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="CPUResource">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Resource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="StorageResource">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Resource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Lighting">
+    <rdfs:subClassOf rdf:resource="#EnvironmentalCondition"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Environment"/>
+  <owl:Class rdf:ID="Pressure">
+    <rdfs:subClassOf rdf:resource="#EnvironmentalCondition"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Mood"/>
+  <owl:Class rdf:ID="Service"/>
+  <owl:Class rdf:ID="RenderingEngine">
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ServiceProfile"/>
+  <owl:Class rdf:ID="Humidity">
+    <rdfs:subClassOf rdf:resource="#EnvironmentalCondition"/>
+  </owl:Class>
+  <owl:Class rdf:ID="OutputDevice">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="IODevice"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="PowerResource">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Resource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Modality"/>
+  <owl:Class rdf:ID="RelativeLocation">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Location"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="InputDevice">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#IODevice"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Time"/>
+  <owl:Class rdf:ID="ServiceModel"/>
+  <owl:Class rdf:ID="PreferenceProfile">
+    <rdfs:subClassOf rdf:resource="#Profile"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Task"/>
+  <owl:Class rdf:ID="Platform"/>
+  <owl:Class rdf:about="#Resource">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Hardware"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="OperatingSystem">
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:ID="NetworkResource">
+    <rdfs:subClassOf rdf:resource="#Resource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="AbsoluteLocation">
+    <rdfs:subClassOf rdf:resource="#Location"/>
+  </owl:Class>
+  <owl:Class rdf:about="#IODevice">
+    <rdfs:subClassOf rdf:resource="#Hardware"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Role"/>
+  <owl:Class rdf:ID="ServiceGrounding"/>
+  <owl:Class rdf:ID="Temperature">
+    <rdfs:subClassOf rdf:resource="#EnvironmentalCondition"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MemoryResource">
+    <rdfs:subClassOf rdf:resource="#Resource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="User"/>
+  <owl:Class rdf:ID="Activity"/>
+  <owl:Class rdf:ID="VirtualMachine">
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Address">
+    <rdfs:subClassOf rdf:resource="#RelativeLocation"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="hasRole">
+    <rdfs:range rdf:resource="#Role"/>
+    <rdfs:domain rdf:resource="#User"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="providesService">
+    <rdfs:domain rdf:resource="#Software"/>
+    <rdfs:range rdf:resource="#Service"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasServiceProfile">
+    <rdfs:range rdf:resource="#ServiceProfile"/>
+    <rdfs:domain rdf:resource="#Service"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasServiceModel">
+    <rdfs:range rdf:resource="#ServiceModel"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#Service"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasTime">
+    <rdfs:range rdf:resource="#Time"/>
+    <rdfs:domain rdf:resource="#Environment"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasMood">
+    <rdfs:range rdf:resource="#Mood"/>
+    <rdfs:domain rdf:resource="#User"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="supportsModality">
+    <rdfs:range rdf:resource="#Modality"/>
+    <rdfs:domain rdf:resource="#RenderingEngine"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasTask">
+    <rdfs:range rdf:resource="#Task"/>
+    <rdfs:domain rdf:resource="#User"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="requiresPlatform">
+    <rdfs:range rdf:resource="#Platform"/>
+    <rdfs:domain rdf:resource="#Software"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasLocation">
+    <rdfs:domain rdf:resource="#Environment"/>
+    <rdfs:range rdf:resource="#Location"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="providesSoftware">
+    <rdfs:domain rdf:resource="#Platform"/>
+    <rdfs:range rdf:resource="#Software"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isRelativeTo">
+    <rdfs:range rdf:resource="#Location"/>
+    <rdfs:domain rdf:resource="#RelativeLocation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasProfile">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#User"/>
+          <owl:Class rdf:about="#Role"/>
+          <owl:Class rdf:about="#Mood"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#Profile"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="usesIODevice">
+    <rdfs:domain rdf:resource="#User"/>
+    <rdfs:range rdf:resource="#IODevice"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasEnvironmentalCondition">
+    <rdfs:range rdf:resource="#EnvironmentalCondition"/>
+    <rdfs:domain rdf:resource="#Environment"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="providesHardware">
+    <rdfs:range rdf:resource="#Hardware"/>
+    <rdfs:domain rdf:resource="#Platform"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="usesService">
+    <rdfs:domain rdf:resource="#Task"/>
+    <rdfs:range rdf:resource="#Service"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasActivity">
+    <rdfs:domain rdf:resource="#Task"/>
+    <rdfs:range rdf:resource="#Activity"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="environmentValue">
+    <rdfs:domain rdf:resource="#EnvironmentalCondition"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="instructionSet">
+    <rdfs:domain rdf:resource="#CPUResource"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="age">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#Profile"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="latency">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#NetworkResource"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="name">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Profile"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="size">
+    <rdfs:domain rdf:resource="#Profile"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="reliability">
+    <rdfs:domain rdf:resource="#NetworkResource"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="preferredValue">
+    <rdfs:domain rdf:resource="#PreferenceProfile"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="range">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="branchPrediction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#CPUResource"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="version">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Middleware"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="edition">
+    <rdfs:domain rdf:resource="#Middleware"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="currAvailable">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#Resource"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="maxCapacity">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#Resource"/>
+  </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:ID="value">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="cpuCache">
+    <rdfs:domain rdf:resource="#CPUResource"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="gender">
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >F</rdf:first>
+          </rdf:rest>
+          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+          >M</rdf:first>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#Profile"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="hasEnvironment">
+    <rdfs:domain rdf:resource="#Platform"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="#Environment"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="hasServiceGrounding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="#Service"/>
+    <rdfs:range rdf:resource="#ServiceGrounding"/>
+  </owl:FunctionalProperty>
+  <rdf:Description>
+    <rdf:first rdf:resource="#PreferenceProfile"/>
+    <rdf:rest rdf:parseType="Collection">
+      <owl:Class rdf:about="#Profile"/>
+    </rdf:rest>
+  </rdf:Description>
+  <rdf:Description>
+    <rdf:first rdf:resource="#UserInterfacePart"/>
+    <rdf:rest rdf:parseType="Collection">
+      <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Thing"/>
+    </rdf:rest>
+  </rdf:Description>
+  <rdf:Description>
+    <rdf:first rdf:resource="#SimpleUIpart"/>
+    <rdf:rest rdf:parseType="Collection">
+      <rdf:Description rdf:ID="UserInterfacePart"/>
+    </rdf:rest>
+  </rdf:Description>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.7, Build 620)  http://protege.stanford.edu -->

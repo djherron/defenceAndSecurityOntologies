@@ -13,3 +13,14 @@ A digital twin:
 > provides a level of **prediction confidence** within specified validation envelope and an associated **assumption set**
 
 
+## The UK's National Digital Twin Programme
+
+The following diagram (a cross between a knowledge graph and a mind-map) describes the UK's National Digital Twin Programme:
+
+![NDTP](NDTP-KG-Mindmap.png "UK National Digital Twin Programme")
+
+
+
+
+
+

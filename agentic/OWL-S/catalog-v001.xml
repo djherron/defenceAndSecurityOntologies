@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1766848986771" name="http://www.daml.org/services/owl-s/1.2/Grounding.owl" uri="Grounding.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1766848986771" name="http://www.daml.org/services/owl-s/1.2/Process.owl" uri="Process.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1766848986771" name="http://www.daml.org/services/owl-s/1.2/Profile.owl" uri="Profile.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1766848986771" name="http://www.daml.org/services/owl-s/1.2/Resource.owl" uri="Resource.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1766848986771" name="http://www.daml.org/services/owl-s/1.2/Service.owl" uri="Service.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1766848986771" name="http://www.daml.org/services/owl-s/1.2/generic/Expression.owl" uri="Expression.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1766848986771" name="http://www.daml.org/services/owl-s/1.2/generic/ObjectList.owl" uri="ObjectList.owl"/>
+    </group>
+</catalog>

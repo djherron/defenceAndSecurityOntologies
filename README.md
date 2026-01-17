@@ -20,7 +20,13 @@ The domains of **defence, intelligence and security** have been **interpreted br
 
 ## Merged ontologies
 
-Some of the ontologies in DISO are distributed as networks of component ontologies, woven together with `owl:imports` statements. For many of these, we have **merged** the component ontology files into a single ontology file, using the Protege ontology editor.  If a merge was performed, details of the merge strategy employed are recorded in the documentation accompanying the ontology.
+Some of the ontologies in DISO are distributed as networks of component ontologies, woven together with `owl:imports` statements. For some of these, we have **merged** the component ontology files into a single ontology file, using the Protege ontology editor.
+
+## DISO cluster conceptual overlaps
+
+This diagram provides a view of the conceptual overlaps that exist between various clusters (or subdomains) of the DISO collection of defence, intelligence and security ontologies.
+
+![DISO](figs/diso-cluster-overlaps.png "DISO cluster conceptual overlaps")
 
 ## Towards an OAEI track ...
 

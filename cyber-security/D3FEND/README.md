@@ -6,7 +6,15 @@
 
 website:
 * https://d3fend.mitre.org/
+> A knowledge graph of cybersecurity countermeasures
 
-... under construction; more coming soon ...
+We downloaded d3fend v1.2.0 ontology files
+* https://d3fend.mitre.org/resources/ontology/
+* https://d3fend.mitre.org/ontologies/d3fend.owl
+> These files contain the entire current D3FEND model.
+
+see:
+* `d3fend.owl`
+* `d3fend.ttl`
 
 

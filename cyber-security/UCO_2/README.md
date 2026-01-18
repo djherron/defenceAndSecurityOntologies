@@ -41,7 +41,7 @@ There is an unfortunate **name clash** between two cyber-security ontologies tha
 
 The `2` in Syed's filename `uco2.ttl` is really a version number, indicating this is version 2 of the Syed UCO ontology.
 
-For our convenience within DISO, we use this `2` as indicating `UCO_2`, to help distinguish the ontology from `UCO_1`.
+For our convenience within DISO, we use this `2` as indicating `UCO_2`, to help distinguish the ontology from `UCO_1`.  The `UCO_1` ontology we have named `uco1-merge.ttl`
 
 Be careful not to mistake one UCO ontology for the other. They are very different.
 

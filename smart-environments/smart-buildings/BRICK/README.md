@@ -7,6 +7,7 @@
 website
 * https://brickschema.org/
 > Brick is an open-source effort to standardize semantic descriptions of the physical, logical and virtual assets in buildings and the relationships between them.
+* Brick does not have an explicit *smart* angle to it, but it models buildings
 
 GitHub repo
 * https://github.com/BrickSchema/Brick/

@@ -36,7 +36,7 @@ SAREF4BLDG
 
 several other domain extensions of SAREF Core are also available on the SAREF website
 
-## Digital Twins and Smart Environments
+## SAREF and Smart Environments
 
 There is strong overlap between the DISO clusters of `digital-twins` and `smart-environments`
 
@@ -44,7 +44,5 @@ Within DISO, SAREF sits in the `digital-twins` cluster because we first became a
 * `Home Automation System Ontology for Digital Building Twin` (Maryasin, 2019)
 * the authors declare that:
 > The most common smart-home and BMS [building management systems] ontologies are SAREF, SAREF4EE, Brick, and BOnSAI
-
-Thus, many of the DISO `smart-environments` ontologies can arguably be regarded as `digital-twin` ontologies.
 
 

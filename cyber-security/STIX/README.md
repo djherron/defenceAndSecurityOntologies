@@ -37,3 +37,8 @@ OASIS Cyber Threat Intelligence (CTI) TC
 * https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cti
 > Supporting automated information sharing for cybersecurity situational awareness, real-time network defense, and sophisticated threat analysis
 
+With Protege, we created a **merged** version of `stix-spec.owl` that draws all of it many imports into a single file. We called this `stix-spec-merged.ttl`.
+
+
+
+

@@ -1,0 +1,2142 @@
+@prefix : <https://saref.etsi.org/saref4cityMerge/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://saref.etsi.org/saref4cityMerge/> .
+
+<https://saref.etsi.org/saref4cityMerge/> rdf:type owl:Ontology ;
+                                           <http://purl.org/dc/terms/creator> <http://maxime-lefrancois.info/me#> ,
+                                                                              <http://w3id.org/people/mpoveda> ,
+                                                                              <http://www.garcia-castro.com/foaf.rdf#me> ,
+                                                                              <https://w3id.org/people/mpoveda/> ,
+                                                                              <https://www.linkedin.com/in/bouterca> ,
+                                                                              <https://www.linkedin.com/in/giulia-biagioni> ,
+                                                                              <https://www.linkedin.com/in/lauradaniele> ,
+                                                                              <https://www.linkedin.com/in/david-gnabasik-0056a0ba/> ,
+                                                                              <https://www.linkedin.com/in/paolaespinoza-arias/> ;
+                                           <http://purl.org/dc/terms/description> "The Smart Applications REFerence ontology (SAREF) is intended to enable interoperability between solutions from different providers and among various activity sectors in the Internet of Things (IoT), thus contributing to the development of the global digital market."@en ,
+                                                                                  "This ontology extends the SAREF ontology for the Smart City domain. This work has been developed in the context of the STF 534 (https://portal.etsi.org/STF/STFs/STFHomePages/STF534.aspx), which was established with the goal to create three SAREF extensions, one of them for the Smart City domain."@en ;
+                                           <http://purl.org/dc/terms/issued> "2020-06-05"^^xsd:date ,
+                                                                             "2024-10-31"^^xsd:date ;
+                                           <http://purl.org/dc/terms/license> <https://forge.etsi.org/etsi-software-license> ;
+                                           <http://purl.org/dc/terms/modified> "2024-03-06"^^xsd:date ,
+                                                                               "2025-04-11"^^xsd:date ;
+                                           <http://purl.org/dc/terms/publisher> <https://www.etsi.org/> ;
+                                           <http://purl.org/dc/terms/source> <https://saref.etsi.org/sources/saref-core/> ,
+                                                                             <https://saref.etsi.org/sources/saref4city/> ;
+                                           <http://purl.org/dc/terms/title> "SAREF4CITY: an extension of SAREF for the Smart City domain"@en ,
+                                                                            "SAREF: the Smart Applications REFerence ontology"@en ;
+                                           <http://purl.org/vocab/vann/preferredNamespacePrefix> "saref" ,
+                                                                                                 "s4city" ;
+                                           <http://purl.org/vocab/vann/preferredNamespaceUri> "https://saref.etsi.org/core/" ,
+                                                                                              "https://saref.etsi.org/saref4city/" ;
+                                           rdfs:comment """Information about changes compared to version 1.1.1: 
+ - Updated namespaces for compatibility with SAREF v3."""@en ,
+                                                        """Information about changes to version 2.1.1:
+
+- The classes and properties related to how to represent devices in building spaces (such as the saref:BuildingSpace class,  saref:BuildingObject class and saref:isLocatedIn property) have been removed from SAREF and incorporated  into the SAREF4BLDG extension related to buildings, including the reuse of the W3C? WGS84 geo positioning vocabulary.
+- The saref:DeviceCategory and saref:FunctionCategory classes have been removed. Instead, the hierarchy of device categories has been implemented directly as subclasses of the saref:Device class.
+- The information specific for energy efficiency has been moved to the SAREF4ENER extension. For example, the saref:Profile class has been redefined to accommodate only the properties that are general enough for any type of profile, not only for energy and power. Details on how to specifically model a power profile can be found in the SAREF4ENER extension. 
+- The subclasses of the saref:Energy class  have been removed (i.e., Average Energy, Maximum Energy, Minimum Energy, Total Energy, HVAC Energy, Hot Water Energy and Lighting Energy).
+- The saref:Property class has been split into two classes (saref:Property and saref:Measurement), as it is done in the SAREF4ENVI extension, in order to properly accommodate the distinction between the concept of property (an observable quality of something) and the concept of measurement (a concrete value observed for a property).
+- Too restrictive cardinality restrictions have been revised, sometimes making them optional rather than mandatory (better to make properties mandatory in the extensions that specialize SAREF for a specific purpose, rather than restricting SAREF, whose purpose is more general). For example, definitions of units of measurement using an enumeration (owl:oneOf) were too restrictive because they did not allow using other units than those enumerated. Therefore, the individuals of each class are still there, but the owl:oneOf enumeration has been removed.
+- The saref:UnitOfMeasure subclasses use individuals from the OM ontology for unit of measures, but this is not the only solution. It has been clarified in the comments that the OM ontology is an example, but other ontologies can be used.
+- The global restrictions (rdfs:domain and rdfs:range) in object properties have been completely removed not to hinder interoperability. Object properties are now only restricted locally in the classes. 
+- The subclasses of saref:Task have been transormed in individuals.
+- The saref:hasTask property has been removed from the saref:Profile class to resolve an ambiguity with the saref:Task class.""" ,
+                                                        """Information about changes to version 3.1.1:
+
+NOTE:	In some cases, references have been added to indicate the issue in the ETSI Forge (https://saref.etsi.org/sources/saref-core/issues) where the change was discussed and implemented.
+
+- Added the saref:FeatureOfInterest class and the properties used to relate it to saref:Measurement (saref:hasMeasurement and saref:isMeasurementOf) and to saref:Property (saref:hasProperty and saref:isPropertyOf).
+- Added the saref:measurementMadeBy property as inverse of saref:makesMeasurement.
+- The saref:relatesToProperty and saref:relatesToMeasurement properties are now inverse of each other.
+- The range of saref:hasValue, which was defined as xsd:float, has been removed to support other datatypes for measurements.
+- The range of datatype properties, which was defined as xsd:string, has been removed in order to support strings with language tags (rdf:langString). This affects saref:hasDescription, saref:hasManufacturer, saref:hasModel and saref:hasName, which now have implicitly a range of rdfs:Literal.
+- The saref:hasName property has been removed and the use of rdfs:label is recommended. 
+- The saref:hasDescription property has been deprecated and the use of rdfs:comment is recommended. 
+- Too restrictive restrictions have been removed and in some cases the ontology documentation has been updated to reflect this: a saref:Command having at most one saref:hasDescription; a saref:Task being accomplished by at least one saref:Device; a saref:Device having a typical consumption of only energy or power; a saref:Commodity being measured in units of measure; restrictions on the values of saref:accomplishes that only covered specific use cases; universal restrictions on the saref:actsUpon property have been changed to existential ones; restrictions on the commands that a saref:Function may have, since there could be others not included in the defined enumerations; restrictive documentation of saref:EventFunction and saref:SmokeSensor.
+- Bugs have been fixed: some devices (saref:DoorSwitch, saref:EnergyMeter, saref:LigthSwitch, saref:SmokeSensor, and saref:TemperatureSensor) were defined as subclass of a device and at the same time as consisting of such device; a saref:LightSwitch controls light and does not measure light, since it is an actuator; incorrect documentation of saref:OnState and saref:OffState.
+- The saref:BuildingRelated, saref:EnergyRelated and saref:FunctionRelated classes have been removed, since the different extensions already classify the device types.
+- The instances of the subclasses of saref:Command have been removed, since they represent examples.
+- The instances of saref:UnitOfMeasure have been moved to examples.
+- The classes related to the SAREF4ENER extension have been removed: saref:Generator, saref:Storage, saref:Load and saref:EnergyMeter.
+- Some instances of saref:Device have been moved to examples: saref:WashingMachine, saref:LightingDevice, saref:MicroRenewable, saref:Multimedia, and saref:Network.
+- Added domain and range axioms wherever the definition of a property unambiguously identifies the domain or the range of the property.
+- The OWL Time ontology is not imported anymore.
+- The documentation of some ontology terms has been updated for clarification.
+- Language tags have been added to all labels and comments.
+""" ,
+                                                        """Information about changes to version 3.2.1:
+
+NOTE: Rationale and decisions for many of the changes in V3.2.1 are available in issues in project https://saref.etsi.org/sources/saref-core/issues.
+
+- Definition of saref:FeatureOfInterest is clarified, not only properties are measured, but properties and states can be observed and controlled.
+- Definition of saref:FeatureOfInterest: Clarify it is a specific real world entity.
+- Definition of saref:FeatureOfInterest: allValuesFrom axioms are unnecessary and have been deleted.
+- Introduced class saref:FeatureKind
+- Use SKOS to organize generic classes in taxonomies.
+- Introduce hasClassKind for Class is Feature, Device, Property, State, Function, Command.
+- Add local restrictions on consistsOf on feature of interest
+- Defined domain of saref:hasManufacturer to union of feature kind and feature of interest.
+- Defined domain of saref:hasModel to union of feature kind and feature of interest.
+- Most axioms on saref:Device were useless and have been deleted.
+- definition of saref:Device clarifies it is a real world entity.
+- saref:Device is explicitly a subclass of saref:FeatureOfInterest and s4syst:System.
+- saref:actsUpon now holds not only between a command and a state. It generalizes actsUpon, observes, controls. Domain and range are unions of several classes.
+- Introduced property saref:isActedUponBy.
+- Introduced property saref:observes, as sub-property of saref:actsUpon. and generalization of measures.
+- Introduced property saref:controls, as sub-property of saref:actsUpon. and generalization of saref:controlsProperty.
+- Introduced property saref:isControlledBy.
+- saref:measuresProperty is deprecated: will be deleted in the next release of SAREF
+- saref:isMeasuredByDevice is deprecated: will be deleted in the next release of SAREF
+- saref:isControlledByDevice is deprecated: will be deleted in the next release of SAREF
+- saref:controlsProperty is deprecated: will be deleted in the next release of SAREF
+- Definition of saref:Appliance is grounded on tasks and commodities.
+- Definition of Sensor is simplified and grounded on saref:observes. Local restriction on saref:hasFunction is deleted.
+- Definition of Actuator is simplified and grounded on saref:controls. Local restriction on saref:hasFunction is deleted.
+- Definition of Meter is simplified and grounded on saref:observes. Local restriction on saref:hasFunction is deleted.
+- Deprecated saref:HVAC for it is only an example.
+- Deprecated saref:Switch for it is only an example.
+- Deprecated saref:DoorSwitch for it is only an example.
+- Deprecated saref:LightSwitch for it is only an example.
+- Deprecated saref:SmokeSensor for it is only an example.
+- Deprecated saref:TemperatureSensor for it is only an example.
+- The following tasks are deprecated, and may be deleted in the next release of SAREF: saref:Cleaning, saref:Comfort, saref:Drying, saref:EnergyEfficiency, saref:Entertainment, saref:Lighting, saref:MeterReading, saref:Safety, saref:Washing, saref:WellBeing.
+- Definition of saref:Commodity is simplified.
+- saref:Electricity is deprecated: will be defined as an instance of saref:Commodity in the next release of SAREF
+- saref:Gas is deprecated: will be defined as an instance of saref:Commodity in the next release of SAREF
+- saref:Coal is deprecated: will be defined as an instance of saref:Commodity in the next release of SAREF
+- saref:Water is deprecated: will be defined as an instance of saref:Commodity in the next release of SAREF
+- New category of commodities saref:EnergyCommodity
+- New category of commodities saref:NaturalResourceCommodity
+- Introduced saref:consumes, saref:isConsumedBy, saref:produces, saref:isProducedBy, saref:stores, saref:isStoredBy.
+- The definition and scope of usage for saref:Property is clarified. Axiomatization is simplified.
+- applicability of saref:hasProperty is relaxed to also saref:FeatureKind
+- Introduced saref:PropertyOfInterest to solved the ambiguity between generic vs specific properties.
+- Introduced saref:hasPropertyOfInterest and saref:isPropertyOfInterestOf. Cannot use saref:hasProperty due to the combination of cardinality restrictions and sub-property chain axioms makes the ontology exist the OWL 2 DL prodile.
+- Introduced saref:PropertyValue to simplify the association of a measure to a property, without always needing it to be a measurement made by a device.
+- Clarified definition of saref:hasValue.
+- Relaxed domain of saref:isMeasuredIn so it can apply to saref:PropertyValue as well as saref:Measurement. The new range will be enforced in the next release of SAREF.
+- Introduced saref:hasPropertyValue.
+- Introduced saref:isValueOfProperty.
+- The following classes are deprecated and may be defined as instances of saref:Property in the next release of SAREF: saref:Energy, saref:Humidity, saref:Light, saref:Motion, saref:Occupancy, saref:Power, saref:Pressure, saref:Price, saref:Smoke, saref:Temperature
+- saref:EnergyUnit is deprecated. Will be deleted in the next release of SAREF
+- saref:IlluminanceUnit is deprecated. Will be deleted in the next release of SAREF
+- saref:PowerUnit is deprecated. Will be deleted in the next release of SAREF
+- saref:PressureUnit is deprecated. Will be deleted in the next release of SAREF
+- saref:TemperatureUnit is deprecated. Will be deleted in the next release of SAREF
+- Clarified and generalized definition of saref:State. Can now apply to all features of interest, not just devices.
+- Relaxed domain of saref:hasState.
+- Introduced saref:isStateOf.
+- Introduced saref:StateOfInterest, parallel to saref:PropertyOfInterest.
+- Introduced saref:hasStateOfInterest and saref:isStateOfInterestOf, parallel to saref:hasPropertyOfInterest and saref:isPropertyOfInterestOf.
+- The following classes are deprecated and may be defined as instances of saref:State in the next release of SAREF: saref:CloseState, saref:MultiLevelState, saref:OffState, saref:OnOffState, saref:OnState, saref:OpenCloseState, saref:OpenState, saref:StartState, saref:StartStopState, saref:StopState.
+- Simplified definition and axiomatization of saref:Function. Added examples.
+- saref:SensingFunction is deprecated: may be defined as an instance of saref:Function in the next release of SAREF
+- saref:hasSensingRange is deprecated together with saref:SensingFunction. And may be defined as an instance of saref:Property in the next release of SAREF
+- saref:hasSensorType is deprecated together with saref:SensingFunction. Use saref:hasDeviceKind instead.
+- saref:EventFunction is deprecated: may be defined as an instance of saref:Function in the next release of SAREF
+- saref:hasThresholdMeasurement is deprecated together with saref:EventFunction. And may be defined as an instance of saref:Property in the next release of SAREF
+- saref:MeteringFunction is deprecated: may be defined as an instance of saref:Function in the next release of SAREF
+- deprecated saref:hasMeterReading together with saref:Measurement and saref:MeteringFunction
+- deprecated saref:hasMeterReadingType together with saref:MeteringFunction
+- saref:LevelControlFunction, saref:StartStopFunction, saref:OpenCloseFunction, saref:OnOffFunction,  
+- saref:ActuatingFunction are deprecated: may be defined as an instance of saref:Function in the next release of SAREF.
+- Domain of saref:hasFunction is relaxed.
+- Introduced saref:isFunctionOf.
+- Introduced saref:FunctionOfInterest, parallel to saref:PropertyOfInterest.
+- Simplified definition and axiomatization of saref:Command. Added examples.
+- Domain of saref:hasCommand is relaxed to saref:Function or saref:FunctionOfInterest.
+- Introduced mandatory and optional commands.
+- Introduced saref:hasInput and saref:hasOutput.
+- Introduced saref:CommandOfInterest, parallel to saref:PropertyOfInterest.
+- The following classes are deprecated and may be defined as instances of saref:Command in the next release of SAREF: saref:ToggleCommand, saref:GetCommand, saref:NotifyCommand, saref:GetSensingDataCommand, saref:GetCurrentMeterValueCommand, saref:GetMeterDataCommand, saref:GetMeterHistoryCommand, saref:SetAbsoluteLevelCommand, saref:SetRelativeLevelCommand, saref:SetLevelCommand, saref:StepDownCommand, saref:StepUpCommand, saref:PauseCommand, saref:StartCommand, saref:StopCommand, saref:CloseCommand, saref:OpenCommand, saref:OnCommand, saref:OffCommand.
+- Simplified definition of saref:Service. Added examples.
+- Relaxed domain and range of saref:represents.
+- Clarified definition of saref:offers.
+- Clarified definition of saref:isOfferedBy.
+- saref:SwitchOnService is deprecated for it is just an example. It may be deleted in the next release of SAREF
+- Introduced saref:Operation and associated properties from oneM2M base ontology.
+- Introduced saref:ProcedureExecution.
+- Introduce saref:madeBy (resp. saref:madeExecution) as generalization of saref:measurementMadeBy (resp. saref:makesMeasurement).
+- saref:makesMeasurement is deprecated as one of the properties related to saref:Measurement. It may be deleted in the next release of SAREF
+- saref:makesMeasurement is deprecated as one of the properties related to saref:Measurement. It may be deleted in the next release of SAREF
+- Introduced saref:hasResult as part of general will to make SAREF and SOSA/SSN converge.
+- Introduced saref:hasResultTime as part of general will to make SAREF and SOSA/SSN converge.
+- Introduced saref:hasPhenomenonTime as part of general will to make SAREF and SOSA/SSN converge.
+- Tried to clarify definition of saref:hasTimestamp. Still unclear.
+- Deprecated saref:Measurement in favour of saref:Observation, to generalize to observation of states and convergence with SOSA/SSN.
+- Deprecated saref:isMeasurementOf together with saref:Measurement.
+- Deprecated saref:isMeasurementOf together with saref:Measurement.
+- Deprecated saref:isMeasurementOf together with saref:Measurement.
+- Deprecated saref:isMeasurementOf together with saref:Measurement.
+- Class saref:Profile has been re-specified, to take into account findings from SAREF4ENER V1.2.1.
+- Relaxed domain of saref:hasProfile to saref:FeatureKind or saref:Device
+- Deprecated saref:hasTime and use OWL Time instead whenever possible.
+- Deprecated saref:Time and use OWL Time instead whenever possible.
+- Deprecated saref:hasTypicalConsumption. May be defined as an instance of saref:Property in the next release of SAREF.
+""" ,
+                                                        """Information about changes to version 4.1.1:
+
+NOTE: Rationale and decisions for many of the changes in V4.1.1 are available in issues in project https://labs.etsi.org/rep/saref/saref-core/-/milestones/3#tab-issues
+
+- Deprecated classes and properties have been deleted
+- Reworded definition of saref:Sensor and saref:Meter
+- saref:hasValue is now optional on saref:PropertyValue
+- improved parallel between Property and State descriptions
+- introduced saref:StateValue
+- Removed examples of commodity categories
+- Added notes and examples in multiple sections
+- Added clause 5.14 about composite properties
+- Reworked figures throughout the document
+- Added migration guide from V3.1.1 to V4.1.1
+- Updated the oneM2M base ontology to SAREF mapping
+- Added principle on generic versus specific entities distinction
+- Added references to EN 303 760
+""" ;
+                                           rdfs:seeAlso <https://www.etsi.org/deliver/etsi_ts/103200_103299/103264/04.01.01_60/ts_103264v040101p.pdf> ,
+                                                        <https://www.etsi.org/deliver/etsi_ts/103400_103499/10341004/02.01.01_60/ts_10341004v020101p.pdf> ;
+                                           owl:priorVersion <https://saref.etsi.org/core/v3.2.1/> ,
+                                                            <https://saref.etsi.org/saref4city/v1.1.2/> ;
+                                           owl:versionInfo "v4.1.1" ,
+                                                           "v2.1.1" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/contributor
+<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+<http://purl.org/dc/terms/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/issued
+<http://purl.org/dc/terms/issued> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+<http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+<http://purl.org/dc/terms/modified> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/publisher
+<http://purl.org/dc/terms/publisher> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/source
+<http://purl.org/dc/terms/source> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+<http://purl.org/dc/terms/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+<http://purl.org/vocab/vann/preferredNamespacePrefix> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+<http://purl.org/vocab/vann/preferredNamespaceUri> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#example
+<http://www.w3.org/2004/02/skos/core#example> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#historyNote
+<http://www.w3.org/2004/02/skos/core#historyNote> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#note
+<http://www.w3.org/2004/02/skos/core#note> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#scopeNote
+<http://www.w3.org/2004/02/skos/core#scopeNote> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#duration
+xsd:duration rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/vocab/cpsv#physicallyAvailableAt
+<http://purl.org/vocab/cpsv#physicallyAvailableAt> rdf:type owl:ObjectProperty ;
+                                                   rdfs:comment "A physical location at which a user may interact with the Public Service."@en ;
+                                                   rdfs:isDefinedBy <http://purl.org/vocab/cpsv#> ;
+                                                   rdfs:label "physically available at"@en .
+
+
+###  http://purl.org/vocab/cpsv#provides
+<http://purl.org/vocab/cpsv#provides> rdf:type owl:ObjectProperty ;
+                                      rdfs:comment "The provides property links an Agent to a Public Service for which it is responsible. Whether it provides the service directly or outsources it is not relevant, the Agent that provides the service is the one that is ultimately responsible for its provision."@en ;
+                                      rdfs:isDefinedBy <http://purl.org/vocab/cpsv#> ;
+                                      rdfs:label "provides"@en .
+
+
+###  http://purl.org/vocab/cpsv#uses
+<http://purl.org/vocab/cpsv#uses> rdf:type owl:ObjectProperty ;
+                                  rdfs:comment "The uses property links an Agent to a Public Service in which it plays the specific role of user, meaning that it provides the input and receives the output but does not play any direct role in providing the service. This will typically be an individual citizen or an outside organisation."@en ;
+                                  rdfs:isDefinedBy <http://purl.org/vocab/cpsv#> ;
+                                  rdfs:label "uses"@en .
+
+
+###  http://www.opengis.net/ont/geosparql#hasGeometry
+<http://www.opengis.net/ont/geosparql#hasGeometry> rdf:type owl:ObjectProperty ;
+                                                   rdfs:domain <http://www.opengis.net/ont/geosparql#Feature> ;
+                                                   rdfs:range <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                                   rdfs:comment "A spatial representation for a given feature."@en ;
+                                                   rdfs:isDefinedBy <http://www.opengis.net/ont/geosparql#> ;
+                                                   rdfs:label "has geometry"@en .
+
+
+###  http://www.opengis.net/ont/geosparql#sfContains
+<http://www.opengis.net/ont/geosparql#sfContains> rdf:type owl:ObjectProperty ;
+                                                  rdfs:domain <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                                  rdfs:range <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                                  rdfs:comment "Exists if the subject SpatialObject spatially contains the object SpatialObject. DE-9IM: T*****FF*"@en ;
+                                                  rdfs:isDefinedBy <http://www.opengis.net/ont/geosparql> ;
+                                                  rdfs:label "contains"@en .
+
+
+###  http://www.opengis.net/ont/geosparql#sfWithin
+<http://www.opengis.net/ont/geosparql#sfWithin> rdf:type owl:ObjectProperty ;
+                                                rdfs:domain <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                                rdfs:range <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                                rdfs:comment "Exists if the subject SpatialObject is spatially within the object SpatialObject. DE-9IM: T*F**F***"@en ;
+                                                rdfs:isDefinedBy <http://www.opengis.net/ont/geosparql> ;
+                                                rdfs:label "within"@en .
+
+
+###  http://www.w3.org/2004/02/skos/core#broader
+<http://www.w3.org/2004/02/skos/core#broader> rdf:type owl:ObjectProperty ;
+                                              owl:inverseOf <http://www.w3.org/2004/02/skos/core#narrower> .
+
+
+###  http://www.w3.org/2004/02/skos/core#narrower
+<http://www.w3.org/2004/02/skos/core#narrower> rdf:type owl:ObjectProperty .
+
+
+###  https://saref.etsi.org/core/accomplishes
+<https://saref.etsi.org/core/accomplishes> rdf:type owl:ObjectProperty ;
+                                           owl:inverseOf <https://saref.etsi.org/core/isAccomplishedBy> ;
+                                           rdfs:range <https://saref.etsi.org/core/Task> ;
+                                           rdfs:comment "Links a certain entity (e.g., a device) to the task it accomplishes."@en ;
+                                           rdfs:label "accomplishes"@en .
+
+
+###  https://saref.etsi.org/core/consistsOf
+<https://saref.etsi.org/core/consistsOf> rdf:type owl:ObjectProperty ;
+                                         owl:propertyChainAxiom ( <https://saref.etsi.org/core/consistsOf>
+                                                                  <https://saref.etsi.org/core/hasFeatureKind>
+                                                                ) ,
+                                                                ( <https://saref.etsi.org/core/consistsOf>
+                                                                  <https://saref.etsi.org/core/hasPropertyKind>
+                                                                ) ,
+                                                                ( <https://saref.etsi.org/core/consistsOf>
+                                                                  <https://saref.etsi.org/core/hasStateKind>
+                                                                ) ,
+                                                                ( <https://saref.etsi.org/core/consistsOf>
+                                                                  <https://saref.etsi.org/core/isValueOfProperty>
+                                                                ) ,
+                                                                ( <https://saref.etsi.org/core/consistsOf>
+                                                                  <https://saref.etsi.org/core/isValueOfState>
+                                                                ) ;
+                                         rdfs:comment "A relationship indicating a composite entity that consists of other entities (e.g., a temperature/humidity sensor that consists of a temperature sensor and a humidity sensor)"@en ;
+                                         rdfs:label "consists of"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Add local restrictions on consistsOf on feature of interest"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#note> "A feature kind (respectively a feature of interest) may consist of (OP saref:consistsOf) other feature kinds (respectively feature kinds or features of interest)."@en ,
+                                                                                    "The OP saref:consistsOf can link a composite property, property of interest, or property value to its individual components."@en .
+
+
+###  https://saref.etsi.org/core/consumes
+<https://saref.etsi.org/core/consumes> rdf:type owl:ObjectProperty ;
+                                       owl:inverseOf <https://saref.etsi.org/core/isConsumedBy> ;
+                                       rdfs:domain [ rdf:type owl:Class ;
+                                                     owl:unionOf ( <https://saref.etsi.org/core/Device>
+                                                                   <https://saref.etsi.org/core/DeviceKind>
+                                                                   <https://saref.etsi.org/core/FeatureKind>
+                                                                   <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                 )
+                                                   ] ;
+                                       rdfs:range <https://saref.etsi.org/core/Commodity> ;
+                                       rdfs:comment "Links a feature kind, feature of interest, or device, to the commodity it consumes"@en ;
+                                       rdfs:label "consumes"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:consumes, saref:isConsumedBy, saref:produces, saref:isProducedBy, saref:stores, saref:isStoredBy."@en .
+
+
+###  https://saref.etsi.org/core/controls
+<https://saref.etsi.org/core/controls> rdf:type owl:ObjectProperty ;
+                                       rdfs:subPropertyOf <https://saref.etsi.org/core/targets> ;
+                                       owl:inverseOf <https://saref.etsi.org/core/isControlledBy> ;
+                                       rdfs:domain [ rdf:type owl:Class ;
+                                                     owl:unionOf ( <https://saref.etsi.org/core/Actuation>
+                                                                   <https://saref.etsi.org/core/Actuator>
+                                                                   <https://saref.etsi.org/core/Command>
+                                                                   <https://saref.etsi.org/core/CommandOfInterest>
+                                                                   <https://saref.etsi.org/core/DeviceKind>
+                                                                   <https://saref.etsi.org/core/Function>
+                                                                   <https://saref.etsi.org/core/FunctionOfInterest>
+                                                                 )
+                                                   ] ;
+                                       rdfs:comment "Links a device, function, command, or procedure execution, to the feature, property, or state, it controls."@en ;
+                                       rdfs:label "controls"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced property saref:controls, as sub-property of saref:targets. and generalization of saref:controlsProperty."@en .
+
+
+###  https://saref.etsi.org/core/hasApplicableTime
+<https://saref.etsi.org/core/hasApplicableTime> rdf:type owl:ObjectProperty ;
+                                                rdfs:range [ rdf:type owl:Class ;
+                                                             owl:unionOf ( <http://www.w3.org/2006/time#TemporalEntity>
+                                                                           <http://www.w3.org/2006/time#TemporalPosition>
+                                                                         )
+                                                           ] ;
+                                                rdfs:comment "Links an entity (e.g., a profile) to an instant or interval or other compound temporal entity expressed using OWL Time, which bounds temporally the applicable context of that entity."@en ;
+                                                rdfs:label "has applicable time"@en .
+
+
+###  https://saref.etsi.org/core/hasCommand
+<https://saref.etsi.org/core/hasCommand> rdf:type owl:ObjectProperty ;
+                                         owl:inverseOf <https://saref.etsi.org/core/isCommandOf> ;
+                                         rdfs:domain [ rdf:type owl:Class ;
+                                                       owl:unionOf ( <https://saref.etsi.org/core/Function>
+                                                                     <https://saref.etsi.org/core/FunctionOfInterest>
+                                                                   )
+                                                     ] ;
+                                         rdfs:range <https://saref.etsi.org/core/Command> ;
+                                         owl:propertyChainAxiom ( <https://saref.etsi.org/core/hasCommandOfInterest>
+                                                                  <https://saref.etsi.org/core/hasCommandKind>
+                                                                ) ,
+                                                                ( <https://saref.etsi.org/core/hasFeatureKind>
+                                                                  <https://saref.etsi.org/core/hasMandatoryCommand>
+                                                                ) ;
+                                         rdfs:comment "Links a function or function of interest and the command it supports."@en ;
+                                         rdfs:label "has command"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Domain of saref:hasCommand is relaxed to saref:Function or saref:FunctionOfInterest."@en .
+
+
+###  https://saref.etsi.org/core/hasCommandKind
+<https://saref.etsi.org/core/hasCommandKind> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <https://saref.etsi.org/core/CommandOfInterest> ;
+                                             rdfs:range <https://saref.etsi.org/core/Command> ;
+                                             owl:propertyChainAxiom ( <https://saref.etsi.org/core/hasCommandKind>
+                                                                      <http://www.w3.org/2004/02/skos/core#broader>
+                                                                    ) ;
+                                             rdfs:comment "links a command of interest to its kind, a command."@en ;
+                                             rdfs:label "has command kind"@en .
+
+
+###  https://saref.etsi.org/core/hasCommandOfInterest
+<https://saref.etsi.org/core/hasCommandOfInterest> rdf:type owl:ObjectProperty ;
+                                                   owl:inverseOf <https://saref.etsi.org/core/isCommandOfInterestOf> ;
+                                                   rdfs:domain <https://saref.etsi.org/core/FunctionOfInterest> ;
+                                                   rdfs:range <https://saref.etsi.org/core/CommandOfInterest> ;
+                                                   rdfs:comment "Links a function of interest to one of its commands of interest."@en ;
+                                                   rdfs:label "has command of interest"@en .
+
+
+###  https://saref.etsi.org/core/hasDeviceKind
+<https://saref.etsi.org/core/hasDeviceKind> rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf <https://saref.etsi.org/core/hasFeatureKind> ;
+                                            rdfs:domain <https://saref.etsi.org/core/Device> ;
+                                            rdfs:range <https://saref.etsi.org/core/DeviceKind> ;
+                                            rdfs:comment "Links a device to its kind, a device kind. Kinds of devices describe models of devices, with common properties and common states having the same value, targeting the same properties and states, common functions, and common services."@en ;
+                                            rdfs:label "has device kind"@en .
+
+
+###  https://saref.etsi.org/core/hasFeatureKind
+<https://saref.etsi.org/core/hasFeatureKind> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                             rdfs:range <https://saref.etsi.org/core/FeatureKind> ;
+                                             owl:propertyChainAxiom ( <https://saref.etsi.org/core/hasFeatureKind>
+                                                                      <http://www.w3.org/2004/02/skos/core#broader>
+                                                                    ) ;
+                                             rdfs:comment "links a feature of interest to its kind, a feature kind"@en ;
+                                             rdfs:label "has feature kind"@en ;
+                                             <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduce hasClassKind for Class is Feature, Device, Property, State, Function, Command."@en .
+
+
+###  https://saref.etsi.org/core/hasFunction
+<https://saref.etsi.org/core/hasFunction> rdf:type owl:ObjectProperty ;
+                                          owl:inverseOf <https://saref.etsi.org/core/isFunctionOf> ;
+                                          rdfs:domain [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                      <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                    )
+                                                      ] ;
+                                          rdfs:range <https://saref.etsi.org/core/Function> ;
+                                          owl:propertyChainAxiom ( <http://www.w3.org/2004/02/skos/core#broader>
+                                                                   <https://saref.etsi.org/core/hasFunction>
+                                                                 ) ,
+                                                                 ( <https://saref.etsi.org/core/hasDeviceKind>
+                                                                   <https://saref.etsi.org/core/hasFunction>
+                                                                 ) ,
+                                                                 ( <https://saref.etsi.org/core/hasFunctionOfInterest>
+                                                                   <https://saref.etsi.org/core/hasFunctionKind>
+                                                                 ) ;
+                                          rdfs:comment "Links a feature kind or a device to one of its functions."@en ;
+                                          rdfs:label "has function"@en ;
+                                          <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Domain of saref:hasFunction is relaxed."@en .
+
+
+###  https://saref.etsi.org/core/hasFunctionKind
+<https://saref.etsi.org/core/hasFunctionKind> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <https://saref.etsi.org/core/FunctionOfInterest> ;
+                                              rdfs:range <https://saref.etsi.org/core/Function> ;
+                                              owl:propertyChainAxiom ( <https://saref.etsi.org/core/hasFunctionKind>
+                                                                       <http://www.w3.org/2004/02/skos/core#broader>
+                                                                     ) ;
+                                              rdfs:comment "links a function of interest to its kind, a function"@en ;
+                                              rdfs:label "has function kind"@en .
+
+
+###  https://saref.etsi.org/core/hasFunctionOfInterest
+<https://saref.etsi.org/core/hasFunctionOfInterest> rdf:type owl:ObjectProperty ;
+                                                    owl:inverseOf <https://saref.etsi.org/core/isFunctionOfInterestOf> ;
+                                                    rdfs:domain <https://saref.etsi.org/core/Device> ;
+                                                    rdfs:range <https://saref.etsi.org/core/FunctionOfInterest> ;
+                                                    rdfs:comment "Links a device to one of its functions of interest."@en ;
+                                                    rdfs:label "has function of interest"@en .
+
+
+###  https://saref.etsi.org/core/hasInput
+<https://saref.etsi.org/core/hasInput> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain [ rdf:type owl:Class ;
+                                                     owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                   <https://saref.etsi.org/core/CommandOfInterest>
+                                                                   <https://saref.etsi.org/core/Operation>
+                                                                   <https://saref.etsi.org/core/ProcedureExecution>
+                                                                 )
+                                                   ] ;
+                                       rdfs:comment "Links a command, operation, or procedure execution, to its inputs."@en ;
+                                       rdfs:label "has input"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#example> "Different complementary commands can be defined for controlling a light. Turn on or off the light based on a desired state, toggle the light status of a specific light, set the luminosity level with a transition time, set the default transition time, start comfort."@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:hasInput and saref:hasOutput."@en .
+
+
+###  https://saref.etsi.org/core/hasMandatoryCommand
+<https://saref.etsi.org/core/hasMandatoryCommand> rdf:type owl:ObjectProperty ;
+                                                  rdfs:subPropertyOf <https://saref.etsi.org/core/hasCommand> ;
+                                                  rdfs:domain <https://saref.etsi.org/core/Function> ;
+                                                  owl:propertyChainAxiom ( <http://www.w3.org/2004/02/skos/core#broader>
+                                                                           <https://saref.etsi.org/core/hasMandatoryCommand>
+                                                                         ) ;
+                                                  rdfs:comment "Links a function and one of its mandatory commands"@en ;
+                                                  rdfs:label "has mandatory command"@en ;
+                                                  <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced mandatory and optional commands."@en .
+
+
+###  https://saref.etsi.org/core/hasOperation
+<https://saref.etsi.org/core/hasOperation> rdf:type owl:ObjectProperty ;
+                                           owl:inverseOf <https://saref.etsi.org/core/isOperationOf> ;
+                                           rdfs:domain <https://saref.etsi.org/core/Service> ;
+                                           rdfs:range <https://saref.etsi.org/core/Operation> ;
+                                           rdfs:comment "Links a service to one of its operations."@en ;
+                                           rdfs:label "has operation"@en .
+
+
+###  https://saref.etsi.org/core/hasOptionalCommand
+<https://saref.etsi.org/core/hasOptionalCommand> rdf:type owl:ObjectProperty ;
+                                                 rdfs:subPropertyOf <https://saref.etsi.org/core/hasCommand> ;
+                                                 rdfs:domain <https://saref.etsi.org/core/Function> ;
+                                                 rdfs:comment "Links a function and one of its optional commands"@en ;
+                                                 rdfs:label "has optional command"@en .
+
+
+###  https://saref.etsi.org/core/hasOutput
+<https://saref.etsi.org/core/hasOutput> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain [ rdf:type owl:Class ;
+                                                      owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                    <https://saref.etsi.org/core/CommandOfInterest>
+                                                                    <https://saref.etsi.org/core/Operation>
+                                                                  )
+                                                    ] ;
+                                        rdfs:comment "Links a command or operation to its outputs."@en ;
+                                        rdfs:label "has output"@en ;
+                                        <http://www.w3.org/2004/02/skos/core#example> "Different complementary commands can be defined for observing a smart home. Observe the temperature once will output the indoor temperature property; observe status of the entry door will output an open/close state."@en .
+
+
+###  https://saref.etsi.org/core/hasPhenomenonTime
+<https://saref.etsi.org/core/hasPhenomenonTime> rdf:type owl:ObjectProperty ;
+                                                rdfs:range <http://www.w3.org/2006/time#TemporalEntity> ;
+                                                rdfs:comment "Links a procedure execution to the time that the result applies. It may be an interval or an instant, or some other compound temporal entity expressed using OWL Time."@en ;
+                                                rdfs:label "has phenomenon time"@en ;
+                                                <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:hasPhenomenonTime as part of general will to make SAREF and SOSA/SSN converge."@en .
+
+
+###  https://saref.etsi.org/core/hasProfile
+<https://saref.etsi.org/core/hasProfile> rdf:type owl:ObjectProperty ;
+                                         owl:inverseOf <https://saref.etsi.org/core/isProfileOf> ;
+                                         rdfs:domain [ rdf:type owl:Class ;
+                                                       owl:unionOf ( <https://saref.etsi.org/core/Device>
+                                                                     <https://saref.etsi.org/core/DeviceKind>
+                                                                   )
+                                                     ] ;
+                                         rdfs:range <https://saref.etsi.org/core/Profile> ;
+                                         rdfs:comment "Links a device to its profile. Its inverse is saref:isProfileOf. The device should be linked to a certain commodity using OP saref:consumes, saref:produces, or saref:stores, and optionally to some property or state using OP saref:targets or its sub-properties."@en ;
+                                         rdfs:label "has profile"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Relaxed domain of saref:hasProfile to saref:FeatureKind or saref:Device"@en .
+
+
+###  https://saref.etsi.org/core/hasProperty
+<https://saref.etsi.org/core/hasProperty> rdf:type owl:ObjectProperty ;
+                                          owl:inverseOf <https://saref.etsi.org/core/isPropertyOf> ;
+                                          rdfs:domain [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                      <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                    )
+                                                      ] ;
+                                          rdfs:range <https://saref.etsi.org/core/Property> ;
+                                          owl:propertyChainAxiom ( <http://www.w3.org/2004/02/skos/core#broader>
+                                                                   <https://saref.etsi.org/core/hasProperty>
+                                                                 ) ,
+                                                                 ( <https://saref.etsi.org/core/hasFeatureKind>
+                                                                   <https://saref.etsi.org/core/hasProperty>
+                                                                 ) ,
+                                                                 ( <https://saref.etsi.org/core/hasProperty>
+                                                                   <https://saref.etsi.org/core/consistsOf>
+                                                                 ) ,
+                                                                 ( <https://saref.etsi.org/core/hasPropertyOfInterest>
+                                                                   <https://saref.etsi.org/core/hasPropertyKind>
+                                                                 ) ;
+                                          rdfs:comment "Links a feature kind or a feature of interest to one of its properties."@en ;
+                                          rdfs:label "has property"@en ;
+                                          <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: applicability of saref:hasProperty is relaxed to also saref:FeatureKind"@en .
+
+
+###  https://saref.etsi.org/core/hasPropertyKind
+<https://saref.etsi.org/core/hasPropertyKind> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <https://saref.etsi.org/core/PropertyOfInterest> ;
+                                              rdfs:range <https://saref.etsi.org/core/Property> ;
+                                              owl:propertyChainAxiom ( <https://saref.etsi.org/core/hasPropertyKind>
+                                                                       <http://www.w3.org/2004/02/skos/core#broader>
+                                                                     ) ;
+                                              rdfs:comment "links a property of interest to its kind, a property."@en ;
+                                              rdfs:label "has property kind"@en .
+
+
+###  https://saref.etsi.org/core/hasPropertyOfInterest
+<https://saref.etsi.org/core/hasPropertyOfInterest> rdf:type owl:ObjectProperty ;
+                                                    owl:inverseOf <https://saref.etsi.org/core/isPropertyOfInterestOf> ;
+                                                    rdfs:domain <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                                    rdfs:range <https://saref.etsi.org/core/PropertyOfInterest> ;
+                                                    rdfs:comment "Links a feature of interest to one of its properties of interest."@en ;
+                                                    rdfs:label "has property of interest"@en ;
+                                                    <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:hasPropertyOfInterest and saref:isPropertyOfInterestOf. Cannot use saref:hasProperty due to the combination of cardinality restrictions and sub-property chain axioms makes the ontology exist the OWL 2 DL prodile."@en .
+
+
+###  https://saref.etsi.org/core/hasPropertyValue
+<https://saref.etsi.org/core/hasPropertyValue> rdf:type owl:ObjectProperty ;
+                                               rdfs:domain [ rdf:type owl:Class ;
+                                                             owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                           <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                           <https://saref.etsi.org/core/PropertyOfInterest>
+                                                                         )
+                                                           ] ;
+                                               rdfs:range <https://saref.etsi.org/core/PropertyValue> ;
+                                               owl:propertyChainAxiom ( <http://www.w3.org/2004/02/skos/core#broader>
+                                                                        <https://saref.etsi.org/core/hasPropertyValue>
+                                                                      ) ;
+                                               rdfs:comment "Links a feature kind, a feature of interest, or a property of interest, to a property value."@en ;
+                                               rdfs:label "has property value"@en ;
+                                               <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:hasPropertyValue."@en .
+
+
+###  https://saref.etsi.org/core/hasResult
+<https://saref.etsi.org/core/hasResult> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <https://saref.etsi.org/core/ProcedureExecution> ;
+                                        rdfs:comment "Links a procedure execution (e.g., an observation) to its result (e.g., a property value)."@en ;
+                                        rdfs:label "has result"@en ;
+                                        <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:hasResult as part of general will to make SAREF and SOSA/SSN converge."@en .
+
+
+###  https://saref.etsi.org/core/hasState
+<https://saref.etsi.org/core/hasState> rdf:type owl:ObjectProperty ;
+                                       owl:inverseOf <https://saref.etsi.org/core/isStateOf> ;
+                                       rdfs:domain [ rdf:type owl:Class ;
+                                                     owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                   <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                   <https://saref.etsi.org/core/StateOfInterest>
+                                                                 )
+                                                   ] ;
+                                       rdfs:range <https://saref.etsi.org/core/State> ;
+                                       owl:propertyChainAxiom ( <http://www.w3.org/2004/02/skos/core#broader>
+                                                                <https://saref.etsi.org/core/hasState>
+                                                              ) ,
+                                                              ( <https://saref.etsi.org/core/hasFeatureKind>
+                                                                <https://saref.etsi.org/core/hasState>
+                                                              ) ,
+                                                              ( <https://saref.etsi.org/core/hasStateOfInterest>
+                                                                <https://saref.etsi.org/core/hasStateKind>
+                                                              ) ;
+                                       rdfs:comment "Links a feature kind or a feature of interest to one of its states."@en ;
+                                       rdfs:label "has state"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Relaxed domain of saref:hasState."@en .
+
+
+###  https://saref.etsi.org/core/hasStateKind
+<https://saref.etsi.org/core/hasStateKind> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <https://saref.etsi.org/core/StateOfInterest> ;
+                                           rdfs:range <https://saref.etsi.org/core/State> ;
+                                           owl:propertyChainAxiom ( <https://saref.etsi.org/core/hasStateKind>
+                                                                    <http://www.w3.org/2004/02/skos/core#broader>
+                                                                  ) ;
+                                           rdfs:comment "links a state of interest to its kind, a state"@en ;
+                                           rdfs:label "has state kind"@en .
+
+
+###  https://saref.etsi.org/core/hasStateOfInterest
+<https://saref.etsi.org/core/hasStateOfInterest> rdf:type owl:ObjectProperty ;
+                                                 owl:inverseOf <https://saref.etsi.org/core/isStateOfInterestOf> ;
+                                                 rdfs:domain <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                                 rdfs:range <https://saref.etsi.org/core/StateOfInterest> ;
+                                                 rdfs:comment "Links a feature of interest to one of its states of interest."@en ;
+                                                 rdfs:label "has state of interest"@en ;
+                                                 <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:hasStateOfInterest and saref:isStateOfInterestOf, parallel to saref:hasPropertyOfInterest and saref:isPropertyOfInterestOf."@en .
+
+
+###  https://saref.etsi.org/core/hasStateValue
+<https://saref.etsi.org/core/hasStateValue> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain [ rdf:type owl:Class ;
+                                                          owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                        <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                        <https://saref.etsi.org/core/StateOfInterest>
+                                                                      )
+                                                        ] ;
+                                            rdfs:range <https://saref.etsi.org/core/StateValue> ;
+                                            owl:propertyChainAxiom ( <http://www.w3.org/2004/02/skos/core#broader>
+                                                                     <https://saref.etsi.org/core/hasStateValue>
+                                                                   ) ;
+                                            rdfs:comment "Links a feature kind, a feature of interest, or a state of interest, to a state value."@en ;
+                                            rdfs:label "has state value"@en ;
+                                            <http://www.w3.org/2004/02/skos/core#historyNote> "V4.1.1: Introduced saref:hasStateValue."@en .
+
+
+###  https://saref.etsi.org/core/isAccomplishedBy
+<https://saref.etsi.org/core/isAccomplishedBy> rdf:type owl:ObjectProperty ;
+                                               rdfs:domain <https://saref.etsi.org/core/Task> ;
+                                               rdfs:comment "A relationship identifying an entity (e.g., a device) that can accomplish a task."@en ;
+                                               rdfs:label "is accomplished by"@en .
+
+
+###  https://saref.etsi.org/core/isCommandOf
+<https://saref.etsi.org/core/isCommandOf> rdf:type owl:ObjectProperty ;
+                                          rdfs:domain <https://saref.etsi.org/core/Command> ;
+                                          rdfs:range [ rdf:type owl:Class ;
+                                                       owl:unionOf ( <https://saref.etsi.org/core/Function>
+                                                                     <https://saref.etsi.org/core/FunctionOfInterest>
+                                                                   )
+                                                     ] ;
+                                          rdfs:comment "Links a command and a function or function of interest that supports it."@en ;
+                                          rdfs:label "is command of"@en .
+
+
+###  https://saref.etsi.org/core/isCommandOfInterestOf
+<https://saref.etsi.org/core/isCommandOfInterestOf> rdf:type owl:ObjectProperty ,
+                                                             owl:FunctionalProperty ;
+                                                    rdfs:domain <https://saref.etsi.org/core/CommandOfInterest> ;
+                                                    rdfs:range <https://saref.etsi.org/core/FunctionOfInterest> ;
+                                                    rdfs:comment "Links a command of interest to the function of interest it is a command of."@en ;
+                                                    rdfs:label "is command of interest of"@en .
+
+
+###  https://saref.etsi.org/core/isConsumedBy
+<https://saref.etsi.org/core/isConsumedBy> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <https://saref.etsi.org/core/Commodity> ;
+                                           rdfs:range [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <https://saref.etsi.org/core/Device>
+                                                                      <https://saref.etsi.org/core/DeviceKind>
+                                                                      <https://saref.etsi.org/core/FeatureKind>
+                                                                      <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                    )
+                                                      ] ;
+                                           rdfs:comment "Links a commodity to the feature kind, feature of interest, or device, that consumes it"@en ;
+                                           rdfs:label "is consumed by"@en .
+
+
+###  https://saref.etsi.org/core/isControlledBy
+<https://saref.etsi.org/core/isControlledBy> rdf:type owl:ObjectProperty ;
+                                             rdfs:subPropertyOf <https://saref.etsi.org/core/isTargetOf> ;
+                                             rdfs:comment "Links a feature, property, or state, to the device, function, command, or procedure execution, that controls it."@en ;
+                                             rdfs:label "is controlled by"@en ;
+                                             <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced property saref:isControlledBy."@en .
+
+
+###  https://saref.etsi.org/core/isExecutionOf
+<https://saref.etsi.org/core/isExecutionOf> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <https://saref.etsi.org/core/ProcedureExecution> ;
+                                            rdfs:range [ rdf:type owl:Class ;
+                                                         owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                       <https://saref.etsi.org/core/CommandOfInterest>
+                                                                       <https://saref.etsi.org/core/Operation>
+                                                                     )
+                                                       ] ;
+                                            owl:propertyChainAxiom ( <https://saref.etsi.org/core/isExecutionOf>
+                                                                     <http://www.w3.org/2004/02/skos/core#broader>
+                                                                   ) ,
+                                                                   ( <https://saref.etsi.org/core/isExecutionOf>
+                                                                     <https://saref.etsi.org/core/hasCommandKind>
+                                                                   ) ;
+                                            rdfs:comment "Links a command execution to the command or command of interest that was executed. Also liks an operation execution to the operation that was executed"@en ;
+                                            rdfs:label "is execution of"@en .
+
+
+###  https://saref.etsi.org/core/isFunctionOf
+<https://saref.etsi.org/core/isFunctionOf> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <https://saref.etsi.org/core/Function> ;
+                                           rdfs:range [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                      <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                    )
+                                                      ] ;
+                                           rdfs:comment "Links a function to the feature kind or device it is a function of."@en ;
+                                           rdfs:label "is function of"@en ;
+                                           <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:isFunctionOf."@en .
+
+
+###  https://saref.etsi.org/core/isFunctionOfInterestOf
+<https://saref.etsi.org/core/isFunctionOfInterestOf> rdf:type owl:ObjectProperty ,
+                                                              owl:FunctionalProperty ;
+                                                     rdfs:domain <https://saref.etsi.org/core/FunctionOfInterest> ;
+                                                     rdfs:range <https://saref.etsi.org/core/Device> ;
+                                                     rdfs:comment "Links a function of interest to the device it is a function of."@en ;
+                                                     rdfs:label "is function of interest of"@en .
+
+
+###  https://saref.etsi.org/core/isMeasuredIn
+<https://saref.etsi.org/core/isMeasuredIn> rdf:type owl:ObjectProperty ;
+                                           rdfs:range <https://saref.etsi.org/core/UnitOfMeasure> ;
+                                           rdfs:comment "A relationship identifying the unit of measure used for a certain entity."@en ;
+                                           rdfs:label "is measured in"@en ;
+                                           <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Relaxed domain of saref:isMeasuredIn so it can apply to saref:PropertyValue as well as saref:Measurement. The new range will be enforced in the next major revision of SAREF."@en .
+
+
+###  https://saref.etsi.org/core/isObservedBy
+<https://saref.etsi.org/core/isObservedBy> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <https://saref.etsi.org/core/isTargetOf> ;
+                                           owl:inverseOf <https://saref.etsi.org/core/observes> ;
+                                           rdfs:comment "Links a feature, property, or state, to the device, function, command, or procedure execution, that observes it."@en ;
+                                           rdfs:label "is observed by"@en .
+
+
+###  https://saref.etsi.org/core/isOfferedBy
+<https://saref.etsi.org/core/isOfferedBy> rdf:type owl:ObjectProperty ;
+                                          owl:inverseOf <https://saref.etsi.org/core/offers> ;
+                                          rdf:type owl:FunctionalProperty ;
+                                          rdfs:domain <https://saref.etsi.org/core/Service> ;
+                                          rdfs:range <https://saref.etsi.org/core/Device> ;
+                                          rdfs:comment "Links a service to the device that exposes it to a network"@en ;
+                                          rdfs:label "is offered by"@en ;
+                                          <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Clarified definition of saref:isOfferedBy."@en .
+
+
+###  https://saref.etsi.org/core/isOperationOf
+<https://saref.etsi.org/core/isOperationOf> rdf:type owl:ObjectProperty ,
+                                                     owl:FunctionalProperty ;
+                                            rdfs:domain <https://saref.etsi.org/core/Operation> ;
+                                            rdfs:range <https://saref.etsi.org/core/Service> ;
+                                            rdfs:comment "Links an operation to the service it belongs to."@en ;
+                                            rdfs:label "is operation of"@en .
+
+
+###  https://saref.etsi.org/core/isProducedBy
+<https://saref.etsi.org/core/isProducedBy> rdf:type owl:ObjectProperty ;
+                                           owl:inverseOf <https://saref.etsi.org/core/produces> ;
+                                           rdfs:domain <https://saref.etsi.org/core/Commodity> ;
+                                           rdfs:range [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <https://saref.etsi.org/core/Device>
+                                                                      <https://saref.etsi.org/core/DeviceKind>
+                                                                      <https://saref.etsi.org/core/FeatureKind>
+                                                                      <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                    )
+                                                      ] ;
+                                           rdfs:comment "Links a commodity to the feature kind, feature of interest, or device, that produces it"@en ;
+                                           rdfs:label "is produced by"@en .
+
+
+###  https://saref.etsi.org/core/isProfileOf
+<https://saref.etsi.org/core/isProfileOf> rdf:type owl:ObjectProperty ;
+                                          rdfs:domain <https://saref.etsi.org/core/Profile> ;
+                                          rdfs:range [ rdf:type owl:Class ;
+                                                       owl:unionOf ( <https://saref.etsi.org/core/Device>
+                                                                     <https://saref.etsi.org/core/DeviceKind>
+                                                                   )
+                                                     ] ;
+                                          rdfs:comment "Links a profile to the device it describes. The device should be linked to a certain commodity using OP saref:consumes, saref:produces, or saref:stores, and optionally to some property or state using OP saref:targets or its sub-properties."@en ;
+                                          rdfs:label "is profile of"@en .
+
+
+###  https://saref.etsi.org/core/isPropertyOf
+<https://saref.etsi.org/core/isPropertyOf> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <https://saref.etsi.org/core/Property> ;
+                                           rdfs:range [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                      <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                    )
+                                                      ] ;
+                                           rdfs:comment "Links a property to the feature kind or feature of interest it is a property of."@en ;
+                                           rdfs:label "is property of"@en .
+
+
+###  https://saref.etsi.org/core/isPropertyOfInterestOf
+<https://saref.etsi.org/core/isPropertyOfInterestOf> rdf:type owl:ObjectProperty ,
+                                                              owl:FunctionalProperty ;
+                                                     rdfs:domain <https://saref.etsi.org/core/PropertyOfInterest> ;
+                                                     rdfs:range <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                                     rdfs:comment "Links a property of interest to the feature of interest it is a property of."@en ;
+                                                     rdfs:label "is property of interest of"@en .
+
+
+###  https://saref.etsi.org/core/isStateOf
+<https://saref.etsi.org/core/isStateOf> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <https://saref.etsi.org/core/State> ;
+                                        rdfs:range [ rdf:type owl:Class ;
+                                                     owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                   <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                 )
+                                                   ] ;
+                                        rdfs:comment "Links a state to the feature kind or feature of interest it is a state of."@en ;
+                                        rdfs:label "is state of"@en ;
+                                        <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:isStateOf."@en .
+
+
+###  https://saref.etsi.org/core/isStateOfInterestOf
+<https://saref.etsi.org/core/isStateOfInterestOf> rdf:type owl:ObjectProperty ,
+                                                           owl:FunctionalProperty ;
+                                                  rdfs:domain <https://saref.etsi.org/core/StateOfInterest> ;
+                                                  rdfs:range <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                                  rdfs:comment "Links a state of interest to the feature of interest it is a state of."@en ;
+                                                  rdfs:label "is state of interest of"@en .
+
+
+###  https://saref.etsi.org/core/isStoredBy
+<https://saref.etsi.org/core/isStoredBy> rdf:type owl:ObjectProperty ;
+                                         owl:inverseOf <https://saref.etsi.org/core/stores> ;
+                                         rdfs:domain <https://saref.etsi.org/core/Commodity> ;
+                                         rdfs:range [ rdf:type owl:Class ;
+                                                      owl:unionOf ( <https://saref.etsi.org/core/Device>
+                                                                    <https://saref.etsi.org/core/DeviceKind>
+                                                                    <https://saref.etsi.org/core/FeatureKind>
+                                                                    <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                  )
+                                                    ] ;
+                                         rdfs:comment "Links a commodity to the feature kind, feature of interest, or device, that stores it"@en ;
+                                         rdfs:label "is stored by"@en .
+
+
+###  https://saref.etsi.org/core/isTargetOf
+<https://saref.etsi.org/core/isTargetOf> rdf:type owl:ObjectProperty ;
+                                         owl:inverseOf <https://saref.etsi.org/core/targets> ;
+                                         rdfs:domain [ rdf:type owl:Class ;
+                                                       owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                     <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                     <https://saref.etsi.org/core/Property>
+                                                                     <https://saref.etsi.org/core/PropertyOfInterest>
+                                                                     <https://saref.etsi.org/core/State>
+                                                                     <https://saref.etsi.org/core/StateOfInterest>
+                                                                   )
+                                                     ] ;
+                                         rdfs:range [ rdf:type owl:Class ;
+                                                      owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                    <https://saref.etsi.org/core/CommandOfInterest>
+                                                                    <https://saref.etsi.org/core/Device>
+                                                                    <https://saref.etsi.org/core/DeviceKind>
+                                                                    <https://saref.etsi.org/core/Function>
+                                                                    <https://saref.etsi.org/core/FunctionOfInterest>
+                                                                    <https://saref.etsi.org/core/ProcedureExecution>
+                                                                  )
+                                                    ] ;
+                                         rdfs:comment "Links a feature, property, or state, to the device, function, command, or procedure execution, that targets it."@en ;
+                                         rdfs:label "is target of"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced property saref:isActedUponBy."@en ,
+                                                                                           "V4.1.1: Renamed property saref:isActedUponBy into saref:isTargetOf."@en .
+
+
+###  https://saref.etsi.org/core/isValueOfProperty
+<https://saref.etsi.org/core/isValueOfProperty> rdf:type owl:ObjectProperty ;
+                                                rdfs:domain <https://saref.etsi.org/core/PropertyValue> ;
+                                                rdfs:range [ rdf:type owl:Class ;
+                                                             owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                           <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                           <https://saref.etsi.org/core/Property>
+                                                                           <https://saref.etsi.org/core/PropertyOfInterest>
+                                                                         )
+                                                           ] ;
+                                                owl:propertyChainAxiom ( <https://saref.etsi.org/core/isValueOfProperty>
+                                                                         <https://saref.etsi.org/core/hasPropertyKind>
+                                                                       ) ;
+                                                rdfs:comment "Links a property value to the property or property of interest it is a value of."@en ;
+                                                rdfs:label "is value of property"@en ;
+                                                <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:isValueOfProperty."@en .
+
+
+###  https://saref.etsi.org/core/isValueOfState
+<https://saref.etsi.org/core/isValueOfState> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <https://saref.etsi.org/core/StateValue> ;
+                                             rdfs:range [ rdf:type owl:Class ;
+                                                          owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                        <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                        <https://saref.etsi.org/core/StateOfInterest>
+                                                                      )
+                                                        ] ;
+                                             owl:propertyChainAxiom ( <https://saref.etsi.org/core/isValueOfState>
+                                                                      <https://saref.etsi.org/core/hasStateKind>
+                                                                    ) ;
+                                             rdfs:comment "Links a state value to the state or state of interest it is a value of."@en ;
+                                             rdfs:label "is value of state"@en ;
+                                             <http://www.w3.org/2004/02/skos/core#historyNote> "V4.1.1: Introduced saref:isValueOfState."@en .
+
+
+###  https://saref.etsi.org/core/madeBy
+<https://saref.etsi.org/core/madeBy> rdf:type owl:ObjectProperty ;
+                                     owl:inverseOf <https://saref.etsi.org/core/madeExecution> ;
+                                     rdfs:domain <https://saref.etsi.org/core/ProcedureExecution> ;
+                                     rdfs:range <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                     rdfs:comment "Links a procedure execution to the entity (e.g., device) that made it."@en ;
+                                     rdfs:label "made by"@en ;
+                                     <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduce saref:madeBy (resp. saref:madeExecution) as generalization of saref:measurementMadeBy (resp. saref:makesMeasurement)."@en .
+
+
+###  https://saref.etsi.org/core/madeExecution
+<https://saref.etsi.org/core/madeExecution> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                            rdfs:range <https://saref.etsi.org/core/ProcedureExecution> ;
+                                            rdfs:comment "Links an entity (e.g., device) to the procedure execution it made."@en ;
+                                            rdfs:label "made execution"@en .
+
+
+###  https://saref.etsi.org/core/observes
+<https://saref.etsi.org/core/observes> rdf:type owl:ObjectProperty ;
+                                       rdfs:subPropertyOf <https://saref.etsi.org/core/targets> ;
+                                       rdfs:domain [ rdf:type owl:Class ;
+                                                     owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                   <https://saref.etsi.org/core/CommandOfInterest>
+                                                                   <https://saref.etsi.org/core/DeviceKind>
+                                                                   <https://saref.etsi.org/core/Function>
+                                                                   <https://saref.etsi.org/core/FunctionOfInterest>
+                                                                   <https://saref.etsi.org/core/Observation>
+                                                                   <https://saref.etsi.org/core/Sensor>
+                                                                 )
+                                                   ] ;
+                                       rdfs:comment "Links a device, function, command, or procedure execution, to the feature, property, or state, it observes."@en ;
+                                       rdfs:label "observes"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced property saref:observes, as sub-property of saref:targets. and generalization of measures."@en .
+
+
+###  https://saref.etsi.org/core/offers
+<https://saref.etsi.org/core/offers> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <https://saref.etsi.org/core/Device> ;
+                                     rdfs:range <https://saref.etsi.org/core/Service> ;
+                                     rdfs:comment "Links a device to a service it exposes to a network."@en ;
+                                     rdfs:label "offers"@en ;
+                                     <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Clarified definition of saref:offers."@en .
+
+
+###  https://saref.etsi.org/core/produces
+<https://saref.etsi.org/core/produces> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain [ rdf:type owl:Class ;
+                                                     owl:unionOf ( <https://saref.etsi.org/core/Device>
+                                                                   <https://saref.etsi.org/core/DeviceKind>
+                                                                   <https://saref.etsi.org/core/FeatureKind>
+                                                                   <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                 )
+                                                   ] ;
+                                       rdfs:range <https://saref.etsi.org/core/Commodity> ;
+                                       rdfs:comment "Links a feature kind, feature of interest, or device, to the commodity it produces"@en ;
+                                       rdfs:label "produces"@en .
+
+
+###  https://saref.etsi.org/core/profileHasPrice
+<https://saref.etsi.org/core/profileHasPrice> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <https://saref.etsi.org/core/Profile> ;
+                                              rdfs:range <https://saref.etsi.org/core/PropertyValue> ;
+                                              rdfs:comment "Links a profile to the money earned (negative values) or paid (positive values) for the use (production or consumption) of the commodity by the device"@en ;
+                                              rdfs:label "has price"@en .
+
+
+###  https://saref.etsi.org/core/represents
+<https://saref.etsi.org/core/represents> rdf:type owl:ObjectProperty ;
+                                         rdfs:domain [ rdf:type owl:Class ;
+                                                       owl:unionOf ( <https://saref.etsi.org/core/Operation>
+                                                                     <https://saref.etsi.org/core/Service>
+                                                                   )
+                                                     ] ;
+                                         rdfs:range [ rdf:type owl:Class ;
+                                                      owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                    <https://saref.etsi.org/core/CommandOfInterest>
+                                                                    <https://saref.etsi.org/core/Function>
+                                                                    <https://saref.etsi.org/core/FunctionOfInterest>
+                                                                  )
+                                                    ] ;
+                                         rdfs:comment "Links a service to some function or function of interest it exposes to the network. Also links an operation to some command or command of interest it exposes to the network."@en ;
+                                         rdfs:label "represents"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Relaxed domain and range of saref:represents."@en .
+
+
+###  https://saref.etsi.org/core/stores
+<https://saref.etsi.org/core/stores> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain [ rdf:type owl:Class ;
+                                                   owl:unionOf ( <https://saref.etsi.org/core/Device>
+                                                                 <https://saref.etsi.org/core/DeviceKind>
+                                                                 <https://saref.etsi.org/core/FeatureKind>
+                                                                 <https://saref.etsi.org/core/FeatureOfInterest>
+                                                               )
+                                                 ] ;
+                                     rdfs:range <https://saref.etsi.org/core/Commodity> ;
+                                     rdfs:comment "Links a feature kind, feature of interest, or device, to the commodity it stores"@en ;
+                                     rdfs:label "stores"@en .
+
+
+###  https://saref.etsi.org/core/targets
+<https://saref.etsi.org/core/targets> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain [ rdf:type owl:Class ;
+                                                    owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                  <https://saref.etsi.org/core/CommandOfInterest>
+                                                                  <https://saref.etsi.org/core/Device>
+                                                                  <https://saref.etsi.org/core/DeviceKind>
+                                                                  <https://saref.etsi.org/core/Function>
+                                                                  <https://saref.etsi.org/core/FunctionOfInterest>
+                                                                  <https://saref.etsi.org/core/ProcedureExecution>
+                                                                )
+                                                  ] ;
+                                      rdfs:range [ rdf:type owl:Class ;
+                                                   owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                 <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                 <https://saref.etsi.org/core/Property>
+                                                                 <https://saref.etsi.org/core/PropertyOfInterest>
+                                                                 <https://saref.etsi.org/core/State>
+                                                                 <https://saref.etsi.org/core/StateOfInterest>
+                                                               )
+                                                 ] ;
+                                      rdfs:comment "Links a device, function, command, or procedure execution, to the feature, property, or state, it targets."@en ;
+                                      rdfs:label "targets"@en ;
+                                      <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: saref:actsUpon now holds not only between a command and a state. It generalizes observes, observes, controls. Domain and range are unions of several classes."@en ,
+                                                                                        "V4.1.1: saref:actsUpon is renamed saref:targets."@en .
+
+
+###  https://saref.etsi.org/core/whenPropertyValue
+<https://saref.etsi.org/core/whenPropertyValue> rdf:type owl:ObjectProperty ;
+                                                rdfs:domain <https://saref.etsi.org/core/Profile> ;
+                                                rdfs:range <https://saref.etsi.org/core/PropertyValue> ;
+                                                rdfs:comment "Links a profile to a property value that contributes to restricting its applicable context."@en ;
+                                                rdfs:label "when property value"@en .
+
+
+###  https://saref.etsi.org/core/whenState
+<https://saref.etsi.org/core/whenState> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <https://saref.etsi.org/core/Profile> ;
+                                        rdfs:range <https://saref.etsi.org/core/State> ;
+                                        rdfs:comment "Links a profile to a state that contributes to restricting its applicable context."@en ;
+                                        rdfs:label "when state"@en .
+
+
+###  https://saref.etsi.org/saref4city/assesses
+<https://saref.etsi.org/saref4city/assesses> rdf:type owl:ObjectProperty ;
+                                             rdfs:comment "Relation between a Key Performance Indicator and the feature of interest being assessed"@en ;
+                                             rdfs:label "assesses"@en .
+
+
+###  https://saref.etsi.org/saref4city/hasAccessibility
+<https://saref.etsi.org/saref4city/hasAccessibility> rdf:type owl:ObjectProperty ;
+                                                     rdfs:domain <https://saref.etsi.org/saref4city/Event> ;
+                                                     rdfs:range <https://saref.etsi.org/saref4city/AccessibilityConcept> ;
+                                                     rdfs:comment "relation between an event and the accesility modes provided"@en ;
+                                                     rdfs:label "has accessibility"@en .
+
+
+###  https://saref.etsi.org/saref4city/hasKPI
+<https://saref.etsi.org/saref4city/hasKPI> rdf:type owl:ObjectProperty ;
+                                           owl:inverseOf <https://saref.etsi.org/saref4city/isKPIOf> ;
+                                           rdfs:domain <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                           rdfs:range <https://saref.etsi.org/saref4city/KeyPerformanceIndicator> ;
+                                           rdfs:comment "Relation between a feature of interes and Key Performance Indicators"@en ;
+                                           rdfs:label "has key performance indicator"@en .
+
+
+###  https://saref.etsi.org/saref4city/involvesFacility
+<https://saref.etsi.org/saref4city/involvesFacility> rdf:type owl:ObjectProperty ;
+                                                     rdfs:domain <https://saref.etsi.org/saref4city/PublicService> ;
+                                                     rdfs:range <https://saref.etsi.org/saref4city/Facility> ;
+                                                     rdfs:comment "Relation between public services and the facilities involved"@en ;
+                                                     rdfs:label "involves facility"@en .
+
+
+###  https://saref.etsi.org/saref4city/isAssessedBy
+<https://saref.etsi.org/saref4city/isAssessedBy> rdf:type owl:ObjectProperty ;
+                                                 rdfs:comment "Relation between a Key Performance Indicator assessment and the agent perfoming the assessment"@en ;
+                                                 rdfs:label "is assessed by"@en .
+
+
+###  https://saref.etsi.org/saref4city/isAvailableInLanguage
+<https://saref.etsi.org/saref4city/isAvailableInLanguage> rdf:type owl:ObjectProperty ;
+                                                          rdfs:domain <https://saref.etsi.org/saref4city/PublicService> ;
+                                                          rdfs:range <http://purl.org/dc/terms/LinguisticSystem> ;
+                                                          rdfs:comment "Relation between a public service and the languages it is available in."@en ;
+                                                          rdfs:label "is available in language"@en .
+
+
+###  https://saref.etsi.org/saref4city/isDerivedFrom
+<https://saref.etsi.org/saref4city/isDerivedFrom> rdf:type owl:ObjectProperty ;
+                                                  rdfs:comment "Relation between a Key Performance Indicator Assessmente and te observations used to calculate it"@en ;
+                                                  rdfs:label "is derived from"@en .
+
+
+###  https://saref.etsi.org/saref4city/isKPIOf
+<https://saref.etsi.org/saref4city/isKPIOf> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <https://saref.etsi.org/saref4city/KeyPerformanceIndicator> ;
+                                            rdfs:range <https://saref.etsi.org/core/FeatureOfInterest> ;
+                                            rdfs:comment "is key performance indicator of"@en ;
+                                            rdfs:label "is key performance indicator of"@en .
+
+
+###  https://saref.etsi.org/saref4city/isOrganizedBy
+<https://saref.etsi.org/saref4city/isOrganizedBy> rdf:type owl:ObjectProperty ;
+                                                  rdfs:comment "is organized by"@en ;
+                                                  rdfs:label "is organized by"@en .
+
+
+###  https://saref.etsi.org/saref4city/isSubEventOf
+<https://saref.etsi.org/saref4city/isSubEventOf> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <https://saref.etsi.org/saref4city/Event> ;
+                                                 rdfs:range <https://saref.etsi.org/saref4city/Event> ;
+                                                 rdfs:comment "Relation between an event and a more general event it is part of."@en ;
+                                                 rdfs:label "is subevent of"@en .
+
+
+###  https://saref.etsi.org/saref4city/quantifiesKPI
+<https://saref.etsi.org/saref4city/quantifiesKPI> rdf:type owl:ObjectProperty ;
+                                                  rdfs:range <https://saref.etsi.org/saref4city/KeyPerformanceIndicator> ;
+                                                  rdfs:comment "Relation between a Key Performance Indicator Assessment and the genral Key Performance Indicator being assessed"@en ;
+                                                  rdfs:label "quantifies KPI"@en .
+
+
+###  https://saref.etsi.org/saref4city/refersToFeature
+<https://saref.etsi.org/saref4city/refersToFeature> rdf:type owl:ObjectProperty ;
+                                                    rdfs:domain <https://saref.etsi.org/saref4city/KeyPerformanceIndicatorAssessment> ;
+                                                    rdfs:range <http://www.opengis.net/ont/geosparql#Feature> ;
+                                                    rdfs:comment "Relation between a KPI assessment and the geographical feature it refers to"@en ;
+                                                    rdfs:label "refers to feature"@en .
+
+
+###  https://saref.etsi.org/saref4city/refersToTime
+<https://saref.etsi.org/saref4city/refersToTime> rdf:type owl:ObjectProperty ;
+                                                 rdfs:range <http://www.w3.org/2006/time#TemporalEntity> ;
+                                                 rdfs:comment "Relation between a KPI assessment and the tempral entity it refers to"@en ;
+                                                 rdfs:label "refers to time"@en .
+
+
+###  https://saref.etsi.org/saref4city/takesPlaceAtFacility
+<https://saref.etsi.org/saref4city/takesPlaceAtFacility> rdf:type owl:ObjectProperty ;
+                                                         rdfs:domain <https://saref.etsi.org/saref4city/Event> ;
+                                                         rdfs:range <https://saref.etsi.org/saref4city/Facility> ;
+                                                         rdfs:comment "Relation between an event and the facilities it takes place at."@en ;
+                                                         rdfs:label "takes place at facility"@en .
+
+
+###  https://saref.etsi.org/saref4city/takesPlaceAtTime
+<https://saref.etsi.org/saref4city/takesPlaceAtTime> rdf:type owl:ObjectProperty ;
+                                                     rdfs:domain <https://saref.etsi.org/saref4city/Event> ;
+                                                     rdfs:range <http://www.w3.org/2006/time#TemporalEntity> ;
+                                                     rdfs:comment "Relation between an event and the tiem when it takes place."@en ;
+                                                     rdfs:label "takes place at time"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://saref.etsi.org/core/hasIdentifier
+<https://saref.etsi.org/core/hasIdentifier> rdf:type owl:DatatypeProperty ;
+                                            rdfs:comment "Links some entity to its identifier. Extensions of SAREF may define sub-properties such as s4abcd:hasUUID, s4abcd:hasGTIN12, etc."@en ;
+                                            rdfs:label "has identifier"@en ;
+                                            rdfs:seeAlso <https://labs.etsi.org/rep/saref/saref-portal/-/issues/2> .
+
+
+###  https://saref.etsi.org/core/hasManufacturer
+<https://saref.etsi.org/core/hasManufacturer> rdf:type owl:DatatypeProperty ;
+                                              rdfs:domain [ rdf:type owl:Class ;
+                                                            owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                          <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                        )
+                                                          ] ;
+                                              rdfs:comment "A relationship identifying the manufacturer of an entity (e.g., device). The value is expected to be a string or a string with language tag."@en ;
+                                              rdfs:label "has manufacturer"@en ;
+                                              <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Defined domain of saref:hasManufacturer to union of feature kind and feature of interest."@en .
+
+
+###  https://saref.etsi.org/core/hasModel
+<https://saref.etsi.org/core/hasModel> rdf:type owl:DatatypeProperty ;
+                                       rdfs:domain [ rdf:type owl:Class ;
+                                                     owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                   <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                 )
+                                                   ] ;
+                                       rdfs:comment "A relationship identifying the model of an entity (e.g., device). The value is expected to be a string or a string with language tag."@en ;
+                                       rdfs:label "has model"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Defined domain of saref:hasModel to union of feature kind and feature of interest."@en .
+
+
+###  https://saref.etsi.org/core/hasResultTime
+<https://saref.etsi.org/core/hasResultTime> rdf:type owl:DatatypeProperty ;
+                                            rdfs:domain <https://saref.etsi.org/core/ProcedureExecution> ;
+                                            rdfs:range xsd:dateTime ;
+                                            rdfs:comment "Links a procedure execution to the instant of time when the activity was completed, expressed as an xsd:dateTime literal."@en ;
+                                            rdfs:label "has result time"@en ;
+                                            <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:hasResultTime as part of general will to make SAREF and SOSA/SSN converge."@en .
+
+
+###  https://saref.etsi.org/core/hasRevisionNumber
+<https://saref.etsi.org/core/hasRevisionNumber> rdf:type owl:DatatypeProperty ;
+                                                rdfs:range xsd:string ;
+                                                rdfs:comment "Links some entity (e.g., a device) to its revision number."@en ;
+                                                rdfs:label "has revision number"@en ;
+                                                rdfs:seeAlso <https://labs.etsi.org/rep/saref/saref-core/-/issues/53> .
+
+
+###  https://saref.etsi.org/core/hasTimestamp
+<https://saref.etsi.org/core/hasTimestamp> rdf:type owl:DatatypeProperty ;
+                                           rdfs:domain [ rdf:type owl:Class ;
+                                                         owl:unionOf ( <https://saref.etsi.org/core/ProcedureExecution>
+                                                                       <https://saref.etsi.org/core/Profile>
+                                                                     )
+                                                       ] ;
+                                           rdfs:range xsd:dateTime ;
+                                           rdfs:comment "Links a procedure execution or a profile to an instant."@en ;
+                                           rdfs:label "has timestamp"@en ;
+                                           <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Tried to clarify definition of saref:hasTimestamp. Still unclear."@en ;
+                                           <http://www.w3.org/2004/02/skos/core#note> "Applied on a profile, it describes the applicable instant of that profile"@en ,
+                                                                                      "When the execution time and the phenomenon time are the same time instants, then DP saref:hasTimestamp can be used to simply link a procedure execution to the time of these instants, expressed as an xsd:dateTime literal."@en .
+
+
+###  https://saref.etsi.org/core/hasValue
+<https://saref.etsi.org/core/hasValue> rdf:type owl:DatatypeProperty ;
+                                       rdfs:comment "Value of a property value expressed as an RDF literal. Note that, even if decimal values are expected, values could use other datatypes."@en ;
+                                       rdfs:label "has value"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Clarified definition of saref:hasValue."@en .
+
+
+###  https://saref.etsi.org/core/hasVersion
+<https://saref.etsi.org/core/hasVersion> rdf:type owl:DatatypeProperty ;
+                                         rdfs:range xsd:string ;
+                                         rdfs:comment "Links some entity (e.g., a device) to its version."@en ;
+                                         rdfs:label "has version"@en ;
+                                         rdfs:seeAlso <https://labs.etsi.org/rep/saref/saref-core/-/issues/53> .
+
+
+###  https://saref.etsi.org/saref4city/hasCalculationPeriod
+<https://saref.etsi.org/saref4city/hasCalculationPeriod> rdf:type owl:DatatypeProperty ;
+                                                         rdfs:range xsd:duration ;
+                                                         rdfs:comment "Relation between a KPI  and the temporal period it refers to"@en ;
+                                                         rdfs:label "has calculation period"@en .
+
+
+###  https://saref.etsi.org/saref4city/hasCreationDate
+<https://saref.etsi.org/saref4city/hasCreationDate> rdf:type owl:DatatypeProperty ;
+                                                    rdfs:range xsd:dateTime ;
+                                                    rdfs:comment "Creation date of a KPI assessment"@en ;
+                                                    rdfs:label "has creation date"@en .
+
+
+###  https://saref.etsi.org/saref4city/hasDescription
+<https://saref.etsi.org/saref4city/hasDescription> rdf:type owl:DatatypeProperty ;
+                                                   rdfs:range rdfs:Literal ;
+                                                   rdfs:comment "Description of an entity like a KPI or KPI assessment"@en ;
+                                                   rdfs:label "has description"@en .
+
+
+###  https://saref.etsi.org/saref4city/hasExpirationDate
+<https://saref.etsi.org/saref4city/hasExpirationDate> rdf:type owl:DatatypeProperty ;
+                                                      rdfs:range xsd:dateTime ;
+                                                      rdfs:comment "Expiration date of a KPI assessment"@en ;
+                                                      rdfs:label "has expiration date"@en .
+
+
+###  https://saref.etsi.org/saref4city/hasLastUpdateDate
+<https://saref.etsi.org/saref4city/hasLastUpdateDate> rdf:type owl:DatatypeProperty ;
+                                                      rdfs:range xsd:dateTime ;
+                                                      rdfs:comment "Las update of a KPI assessment"@en ;
+                                                      rdfs:label "has last update date"@en .
+
+
+###  https://saref.etsi.org/saref4city/hasName
+<https://saref.etsi.org/saref4city/hasName> rdf:type owl:DatatypeProperty ;
+                                            rdfs:range rdfs:Literal ;
+                                            rdfs:comment "Name of an entity like a KPI or KPI assessment"@en ;
+                                            rdfs:label "has name"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/dc/terms/LinguisticSystem
+<http://purl.org/dc/terms/LinguisticSystem> rdf:type owl:Class .
+
+
+###  http://purl.org/vocab/cpsv#PublicService
+<http://purl.org/vocab/cpsv#PublicService> rdf:type owl:Class ;
+                                           rdfs:comment "This class represents the service itself. A public service is the capacity to carry out a procedure and exists whether it is used or not. It is a set of deeds and acts performed by or on behalf of a public agency for the benefit of a citizen, a business or another public agency."@en ;
+                                           rdfs:isDefinedBy <http://purl.org/vocab/cpsv#> ;
+                                           rdfs:label "Public Service"@en .
+
+
+###  http://www.opengis.net/ont/geosparql#Feature
+<http://www.opengis.net/ont/geosparql#Feature> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                               rdfs:comment "This class represents the top-level feature type. This class is equivalent to GFI_Feature defined in ISO 19156:2011, and it is superclass of all feature types."@en ;
+                                               rdfs:isDefinedBy <http://www.opengis.net/ont/geosparql> ;
+                                               rdfs:label "Feature"@en .
+
+
+###  http://www.opengis.net/ont/geosparql#Geometry
+<http://www.opengis.net/ont/geosparql#Geometry> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                                rdfs:comment "The class represents the top-level geometry type. This class is equivalent to the UML class GM_Object defined in ISO 19107, and it is superclass of all geometry types."@en ;
+                                                rdfs:isDefinedBy <http://www.opengis.net/ont/geosparql> ;
+                                                rdfs:label "Geometry"@en .
+
+
+###  http://www.opengis.net/ont/geosparql#SpatialObject
+<http://www.opengis.net/ont/geosparql#SpatialObject> rdf:type owl:Class ;
+                                                     rdfs:comment "The class spatial-object represents everything that can have a spatial representation. It is superclass of feature and geometry."@en ;
+                                                     rdfs:isDefinedBy <http://www.opengis.net/ont/geosparql> ;
+                                                     rdfs:label "SpatialObject"@en .
+
+
+###  http://www.opengis.net/ont/sf#Geometry
+<http://www.opengis.net/ont/sf#Geometry> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Geometry> ;
+                                         rdfs:comment """Geometry is the root class of the hierarchy.
+
+The instantiable subclasses of Geometry are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space (R2, R3 or R4). Geometry values in R2 have points with coordinate values for x and y. Geometry values in R3 have points with coordinate values for x, y and z or for x, y and m. Geometry values in R4 have points with coordinate values for x, y, z and m.
+
+The interpretation of the coordinates is subject to the coordinate reference systems associated to the point. All coordinates within a geometry object should be in the same coordinate reference systems. Each coordinate shall be unambiguously associated to a coordinate reference system either directly or through its containing geometry. The z coordinate of a point is typically, but not necessarily, represents altitude or elevation. The m coordinate represents a measurement.
+
+All Geometry classes described in this specification are defined so that instances of Geometry are topologically closed, i.e. all represented geometries include their boundary as point sets. This does not affect their representation, and open versions of the same classes may be used in other circumstances, such as topological representations."""@en ;
+                                         rdfs:isDefinedBy <http://www.opengis.net/ont/sf> ;
+                                         rdfs:label "Geometry" .
+
+
+###  http://www.opengis.net/ont/sf#Point
+<http://www.opengis.net/ont/sf#Point> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://www.opengis.net/ont/sf#Geometry> ;
+                                      rdfs:comment """A Point is a 0-dimensional geometric object and represents a single location in coordinate space. 
+A Point has an x-coordinate value, a y-coordinate value. If called for by the associated Spatial Reference System, it may also have coordinate values for z and m.
+The boundary of a Point is the empty set."""@en ;
+                                      rdfs:isDefinedBy <http://www.opengis.net/ont/sf> ;
+                                      rdfs:label "Point" .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+<http://www.w3.org/2004/02/skos/core#Concept> rdf:type owl:Class ;
+                                              rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core#> .
+
+
+###  http://www.w3.org/2006/time#TemporalEntity
+<http://www.w3.org/2006/time#TemporalEntity> rdf:type owl:Class ;
+                                             rdfs:comment "A temporal interval or instant."@en ;
+                                             rdfs:isDefinedBy <http://www.w3.org/2006/time#> ;
+                                             rdfs:label "Temporal entity"@en .
+
+
+###  http://www.w3.org/2006/time#TemporalPosition
+<http://www.w3.org/2006/time#TemporalPosition> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/org#Organization
+<http://www.w3.org/ns/org#Organization> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://xmlns.com/foaf/0.1/Agent> ;
+                                        rdfs:isDefinedBy <http://www.w3.org/ns/org#> ;
+                                        rdfs:label "Organization"@en .
+
+
+###  http://xmlns.com/foaf/0.1/Agent
+<http://xmlns.com/foaf/0.1/Agent> rdf:type owl:Class ;
+                                  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+                                  rdfs:label "Agent"@en .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+<http://xmlns.com/foaf/0.1/Person> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://xmlns.com/foaf/0.1/Agent> ;
+                                   rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+                                   rdfs:label "Person"@en .
+
+
+###  https://saref.etsi.org/core/Actuation
+<https://saref.etsi.org/core/Actuation> rdf:type owl:Class ;
+                                        rdfs:subClassOf <https://saref.etsi.org/core/ProcedureExecution> ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <https://saref.etsi.org/core/madeBy> ;
+                                                          owl:allValuesFrom <https://saref.etsi.org/core/Actuator>
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <https://saref.etsi.org/core/controls> ;
+                                                          owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                                        ] ;
+                                        rdfs:comment "A saref:Actuation is the act of carrying out a procedure to control the state of the world using an actuator. It links to an actuator to describe what made the actuation, and to the controlled feature, property, property of interest, state, or state of interest. Typically, its input is a property value or a state. An actuation of a state (OP saref:controls) should have a state as input (OP saref:hasInput). Respectively, an actuation of a property should have a property value as input."@en ;
+                                        rdfs:label "Actuation"@en .
+
+
+###  https://saref.etsi.org/core/Actuator
+<https://saref.etsi.org/core/Actuator> rdf:type owl:Class ;
+                                       rdfs:subClassOf <https://saref.etsi.org/core/Device> ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <https://saref.etsi.org/core/controls> ;
+                                                         owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                                       ] ;
+                                       rdfs:comment "A device designed to control one or more properties or states of one or more features of interest."@en ;
+                                       rdfs:label "Actuator"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Definition of Actuator is simplified and grounded on saref:controls. Local restriction on saref:hasFunction is deleted."@en .
+
+
+###  https://saref.etsi.org/core/Appliance
+<https://saref.etsi.org/core/Appliance> rdf:type owl:Class ;
+                                        rdfs:subClassOf <https://saref.etsi.org/core/Device> ;
+                                        rdfs:comment "A device designed to accomplish a particular task for occupant use. It consumes, produces, or stores, some commodity."@en ;
+                                        rdfs:label "Appliance"@en ;
+                                        <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Definition of saref:Appliance is grounded on tasks and commodities."@en .
+
+
+###  https://saref.etsi.org/core/Command
+<https://saref.etsi.org/core/Command> rdf:type owl:Class ;
+                                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                        owl:onProperty <http://www.w3.org/2004/02/skos/core#broader> ;
+                                                        owl:allValuesFrom <https://saref.etsi.org/core/Command>
+                                                      ] ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty <http://www.w3.org/2004/02/skos/core#narrower> ;
+                                                        owl:allValuesFrom <https://saref.etsi.org/core/Command>
+                                                      ] ;
+                                      rdfs:comment "The lowest-level directives a function exposes to some network. Commands can target (OP saref:targets and its sub-properties) features, properties, or states. An instance of saref:Command is independent of any device."@en ;
+                                      rdfs:label "Command"@en ;
+                                      <http://www.w3.org/2004/02/skos/core#example> "Observe property, control property, observe state, control state, invoke action, cancel action, turn on or off, change color, subscribe, publish, etc. are all commands."@en ;
+                                      <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Simplified definition and axiomatization of saref:Command. Added examples."@en .
+
+
+###  https://saref.etsi.org/core/CommandExecution
+<https://saref.etsi.org/core/CommandExecution> rdf:type owl:Class ;
+                                               rdfs:subClassOf <https://saref.etsi.org/core/ProcedureExecution> ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty <https://saref.etsi.org/core/isExecutionOf> ;
+                                                                 owl:allValuesFrom [ rdf:type owl:Class ;
+                                                                                     owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                                                   <https://saref.etsi.org/core/CommandOfInterest>
+                                                                                                 )
+                                                                                   ]
+                                                               ] ;
+                                               rdfs:comment "Describes the execution of a command. Typically, its inputs and outputs are human understandable and relate to some feature of interest, such as its state (e.g., s4abcd:On), or the value of its temperature (e.g., property value 21.0 °C)."@en ;
+                                               rdfs:label "Command Execution"@en .
+
+
+###  https://saref.etsi.org/core/CommandOfInterest
+<https://saref.etsi.org/core/CommandOfInterest> rdf:type owl:Class ;
+                                                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <https://saref.etsi.org/core/isCommandOfInterestOf> ;
+                                                                  owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                ] ;
+                                                rdfs:comment "The lowest-level directives a device supports and exposes to some network. Commands can target (OP saref:targets and its sub-properties) features, properties, or states. A saref:CommandOfInterest is a directives actually supported by a device and exposed to some network."@en ;
+                                                rdfs:label "Command Of Interest"@en ;
+                                                <http://www.w3.org/2004/02/skos/core#example> "The corridor smart light switch supports a command of kind “turn on/off”, which controls the state of the outdoor light."@en ,
+                                                                                              "The smart fridge supports a command of kind “observe temperature”, which observes the temperature of the fridge."@en ;
+                                                <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:CommandOfInterest, parallel to saref:PropertyOfInterest."@en ;
+                                                <http://www.w3.org/2004/02/skos/core#note> "Commands of interest need not always be explicited. It depends on the use case. Typically, commands of interest are useful to specify the actual property of interest or state of interest that is expected as input parameter, output, or that will be targeted."@en ,
+                                                                                           "Like for commands, commands of interest may be described in terms of their input parameters, outputs, and which properties or states they target."@en .
+
+
+###  https://saref.etsi.org/core/Commodity
+<https://saref.etsi.org/core/Commodity> rdf:type owl:Class ;
+                                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <http://www.w3.org/2004/02/skos/core#broader> ;
+                                                          owl:allValuesFrom <https://saref.etsi.org/core/Commodity>
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <http://www.w3.org/2004/02/skos/core#narrower> ;
+                                                          owl:allValuesFrom <https://saref.etsi.org/core/Commodity>
+                                                        ] ;
+                                        rdfs:comment "A marketable item which may be supplied without qualitative differentiation."@en ;
+                                        rdfs:label "Commodity"@en ;
+                                        <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Definition of saref:Commodity is simplified."@en ,
+                                                                                          "V4.1.1: Removed examples of commodity categories."@en ;
+                                        <http://www.w3.org/2004/02/skos/core#note> "Concepts from existing code lists, vocabularies, and taxonomies, may be used as instances of saref:Commodity, for example from the ISDA taxonomy of commodities, the Standard International Energy product Classification (SIEC), the IRENA Energy Taxonomy or Wikidata."@en ,
+                                                                                   "SAREF refers to energy commodities such as electricity, gas, coal and oil."@en .
+
+
+###  https://saref.etsi.org/core/Device
+<https://saref.etsi.org/core/Device> rdf:type owl:Class ;
+                                     rdfs:subClassOf <https://saref.etsi.org/core/FeatureOfInterest> ,
+                                                     <https://saref.etsi.org/saref4syst/System> ;
+                                     rdfs:comment "A tangible object designed to accomplish a particular task. In order to accomplish this task, the device performs one or more functions. An instance of saref:Device represents one specific real world entity."@en ;
+                                     rdfs:label "Device"@en ;
+                                     <http://www.w3.org/2004/02/skos/core#example> "Examples of devices are a light switch, a temperature sensor, an energy meter, a water flow meter, and a laundry dryer. A laundry dryer is designed to dry laundry, and to accomplish this task it has a start/stop function."@en ,
+                                                                                   "For example, a washing machine is designed to wash (task) and to accomplish this task it performs a start and stop function."@en ;
+                                     <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Most axioms on saref:Device were useless and have been deleted."@en ,
+                                                                                       "V3.2.1: definition of saref:Device clarifies it's a real world entity."@en ,
+                                                                                       "V3.2.1: saref:Device is explicitly a subclass of saref:FeatureOfInterest and s4syst:System."@en .
+
+
+###  https://saref.etsi.org/core/DeviceKind
+<https://saref.etsi.org/core/DeviceKind> rdf:type owl:Class ;
+                                         rdfs:subClassOf <https://saref.etsi.org/core/FeatureKind> ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://www.w3.org/2004/02/skos/core#broader> ;
+                                                           owl:allValuesFrom <https://saref.etsi.org/core/FeatureKind>
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://www.w3.org/2004/02/skos/core#narrower> ;
+                                                           owl:allValuesFrom <https://saref.etsi.org/core/FeatureKind>
+                                                         ] ;
+                                         rdfs:comment "Device kinds allow to describe kinds of devices, with common properties and common states having the same value, targeting the same properties and states, common functions, and common services. Devices kinds may be used to describe models of devices in online catalogues."@en ;
+                                         rdfs:label "Device kinds"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#historyNote> "V4.1.1: Introduced class saref:DeviceKind"@en ,
+                                                                                           "V4.1.1: Use SKOS to organize generic classes in taxonomies."@en .
+
+
+###  https://saref.etsi.org/core/FeatureKind
+<https://saref.etsi.org/core/FeatureKind> rdf:type owl:Class ;
+                                          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <http://www.w3.org/2004/02/skos/core#broader> ;
+                                                            owl:allValuesFrom <https://saref.etsi.org/core/FeatureKind>
+                                                          ] ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <http://www.w3.org/2004/02/skos/core#narrower> ;
+                                                            owl:allValuesFrom <https://saref.etsi.org/core/FeatureKind>
+                                                          ] ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <https://saref.etsi.org/core/consistsOf> ;
+                                                            owl:allValuesFrom <https://saref.etsi.org/core/FeatureKind>
+                                                          ] ;
+                                          rdfs:comment "Feature kinds allow to describe kinds of features of interest, with common properties having the same value, and common states being the same. An instance of saref:FeatureKind represents an archetype of real world entities, for example to populate product catalogs."@en ;
+                                          rdfs:label "Feature kinds"@en ;
+                                          <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced class saref:FeatureKind"@en ,
+                                                                                            "V3.2.1: Use SKOS to organize generic classes in taxonomies."@en .
+
+
+###  https://saref.etsi.org/core/FeatureOfInterest
+<https://saref.etsi.org/core/FeatureOfInterest> rdf:type owl:Class ;
+                                                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <https://saref.etsi.org/core/consistsOf> ;
+                                                                  owl:allValuesFrom <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                ] ;
+                                                rdfs:comment "A feature of interest represents any real world entity from which a property or a state may be targeted, such as observed and controlled. An instance of saref:FeatureOfInterest represents one specific real world entity."@en ;
+                                                rdfs:label "Feature of interest"@en ;
+                                                <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Definition of saref:FeatureOfInterest is clarified, not only properties are measured, but properties and states can be observed and controlled."@en ,
+                                                                                                  "V3.2.1: Definition of saref:FeatureOfInterest: Clarify it's a specific real world entity."@en ,
+                                                                                                  "V3.2.1: Definition of saref:FeatureOfInterest: allValuesFrom axioms are unnecessary and have been deleted."@en .
+
+
+###  https://saref.etsi.org/core/Function
+<https://saref.etsi.org/core/Function> rdf:type owl:Class ;
+                                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://www.w3.org/2004/02/skos/core#broader> ;
+                                                         owl:allValuesFrom <https://saref.etsi.org/core/Function>
+                                                       ] ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://www.w3.org/2004/02/skos/core#narrower> ;
+                                                         owl:allValuesFrom <https://saref.etsi.org/core/Function>
+                                                       ] ;
+                                       rdfs:comment "Logical groups of commands that devices support to accomplish their tasks. Function can target (OP saref:targets and its sub-properties) features, properties, or states. An instance of saref:Function can apply to different devices."@en ;
+                                       rdfs:label "Function"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#example> "To accomplish the task of controlling the light, a smart light switch may have a function for turning on and off the light, and another to set the luminosity of the light."@en ,
+                                                                                     "To accomplish the task of sensing the temperature, a temperature sensor should have a sensing function."@en ,
+                                                                                     "To accomplish the task of washing clothes, a washing machine should have a function for washing."@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Simplified definition and axiomatization of saref:Function. Added examples."@en .
+
+
+###  https://saref.etsi.org/core/FunctionOfInterest
+<https://saref.etsi.org/core/FunctionOfInterest> rdf:type owl:Class ;
+                                                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <https://saref.etsi.org/core/isFunctionOfInterestOf> ;
+                                                                   owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                 ] ;
+                                                 rdfs:comment "Logical groups of commands that devices support to accomplish their tasks. Function can target (OP saref:targets and its sub-properties) features, properties, or states. An instance of saref:FunctionOfInterest is supported by exactly one device."@en ;
+                                                 rdfs:label "Function of Interest"@en ;
+                                                 <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:FunctionOfInterest, parallel to saref:PropertyOfInterest."@en ;
+                                                 <http://www.w3.org/2004/02/skos/core#note> "A function of interest is the function of (OP saref:isFunctionOfInterestOf) exactly one device."@en ,
+                                                                                            "Functions of interest need not always be explicited. It depends on the use case. Typically, functions of interest are useful to specify which command is actually exposed, and which actual property of interest or state of interest it targets."@en .
+
+
+###  https://saref.etsi.org/core/Meter
+<https://saref.etsi.org/core/Meter> rdf:type owl:Class ;
+                                    rdfs:subClassOf <https://saref.etsi.org/core/Device> ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty <https://saref.etsi.org/core/observes> ;
+                                                      owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                                    ] ;
+                                    rdfs:comment "A device designed to observe and additionally do some computation and/or display one or more properties of one or more features of interest."@en ;
+                                    rdfs:label "Meter"@en ;
+                                    <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Definition of Meter is simplified and grounded on saref:observes. Local restriction on saref:hasFunction is deleted."@en ,
+                                                                                      "V4.1.1: Definition of Sensor and Meter are updated to better distinguish one from the other."@en .
+
+
+###  https://saref.etsi.org/core/Observation
+<https://saref.etsi.org/core/Observation> rdf:type owl:Class ;
+                                          rdfs:subClassOf <https://saref.etsi.org/core/ProcedureExecution> ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <https://saref.etsi.org/core/madeBy> ;
+                                                            owl:allValuesFrom <https://saref.etsi.org/core/Sensor>
+                                                          ] ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <https://saref.etsi.org/core/observes> ;
+                                                            owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                                          ] ;
+                                          rdfs:comment "A saref:Observation is the act of carrying out a procedure to estimate or calculate a value of a property of a feature of interest, or a state of a feature of interest. It links to a sensor to describe what made the observation, and to the observed feature, property, property of interest, state, or state of interest. Typically, its result is a property value or a state. An observation of a state (OP saref:observes) should have a state as a result (OP saref:hasResult). Respectively, an observation of a property should have a property value as a result."@en ;
+                                          rdfs:label "Observation"@en .
+
+
+###  https://saref.etsi.org/core/Operation
+<https://saref.etsi.org/core/Operation> rdf:type owl:Class ;
+                                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <https://saref.etsi.org/core/represents> ;
+                                                          owl:allValuesFrom [ rdf:type owl:Class ;
+                                                                              owl:unionOf ( <https://saref.etsi.org/core/Command>
+                                                                                            <https://saref.etsi.org/core/CommandOfInterest>
+                                                                                          )
+                                                                            ]
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <https://saref.etsi.org/core/represents> ;
+                                                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                          owl:onClass <https://saref.etsi.org/core/CommandOfInterest>
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <https://saref.etsi.org/core/isOperationOf> ;
+                                                          owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                        ] ;
+                                        rdfs:comment "A saref:Operation is the means of a service to communicate in a procedure-type manner over the network (i.e. transmit data to/from other devices). It is the –machine interpretable– exposure of a –human understandable– command to a network."@en ;
+                                        rdfs:label "Operation"@en ;
+                                        <http://www.w3.org/2004/02/skos/core#example> "In the set of operations exposed by a smart light bulb on a given network, one may be dedicated to turn on and off the light and expect a boolean as input. Another one may be dedicated to set the luminosity status and expect a target luminosity level (a byte) and a transition time (encoded on two bytes)."@en ,
+                                                                                      "In the set of operations exposed by a smart washing machine on a given network, one may be dedicated to set the water temperature for the washing cycle, and expected as input a enumerated value. Another one may be dedicated to start, pause, or stop the washing cycle."@en ,
+                                                                                      "To turn on a light, send a CoAP PUT request with CBOR content 0xf5 (true)"@en ;
+                                        <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:Operation and associated properties from oneM2M base ontology."@en ;
+                                        <http://www.w3.org/2004/02/skos/core#note> "An operation may be described in terms of its inputs and outputs using OP saref:hasInput and saref:hasOutput. Inputs and outputs of operations typically describe the expected schema or shape of network messages."@en ,
+                                                                                   "Typically, a device connected to a given network offers one service for each of its functions of interest, and each service has one operation per command of interest of the function of interest it represents."@en .
+
+
+###  https://saref.etsi.org/core/OperationExecution
+<https://saref.etsi.org/core/OperationExecution> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <https://saref.etsi.org/core/ProcedureExecution> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <https://saref.etsi.org/core/isExecutionOf> ;
+                                                                   owl:allValuesFrom <https://saref.etsi.org/core/Operation>
+                                                                 ] ;
+                                                 rdfs:comment "Describes the execution of an operation in a network: the–machine interpretable–  description of a communication between devices over the network. Typically, its input and result are network messages, that conform to the input and output of the executed operation."@en ;
+                                                 rdfs:label "Operation Execution"@en .
+
+
+###  https://saref.etsi.org/core/ProcedureExecution
+<https://saref.etsi.org/core/ProcedureExecution> rdf:type owl:Class ;
+                                                 rdfs:comment "Represents the act of carrying out a procedure."@en ;
+                                                 rdfs:label "Procedure Execution"@en ;
+                                                 <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:ProcedureExecution."@en .
+
+
+###  https://saref.etsi.org/core/Profile
+<https://saref.etsi.org/core/Profile> rdf:type owl:Class ;
+                                      rdfs:comment "A saref:Profile describes the money earned (negative values) or paied (positive values) for the use (production or consumption) of a commodity by a device in a certain context."@en ;
+                                      rdfs:label "Profile"@en ;
+                                      <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Class saref:Profile has been re-specified, to take into account findings from SAREF4ENER V1.2.1."@en ;
+                                      <http://www.w3.org/2004/02/skos/core#note> "OP saref:hasPrice links a profile to the money earned (negative values) or paid (positive values) for the use (production or consumption) of the commodity by the device."@en ,
+                                                                                 "OP saref:hasProfile links a device to its profile. The device should be linked to a certain commodity using OP saref:consumes, saref:produces, or saref:stores, and optionally to some property or state using OP saref:targets or its sub-properties."@en ,
+                                                                                 "The applicable context can be restricted to when a feature of interest has a certain state (OPs saref:whenState)."@en ,
+                                                                                 "The applicable context can be restricted to when the property of a feature of interest has some value (OPs saref:whenPropertyValue)"@en ,
+                                                                                 "The applicable context of a profile can be bound temporally using DP saref:hasTimestamp or its subproperties defined by SAREF extensions, or OP saref:hasApplicableTime which links to instant or interval or other compound temporal entity expressed using OWL Time."@en .
+
+
+###  https://saref.etsi.org/core/Property
+<https://saref.etsi.org/core/Property> rdf:type owl:Class ;
+                                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://www.w3.org/2004/02/skos/core#broader> ;
+                                                         owl:allValuesFrom <https://saref.etsi.org/core/Property>
+                                                       ] ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://www.w3.org/2004/02/skos/core#narrower> ;
+                                                         owl:allValuesFrom <https://saref.etsi.org/core/Property>
+                                                       ] ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <https://saref.etsi.org/core/consistsOf> ;
+                                                         owl:allValuesFrom [ rdf:type owl:Class ;
+                                                                             owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                                           <https://saref.etsi.org/core/Property>
+                                                                                           <https://saref.etsi.org/core/State>
+                                                                                         )
+                                                                           ]
+                                                       ] ;
+                                       rdfs:comment "Identifiable qualities of features of interest that can be target of devices, such as observed or controlled. A property can apply to different features of interest."@en ;
+                                       rdfs:label "Property"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#example> "Air temperature, pressure, luminance, etc. are all properties."@en ,
+                                                                                     """Two examples using the QUDT Quantity Kind vocabulary, and the British Oceanographic Data Centre Parameter Usage Vocabulary.
+
+<https://qudt.org/2.1/vocab/quantitykind/ActiveEnergy> a saref:Property ;
+    rdfs:label \"Active Energy\"@en ;
+    rdfs:comment \"\"Active Energy\" is the electrical energy transformable into some other form of energy.\"@en .
+
+<http://vocab.nerc.ac.uk/collection/P01/current/CDTSZZ01/> a saref:Property ;
+    skos:prefLabel \"Absolute temperature standard deviation of the atmosphere by dry bulb thermometer\"@en .
+"""@en ;
+                                       <http://www.w3.org/2004/02/skos/core#historyNote> "Until SAREF V3.1.1, there was an ambiguity between whether properties should be specific or generic to features of interest. This ambiguity has been solved in SAREF V3.2.1, and the new modeling will be enforced in the next major revision of SAREF."@en ,
+                                                                                         "V3.2.1: The definition and scope of usage for saref:Property is clarified. Axiomatization is simplified."@en ;
+                                       <http://www.w3.org/2004/02/skos/core#note> "Concepts from existing code lists, vocabularies, and taxonomies, may be used as instances of saref:Property."@en .
+
+
+###  https://saref.etsi.org/core/PropertyOfInterest
+<https://saref.etsi.org/core/PropertyOfInterest> rdf:type owl:Class ;
+                                                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <https://saref.etsi.org/core/consistsOf> ;
+                                                                   owl:allValuesFrom [ rdf:type owl:Class ;
+                                                                                       owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                                                     <https://saref.etsi.org/core/Property>
+                                                                                                     <https://saref.etsi.org/core/PropertyOfInterest>
+                                                                                                     <https://saref.etsi.org/core/State>
+                                                                                                     <https://saref.etsi.org/core/StateOfInterest>
+                                                                                                   )
+                                                                                     ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <https://saref.etsi.org/core/isPropertyOfInterestOf> ;
+                                                                   owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                 ] ;
+                                                 rdfs:comment "Identifiable qualities of features of interest that can be target of devices, such as observed or controlled. An instance of saref:PropertyOfInterest is specific to a feature of interest. It is inherent to and cannot exist without that feature of interest."@en ;
+                                                 rdfs:label "Property of Interest"@en ;
+                                                 <http://www.w3.org/2004/02/skos/core#example> """The air temperature of the atmosphere sample at a certain location and altitude, the received signal strength indicator of an wireless IoT connection, the luminance of the ETSI ATHENA amphitheatre.
+
+<etsi_premises/athena#luminance> a saref:PropertyOfInterest ;
+    saref:isPropertyOfInterestOf <etsi_premises/athena> ;
+    saref:hasPropertyKind saref:Luminance ;
+    rdfs:comment \"The luminance of amphitheatre ATHENA\"@en .
+"""@en ;
+                                                 <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:PropertyOfInterest to solved the ambiguity between generic vs specific properties."@en ;
+                                                 <http://www.w3.org/2004/02/skos/core#note> "A property of interest is the property of (OP saref:isPropertyOfInterestOf) exactly one feature of interest."@en ,
+                                                                                            "Per convention, the IRI of properties of interest should consist of the IRI of their feature of interest, suffixed with a fragment identifier #{P} where {P} refers to the name of the property."@en ,
+                                                                                            "Properties of interest need not always be explicited. It depends on the use case. Typically, properties of interest are useful in applications, where the association between a feature of interest and a property (i.e., the property of interest) needs to be identified and related to other properties of interest."@en .
+
+
+###  https://saref.etsi.org/core/PropertyValue
+<https://saref.etsi.org/core/PropertyValue> rdf:type owl:Class ;
+                                            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <https://saref.etsi.org/core/consistsOf> ;
+                                                              owl:allValuesFrom [ rdf:type owl:Class ;
+                                                                                  owl:unionOf ( <https://saref.etsi.org/core/FeatureKind>
+                                                                                                <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                                                <https://saref.etsi.org/core/Property>
+                                                                                                <https://saref.etsi.org/core/PropertyOfInterest>
+                                                                                                <https://saref.etsi.org/core/PropertyValue>
+                                                                                                <https://saref.etsi.org/core/State>
+                                                                                                <https://saref.etsi.org/core/StateOfInterest>
+                                                                                                <https://saref.etsi.org/core/StateValue>
+                                                                                              )
+                                                                                ]
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <https://saref.etsi.org/core/isMeasuredIn> ;
+                                                              owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <https://saref.etsi.org/core/hasValue> ;
+                                                              owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                            ] ;
+                                            rdfs:comment "Describes the value for a property. The property value is optionally linked to its value expressed as an RDF literal (DP saref:hasValue), optionally to the unit of measurement (OP saref:isMeasuredIn), and optionally to the properties or properties of interest it is a value of (OP saref:isValueOfProperty)."@en ;
+                                            rdfs:label "Property Value"@en ;
+                                            <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:PropertyValue to simplify the association of a measure to a property, without always needing it to be a measurement made by a device."@en ,
+                                                                                              "V4.1.1: saref:hasValue is now optional on saref:PropertyValue."@en .
+
+
+###  https://saref.etsi.org/core/Sensor
+<https://saref.etsi.org/core/Sensor> rdf:type owl:Class ;
+                                     rdfs:subClassOf <https://saref.etsi.org/core/Device> ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty <https://saref.etsi.org/core/observes> ;
+                                                       owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                                     ] ;
+                                     rdfs:comment "A device designed to observe and measure one or more properties or states of one or more features of interest."@en ;
+                                     rdfs:label "Sensor"@en ;
+                                     <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Definition of Sensor is simplified and grounded on saref:observes. Local restriction on saref:hasFunction is deleted."@en ,
+                                                                                       "V4.1.1: Definition of Sensor and Meter are updated to better distinguish one from the other."@en .
+
+
+###  https://saref.etsi.org/core/Service
+<https://saref.etsi.org/core/Service> rdf:type owl:Class ;
+                                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                        owl:onProperty <https://saref.etsi.org/core/represents> ;
+                                                        owl:allValuesFrom [ rdf:type owl:Class ;
+                                                                            owl:unionOf ( <https://saref.etsi.org/core/Function>
+                                                                                          <https://saref.etsi.org/core/FunctionOfInterest>
+                                                                                        )
+                                                                          ]
+                                                      ] ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty <https://saref.etsi.org/core/represents> ;
+                                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass <https://saref.etsi.org/core/FunctionOfInterest>
+                                                      ] ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty <https://saref.etsi.org/core/isOfferedBy> ;
+                                                        owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                      ] ;
+                                      rdfs:comment "A saref:Service is a digital representation of a function in a network, making it discoverable, registerable and remotely controllable in the network."@en ;
+                                      rdfs:label "Service"@en ;
+                                      <http://www.w3.org/2004/02/skos/core#example> "For example, a light switch can offer the service of remotely switching the lights in a home through mobile phone devices that are connected to the local network (ex:SwitchOnService class). This \"remote switching\" service represents the ex:OnOffFunction."@en ;
+                                      <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Simplified definition of saref:Service. Added examples."@en ;
+                                      <http://www.w3.org/2004/02/skos/core#note> "Typically, a device connected to a given network offers one service for each of its functions of interest."@en .
+
+
+###  https://saref.etsi.org/core/State
+<https://saref.etsi.org/core/State> rdf:type owl:Class ;
+                                    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                      owl:onProperty <http://www.w3.org/2004/02/skos/core#broader> ;
+                                                      owl:allValuesFrom <https://saref.etsi.org/core/State>
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty <http://www.w3.org/2004/02/skos/core#narrower> ;
+                                                      owl:allValuesFrom <https://saref.etsi.org/core/State>
+                                                    ] ;
+                                    rdfs:comment "Identifiable conditions that features of interest are or may be in, and that can be target of devices, such as observed and controlled. A state can apply to different features of interest."@en ;
+                                    rdfs:label "State"@en ;
+                                    <http://www.w3.org/2004/02/skos/core#example> "A switch can be found in the saref:OnOffState."@en ;
+                                    <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Clarified and generalized definition of saref:State. Can now apply to all features of interest, not just devices."@en ;
+                                    <http://www.w3.org/2004/02/skos/core#note> "Concepts from existing code lists, vocabularies, and taxonomies, may be used as instances of saref:State."@en ,
+                                                                               "SAREF is not restricted to binary states such as the ex:OnOffState, but allows to define also enumerated states."@en .
+
+
+###  https://saref.etsi.org/core/StateOfInterest
+<https://saref.etsi.org/core/StateOfInterest> rdf:type owl:Class ;
+                                              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                owl:onProperty <https://saref.etsi.org/core/isStateOfInterestOf> ;
+                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                              ] ;
+                                              rdfs:comment "Identifiable conditions that features of interest are or may be in, and that can be target of devices, such as observed and controlled. An instance of saref:StateOfInterest is specific to a feature of interest. It is inherent to and cannot exist without that feature of interest."@en ;
+                                              rdfs:label "State of Interest"@en ;
+                                              <http://www.w3.org/2004/02/skos/core#historyNote> "V3.2.1: Introduced saref:StateOfInterest, parallel to saref:PropertyOfInterest."@en ;
+                                              <http://www.w3.org/2004/02/skos/core#note> "A state of interest is the state of (OP saref:isStateOfInterestOf) exactly one feature of interest."@en ,
+                                                                                         "Per convention, the IRI of states of interest should consist of the IRI of their feature of interest, suffixed with a fragment identifier #{S} where {S} refers to the name of the state."@en ,
+                                                                                         "States of interest need not always be explicited. It depends on the use case. Typically, states of interest are useful in applications, where the association between a feature of interest and a state (i.e., the state of interest) needs to be identified and related to other states of interest."@en .
+
+
+###  https://saref.etsi.org/core/StateValue
+<https://saref.etsi.org/core/StateValue> rdf:type owl:Class ;
+                                         rdfs:comment "Describes the value for a state. The state value is optionally linked the states or states of interest it is a value of (OP saref:isValueOfState)."@en ;
+                                         rdfs:label "State Value"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#historyNote> "V4.1.1: Introduced saref:StateValue."@en .
+
+
+###  https://saref.etsi.org/core/Task
+<https://saref.etsi.org/core/Task> rdf:type owl:Class ;
+                                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <http://www.w3.org/2004/02/skos/core#broader> ;
+                                                     owl:allValuesFrom <https://saref.etsi.org/core/Task>
+                                                   ] ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <http://www.w3.org/2004/02/skos/core#narrower> ;
+                                                     owl:allValuesFrom <https://saref.etsi.org/core/Task>
+                                                   ] ;
+                                   rdfs:comment "The goal for which a device is designed, from a user perspective."@en ;
+                                   rdfs:label "Task"@en ;
+                                   <http://www.w3.org/2004/02/skos/core#example> "For example, a washing machine is designed for the task of washing."@en ;
+                                   <http://www.w3.org/2004/02/skos/core#note> "Tasks can be accomplished by devices (saref:isAccomplishedBy)."@en .
+
+
+###  https://saref.etsi.org/core/UnitOfMeasure
+<https://saref.etsi.org/core/UnitOfMeasure> rdf:type owl:Class ;
+                                            rdfs:comment "The unit of measure is a standard for measurement of a quantity, such as a Property."@en ;
+                                            rdfs:label "Unit of measure"@en ;
+                                            <http://www.w3.org/2004/02/skos/core#example> "For example, consumption power is a property and Watt is a unit of power that represents a definite predetermined power: when we say 10 Watt, we actually mean 10 times the definite predetermined power \"Watt\"."@en ;
+                                            <http://www.w3.org/2004/02/skos/core#note> "Concepts from existing code lists, vocabularies, and taxonomies, may be used as instances of saref:UnitOfMeasure. For example the QUDT Unit vocabulary"@en ,
+                                                                                       "Our definition is based on the definition of unit of measure in the Ontology of units of Measure (OM)."@en .
+
+
+###  https://saref.etsi.org/saref4city/AccessibilityConcept
+<https://saref.etsi.org/saref4city/AccessibilityConcept> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://www.w3.org/2004/02/skos/core#Concept> ;
+                                                         rdfs:comment "SKOS concept to list  accessibility modes."@en ;
+                                                         rdfs:label "Accessibility concept"@en .
+
+
+###  https://saref.etsi.org/saref4city/AdministrativeArea
+<https://saref.etsi.org/saref4city/AdministrativeArea> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Feature> ;
+                                                       rdfs:comment "An administrative division, unit, entity, area or region, also referred to as a subnational entity, constituent unit, or country subdivision, is a portion of a country or other region delineated for the purpose of administration. (https://en.wikipedia.org/wiki/Administrative_division)"@en ;
+                                                       rdfs:label "Administrative area"@en .
+
+
+###  https://saref.etsi.org/saref4city/Agent
+<https://saref.etsi.org/saref4city/Agent> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://xmlns.com/foaf/0.1/Agent> ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <http://purl.org/vocab/cpsv#provides> ;
+                                                            owl:allValuesFrom <https://saref.etsi.org/saref4city/PublicService>
+                                                          ] ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <http://purl.org/vocab/cpsv#uses> ;
+                                                            owl:allValuesFrom <https://saref.etsi.org/saref4city/PublicService>
+                                                          ] ;
+                                          rdfs:comment "An agent making an action in the context of a city. An agent could be a person, software, etc."@en ;
+                                          rdfs:label "Agent"@en .
+
+
+###  https://saref.etsi.org/saref4city/City
+<https://saref.etsi.org/saref4city/City> rdf:type owl:Class ;
+                                         rdfs:subClassOf <https://saref.etsi.org/saref4city/AdministrativeArea> ;
+                                         rdfs:comment "A city is a large human settlement. A city is distinguished from other human settlements by its relatively great size, but also by its functions and its special symbolic status, which may be conferred by a central authority. (https://en.wikipedia.org/wiki/City)"@en ;
+                                         rdfs:label "City"@en .
+
+
+###  https://saref.etsi.org/saref4city/CityObject
+<https://saref.etsi.org/saref4city/CityObject> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Feature> ;
+                                               rdfs:comment "Generic class for describing city objects."@en ;
+                                               rdfs:label "City object"@en .
+
+
+###  https://saref.etsi.org/saref4city/Country
+<https://saref.etsi.org/saref4city/Country> rdf:type owl:Class ;
+                                            rdfs:subClassOf <https://saref.etsi.org/saref4city/AdministrativeArea> ;
+                                            rdfs:comment "A country is a region that is identified as a distinct national entity in political geography. (https://en.wikipedia.org/wiki/Country)"@en ;
+                                            rdfs:label "Country"@en .
+
+
+###  https://saref.etsi.org/saref4city/District
+<https://saref.etsi.org/saref4city/District> rdf:type owl:Class ;
+                                             rdfs:subClassOf <https://saref.etsi.org/saref4city/AdministrativeArea> ;
+                                             rdfs:comment "A district is a type of administrative division that, in some countries, is managed by local government. Across the world, areas known as \"districts\" vary greatly in size, spanning regions or counties, several municipalities, subdivisions of municipalities, school district, or political district. (https://en.wikipedia.org/wiki/District)"@en ;
+                                             rdfs:label "District"@en .
+
+
+###  https://saref.etsi.org/saref4city/Event
+<https://saref.etsi.org/saref4city/Event> rdf:type owl:Class ;
+                                          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <https://saref.etsi.org/saref4city/isOrganizedBy> ;
+                                                            owl:allValuesFrom <https://saref.etsi.org/saref4city/Agent>
+                                                          ] ;
+                                          rdfs:comment "Temporary and scheduled event, like a festival or competition. (Definition taken from Wikidata)"@en ;
+                                          rdfs:label "Event"@en ;
+                                          rdfs:seeAlso <https://www.wikidata.org/wiki/Q1656682> .
+
+
+###  https://saref.etsi.org/saref4city/Facility
+<https://saref.etsi.org/saref4city/Facility> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Feature> ;
+                                             rdfs:comment "A place, amenity, or piece of equipment provided for a particular purpose. (Definition taken from https://en.oxforddictionaries.com/definition/facility)"@en ;
+                                             rdfs:label "Facility"@en .
+
+
+###  https://saref.etsi.org/saref4city/KeyPerformanceIndicator
+<https://saref.etsi.org/saref4city/KeyPerformanceIndicator> rdf:type owl:Class ;
+                                                            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty <https://saref.etsi.org/saref4city/isKPIOf> ;
+                                                                              owl:allValuesFrom <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                            ] ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty <https://saref.etsi.org/saref4city/hasCalculationPeriod> ;
+                                                                              owl:allValuesFrom xsd:duration
+                                                                            ] ;
+                                                            rdfs:comment "A Key Performance Indicator (KPI) is a type of performance measurement. KPIs evaluate the success of an organization or of a particular activity in which it engages. (Definition taken from FIWARE)"@en ;
+                                                            rdfs:label "Key Performance Indicator"@en ;
+                                                            rdfs:seeAlso <http://fiware-datamodels.readthedocs.io/en/latest/KeyPerformanceIndicator/doc/spec/index.html> .
+
+
+###  https://saref.etsi.org/saref4city/KeyPerformanceIndicatorAssessment
+<https://saref.etsi.org/saref4city/KeyPerformanceIndicatorAssessment> rdf:type owl:Class ;
+                                                                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/core/isMeasuredIn> ;
+                                                                                        owl:allValuesFrom <https://saref.etsi.org/core/UnitOfMeasure>
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/saref4city/assesses> ;
+                                                                                        owl:allValuesFrom <https://saref.etsi.org/core/FeatureOfInterest>
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/saref4city/isAssessedBy> ;
+                                                                                        owl:allValuesFrom <https://saref.etsi.org/saref4city/Agent>
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/saref4city/isDerivedFrom> ;
+                                                                                        owl:allValuesFrom <https://saref.etsi.org/core/Observation>
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/saref4city/quantifiesKPI> ;
+                                                                                        owl:allValuesFrom <https://saref.etsi.org/saref4city/KeyPerformanceIndicator>
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/saref4city/refersToTime> ;
+                                                                                        owl:allValuesFrom <http://www.w3.org/2006/time#TemporalEntity>
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/saref4city/hasCreationDate> ;
+                                                                                        owl:allValuesFrom xsd:dateTime
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/saref4city/hasExpirationDate> ;
+                                                                                        owl:allValuesFrom xsd:dateTime
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/saref4city/hasLastUpdateDate> ;
+                                                                                        owl:allValuesFrom xsd:dateTime
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <https://saref.etsi.org/core/hasValue> ;
+                                                                                        owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                                      ] ;
+                                                                      rdfs:comment "A Key Performance Indicator assessment represents the assessment of a KPI calculated by a given agent in a given time."@en ;
+                                                                      rdfs:label "Key performance indicator assessment"@en .
+
+
+###  https://saref.etsi.org/saref4city/Neighbourhood
+<https://saref.etsi.org/saref4city/Neighbourhood> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <https://saref.etsi.org/saref4city/AdministrativeArea> ;
+                                                  rdfs:comment "A neighbourhood (British English), or neighborhood (American English; see spelling differences), is a geographically localised community within a larger city, town, suburb or rural area. (https://en.wikipedia.org/wiki/Neighbourhood)"@en ;
+                                                  rdfs:label "Neighbourhood"@en .
+
+
+###  https://saref.etsi.org/saref4city/PublicAdministration
+<https://saref.etsi.org/saref4city/PublicAdministration> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://www.w3.org/ns/org#Organization> ;
+                                                         rdfs:comment "Public leadership of public affairs directly responsible for executive action. (Definition taken from wikidata)"@en ;
+                                                         rdfs:label "Public administration"@en ;
+                                                         rdfs:seeAlso <https://www.wikidata.org/wiki/Q31728> .
+
+
+###  https://saref.etsi.org/saref4city/PublicService
+<https://saref.etsi.org/saref4city/PublicService> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/vocab/cpsv#PublicService> ,
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <http://purl.org/vocab/cpsv#physicallyAvailableAt> ;
+                                                                    owl:allValuesFrom <https://saref.etsi.org/saref4city/AdministrativeArea>
+                                                                  ] ,
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <https://saref.etsi.org/saref4city/involvesFacility> ;
+                                                                    owl:allValuesFrom <https://saref.etsi.org/saref4city/Facility>
+                                                                  ] ;
+                                                  rdfs:comment "Public service is a service which is provided by government either directly (through the public sector) or by financing provision of services. (Definition taken from Wikipedia)"@en ;
+                                                  rdfs:label "Public service"@en ;
+                                                  rdfs:seeAlso <https://en.wikipedia.org/wiki/Public_service> .
+
+
+###  https://saref.etsi.org/saref4syst/System
+<https://saref.etsi.org/saref4syst/System> rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

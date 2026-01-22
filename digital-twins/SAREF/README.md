@@ -36,6 +36,18 @@ SAREF4BLDG
 
 several other domain extensions of SAREF Core are also available on the SAREF website
 
+
+## Merged ontologies
+
+Using Protege, we created two **merged** ontologies
+
+with the 3 ontologies together in a directory, we first loaded `saref4city.ttl` in Protege, which then imports `saref.ttl`
+* we merged these two ontologies and called the output `saref4cityMerge.ttl`
+
+then we loaded `saref4bldg.ttl` in Protege, which then imports `saref.ttl`
+* we merged these two ontologies and called the output `saref4bldgMerge.ttl`
+
+
 ## SAREF and Smart Environments
 
 There is strong overlap between the DISO clusters of `digital-twins` and `smart-environments`

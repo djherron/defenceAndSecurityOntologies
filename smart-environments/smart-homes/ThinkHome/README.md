@@ -17,3 +17,6 @@ websites
 * https://www.auto.tuwien.ac.at/downloads/thinkhome/
 * https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/
 
+We created a **merged** version of ThinkHome and called it `ThinkHomeMerged.ttl`
+
+

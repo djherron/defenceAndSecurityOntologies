@@ -14,3 +14,10 @@ Download:
 * https://onto.eva.mpg.de/gfo-bio/gfo-bio-meta.owl
 * https://onto.eva.mpg.de/gfo-bio/gfo-obo-link.owl
 
+Using Protege, we created a **merged** version of GFO-Bio
+* we loaded `gfo-bio.owl` into Protege, which automatically imported GFO over the web
+* we merged these two ontologies into one and called it `gfo-bio-merged.ttl`
+
+
+
+

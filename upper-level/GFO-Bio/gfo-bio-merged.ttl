@@ -1,0 +1,2028 @@
+@prefix : <http://onto.eva.mpg.de/ontologies/gfo-bio-merged.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://onto.eva.mpg.de/ontologies/gfo-bio-merged.owl> .
+
+<http://onto.eva.mpg.de/ontologies/gfo-bio-merged.owl> rdf:type owl:Ontology ;
+                                                        rdfs:comment """Copyright (c) 2006, Regents of the Research Group Ontologies in Medicine (Onto-Med), University of Leipzig, Germany.
+       All rights reserved.  
+
+       Redistribution and use in source and binary forms, with or without modification,
+       are permitted provided that the following conditions are met:
+       
+       1. Redistributions of source code must retain the above copyright notice, this list
+          of conditions and the following disclaimer.
+       
+       2. Redistributions in binary form must reproduce the above copyright notice, this list
+          of conditions and the following disclaimer in the documentation and/or other
+          materials provided with the distribution.
+          
+       3. Neither the name of the Research Group Ontologies in Medicine (Onto-Med), University
+          of Leipzig nor the names of its contributors may be used to endorse or promote products
+          derived from this software without specific prior written permission.
+
+       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS
+       OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+       AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+       CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+       DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+       DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+       IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+       OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."""@en ,
+                                                                     """Copyright (c) 2006, Regents of the Research Group Ontologies in Medicine (Onto-Med), University of Leipzig, and the Max-Planck-Institute for Evolutionary Anthropology.
+All rights reserved.  
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: 
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of the Research Group Ontologies in Medicine (Onto-Med), University of Leipzig or the Max-Planck-Institute for Evolutionary Anthropology nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."""@en ,
+                                                                     """This distribution uses ideas and code from Alan Rector, Robert Stevens, Jeremy Rogers and the CO-ODE and BioHealth Informatics Teams.
+We used the OWL-Version of the Simple Bio Upper Ontology (http://www.cs.man.ac.uk/~rector/ontologies/simple-top-bio/) as a source of ideas, and included some of the categories (esp. value partitions). The gfo-sbuo-link.owl uses the entire ontology and links to it."""@en ;
+                                                        owl:versionInfo "Version 1.0 ($Revision: 1.9 $)" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2000/01/rdf-schema#comment
+rdfs:comment rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#versionInfo
+owl:versionInfo rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.geneontology.org/owl#OBO_REL_has_part
+<http://www.geneontology.org/owl#OBO_REL_has_part> rdf:type owl:ObjectProperty ;
+                                                   owl:equivalentProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> .
+
+
+###  http://www.geneontology.org/owl#OBO_REL_has_participant
+<http://www.geneontology.org/owl#OBO_REL_has_participant> rdf:type owl:ObjectProperty ;
+                                                          owl:equivalentProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> .
+
+
+###  http://www.geneontology.org/owl#OBO_REL_part_of
+<http://www.geneontology.org/owl#OBO_REL_part_of> rdf:type owl:ObjectProperty ;
+                                                  owl:equivalentProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> .
+
+
+###  http://www.geneontology.org/owl#OBO_REL_participates_in
+<http://www.geneontology.org/owl#OBO_REL_participates_in> rdf:type owl:ObjectProperty ;
+                                                          owl:equivalentProperty <http://www.onto-med.de/ontologies/gfo.owl#participates_in> .
+
+
+###  http://www.geneontology.org/owl/#develops_from
+<http://www.geneontology.org/owl/#develops_from> rdf:type owl:ObjectProperty ,
+                                                          owl:TransitiveProperty .
+
+
+###  http://www.geneontology.org/owl/#part_of
+<http://www.geneontology.org/owl/#part_of> rdf:type owl:ObjectProperty ;
+                                           owl:equivalentProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#abstract_has_part
+<http://www.onto-med.de/ontologies/gfo.owl#abstract_has_part> rdf:type owl:ObjectProperty ;
+                                                              owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                              rdf:type owl:TransitiveProperty ;
+                                                              rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Item> ;
+                                                              rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Item> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of
+<http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> rdf:type owl:ObjectProperty ,
+                                                                      owl:TransitiveProperty ;
+                                                             rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Item> ;
+                                                             rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Item> ;
+                                                             rdfs:comment """The abstract part-of relation is denoted by p(x,y);
+the argument-types of this relation are not specified, i.e. we allow
+arbitrary entities to be arguments. We assume that p(x,y) satisfies
+the condition of a partial ordering, .i.e. the following axioms: reflexivity, antisymmetry and transitivity.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#agent_in
+<http://www.onto-med.de/ontologies/gfo.owl#agent_in> rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#causes> ,
+                                                                        <http://www.onto-med.de/ontologies/gfo.owl#participates_in> ;
+                                                     owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_agent> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#boundary_of
+<http://www.onto-med.de/ontologies/gfo.owl#boundary_of> rdf:type owl:ObjectProperty ;
+                                                        rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#depends_on> ;
+                                                        owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_boundary> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#categorial_part_of
+<http://www.onto-med.de/ontologies/gfo.owl#categorial_part_of> rdf:type owl:ObjectProperty ;
+                                                               rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                               owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_categorial_part> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#category_in_layer
+<http://www.onto-med.de/ontologies/gfo.owl#category_in_layer> rdf:type owl:ObjectProperty ;
+                                                              rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#categorial_part_of> ;
+                                                              owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_category> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#caused_by
+<http://www.onto-med.de/ontologies/gfo.owl#caused_by> rdf:type owl:ObjectProperty ;
+                                                      owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#causes> ;
+                                                      rdfs:domain [ rdf:type owl:Class ;
+                                                                    owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Occurrent>
+                                                                                  <http://www.onto-med.de/ontologies/gfo.owl#Presential>
+                                                                                )
+                                                                  ] ;
+                                                      rdfs:range [ rdf:type owl:Class ;
+                                                                   owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Occurrent>
+                                                                                 <http://www.onto-med.de/ontologies/gfo.owl#Presential>
+                                                                               )
+                                                                 ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#causes
+<http://www.onto-med.de/ontologies/gfo.owl#causes> rdf:type owl:ObjectProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#constituent_part_of
+<http://www.onto-med.de/ontologies/gfo.owl#constituent_part_of> rdf:type owl:ObjectProperty ;
+                                                                rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#proper_part_of> ;
+                                                                owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_constituent_part> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#depends_on
+<http://www.onto-med.de/ontologies/gfo.owl#depends_on> rdf:type owl:ObjectProperty ;
+                                                       owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#necessary_for> ;
+                                                       rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Item> ;
+                                                       rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Item> ;
+                                                       rdfs:comment "This relation captures the notion of existential dependence." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#exists_at
+<http://www.onto-med.de/ontologies/gfo.owl#exists_at> rdf:type owl:ObjectProperty ,
+                                                               owl:FunctionalProperty ;
+                                                      rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Presential> ;
+                                                      rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Time_boundary> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#framed_by
+<http://www.onto-med.de/ontologies/gfo.owl#framed_by> rdf:type owl:ObjectProperty ;
+                                                      rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#occupies> ;
+                                                      owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#frames> ;
+                                                      rdf:type owl:FunctionalProperty ;
+                                                      rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Material_object> ;
+                                                      rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Topoid> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#frames
+<http://www.onto-med.de/ontologies/gfo.owl#frames> rdf:type owl:ObjectProperty ,
+                                                            owl:InverseFunctionalProperty ;
+                                                   rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Topoid> ;
+                                                   rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Material_object> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#function_determinant_of
+<http://www.onto-med.de/ontologies/gfo.owl#function_determinant_of> rdf:type owl:ObjectProperty ;
+                                                                    owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_function_determinant> ;
+                                                                    rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Function> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#function_of
+<http://www.onto-med.de/ontologies/gfo.owl#function_of> rdf:type owl:ObjectProperty ;
+                                                        owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_function> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#functional_item_of
+<http://www.onto-med.de/ontologies/gfo.owl#functional_item_of> rdf:type owl:ObjectProperty ;
+                                                               rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#function_determinant_of> ;
+                                                               owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_functional_item> ;
+                                                               rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Role> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#goal_of
+<http://www.onto-med.de/ontologies/gfo.owl#goal_of> rdf:type owl:ObjectProperty ;
+                                                    rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#function_determinant_of> ;
+                                                    owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#has_goal> ;
+                                                    rdfs:domain [ rdf:type owl:Class ;
+                                                                  owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Configuration>
+                                                                                <http://www.onto-med.de/ontologies/gfo.owl#Configuroid>
+                                                                              )
+                                                                ] ;
+                                                    rdfs:comment "\"goal\" here refers to \"final state\" in (Burek, 2006)."@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_agent
+<http://www.onto-med.de/ontologies/gfo.owl#has_agent> rdf:type owl:ObjectProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_boundary
+<http://www.onto-med.de/ontologies/gfo.owl#has_boundary> rdf:type owl:ObjectProperty ,
+                                                                  owl:InverseFunctionalProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_categorial_part
+<http://www.onto-med.de/ontologies/gfo.owl#has_categorial_part> rdf:type owl:ObjectProperty ;
+                                                                rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#abstract_has_part> ;
+                                                                rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Category> ;
+                                                                rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Category> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_category
+<http://www.onto-med.de/ontologies/gfo.owl#has_category> rdf:type owl:ObjectProperty ;
+                                                         rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Ontological_layer> ;
+                                                         rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Category> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_constituent_part
+<http://www.onto-med.de/ontologies/gfo.owl#has_constituent_part> rdf:type owl:ObjectProperty ;
+                                                                 rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_proper_part> ;
+                                                                 rdfs:domain [ rdf:type owl:Class ;
+                                                                               owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Configuration>
+                                                                                             <http://www.onto-med.de/ontologies/gfo.owl#Configuroid>
+                                                                                           )
+                                                                             ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_function
+<http://www.onto-med.de/ontologies/gfo.owl#has_function> rdf:type owl:ObjectProperty ;
+                                                         rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Individual> ;
+                                                         rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Function> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_function_determinant
+<http://www.onto-med.de/ontologies/gfo.owl#has_function_determinant> rdf:type owl:ObjectProperty ;
+                                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Function> ;
+                                                                     rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Individual> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_functional_item
+<http://www.onto-med.de/ontologies/gfo.owl#has_functional_item> rdf:type owl:ObjectProperty ;
+                                                                rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_function_determinant> ;
+                                                                rdf:type owl:FunctionalProperty ;
+                                                                rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Function> ;
+                                                                rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Role> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_goal
+<http://www.onto-med.de/ontologies/gfo.owl#has_goal> rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_function_determinant> ;
+                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Function> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_left_time_boundary
+<http://www.onto-med.de/ontologies/gfo.owl#has_left_time_boundary> rdf:type owl:ObjectProperty ;
+                                                                   rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_time_boundary> ;
+                                                                   owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#left_boundary_of> ;
+                                                                   rdf:type owl:FunctionalProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_member
+<http://www.onto-med.de/ontologies/gfo.owl#has_member> rdf:type owl:ObjectProperty ;
+                                                       owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#member_of> ;
+                                                       rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Set> ;
+                                                       rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Entity> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_part
+<http://www.onto-med.de/ontologies/gfo.owl#has_part> rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#abstract_has_part> ;
+                                                     owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                     rdf:type owl:TransitiveProperty ;
+                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Concrete> ;
+                                                     rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Concrete> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_participant
+<http://www.onto-med.de/ontologies/gfo.owl#has_participant> rdf:type owl:ObjectProperty ;
+                                                            owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#participates_in> ;
+                                                            rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Occurrent> ;
+                                                            rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Presential> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_proper_part
+<http://www.onto-med.de/ontologies/gfo.owl#has_proper_part> rdf:type owl:ObjectProperty ;
+                                                            rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                            owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#proper_part_of> ;
+                                                            rdf:type owl:TransitiveProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_requirement
+<http://www.onto-med.de/ontologies/gfo.owl#has_requirement> rdf:type owl:ObjectProperty ;
+                                                            rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_function_determinant> ;
+                                                            owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#requirement_of> ;
+                                                            rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Function> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_right_time_boundary
+<http://www.onto-med.de/ontologies/gfo.owl#has_right_time_boundary> rdf:type owl:ObjectProperty ;
+                                                                    rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_time_boundary> ;
+                                                                    owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#right_boundary_of> ;
+                                                                    rdf:type owl:FunctionalProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_sequence_constituent
+<http://www.onto-med.de/ontologies/gfo.owl#has_sequence_constituent> rdf:type owl:ObjectProperty ;
+                                                                     owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#sequence_constituent_of> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_spatial_boundary
+<http://www.onto-med.de/ontologies/gfo.owl#has_spatial_boundary> rdf:type owl:ObjectProperty ;
+                                                                 rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_boundary> ;
+                                                                 owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#spatial_boundary_of> ;
+                                                                 rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Spatial_boundary> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_time_boundary
+<http://www.onto-med.de/ontologies/gfo.owl#has_time_boundary> rdf:type owl:ObjectProperty ;
+                                                              rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#has_boundary> ;
+                                                              owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#time_boundary_of> ;
+                                                              rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Chronoid> ;
+                                                              rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Time_boundary> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_token
+<http://www.onto-med.de/ontologies/gfo.owl#has_token> rdf:type owl:ObjectProperty ;
+                                                      rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                      owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#token_of> ;
+                                                      rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Symbol_structure> ;
+                                                      rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Concrete> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#has_value
+<http://www.onto-med.de/ontologies/gfo.owl#has_value> rdf:type owl:ObjectProperty ;
+                                                      owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#value_of> ;
+                                                      rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Property> ;
+                                                      rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Property_value> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#instance_of
+<http://www.onto-med.de/ontologies/gfo.owl#instance_of> rdf:type owl:ObjectProperty ;
+                                                        owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> ;
+                                                        rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Entity> ;
+                                                        rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Category> ;
+                                                        rdfs:comment "The instantiation relation holds between a category and an item. It is not a relation between categories and individuals due to higher order categories such as \"species\"." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#instantiated_by
+<http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> rdf:type owl:ObjectProperty ;
+                                                            rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Category> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#layer_of
+<http://www.onto-med.de/ontologies/gfo.owl#layer_of> rdf:type owl:ObjectProperty ;
+                                                     owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#on_layer> ;
+                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Ontological_layer> ;
+                                                     rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Individual> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#left_boundary_of
+<http://www.onto-med.de/ontologies/gfo.owl#left_boundary_of> rdf:type owl:ObjectProperty ,
+                                                                      owl:InverseFunctionalProperty ;
+                                                             rdfs:comment "Left boundary of a chronoid." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#level_of
+<http://www.onto-med.de/ontologies/gfo.owl#level_of> rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#layer_of> ;
+                                                     owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Level> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#member_of
+<http://www.onto-med.de/ontologies/gfo.owl#member_of> rdf:type owl:ObjectProperty ;
+                                                      rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Entity> ;
+                                                      rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Set> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#necessary_for
+<http://www.onto-med.de/ontologies/gfo.owl#necessary_for> rdf:type owl:ObjectProperty ;
+                                                          rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Item> ;
+                                                          rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Item> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#occupied_by
+<http://www.onto-med.de/ontologies/gfo.owl#occupied_by> rdf:type owl:ObjectProperty ;
+                                                        owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#occupies> ;
+                                                        rdf:type owl:InverseFunctionalProperty ;
+                                                        rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Space> ;
+                                                        rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Presential> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#occupies
+<http://www.onto-med.de/ontologies/gfo.owl#occupies> rdf:type owl:ObjectProperty ,
+                                                              owl:FunctionalProperty ;
+                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Presential> ;
+                                                     rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Space> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#on_layer
+<http://www.onto-med.de/ontologies/gfo.owl#on_layer> rdf:type owl:ObjectProperty ;
+                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Individual> ;
+                                                     rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Ontological_layer> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#on_level
+<http://www.onto-med.de/ontologies/gfo.owl#on_level> rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#on_layer> ;
+                                                     rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Level> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#on_stratum
+<http://www.onto-med.de/ontologies/gfo.owl#on_stratum> rdf:type owl:ObjectProperty ;
+                                                       rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#on_layer> ;
+                                                       owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#stratum_of> ;
+                                                       rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Stratum> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#part_of
+<http://www.onto-med.de/ontologies/gfo.owl#part_of> rdf:type owl:ObjectProperty ;
+                                                    rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                    rdf:type owl:TransitiveProperty ;
+                                                    rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Concrete> ;
+                                                    rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Concrete> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#participates_in
+<http://www.onto-med.de/ontologies/gfo.owl#participates_in> rdf:type owl:ObjectProperty ;
+                                                            rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Presential> ;
+                                                            rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Occurrent> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#plays_role
+<http://www.onto-med.de/ontologies/gfo.owl#plays_role> rdf:type owl:ObjectProperty ;
+                                                       rdfs:domain owl:Thing ;
+                                                       rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Role> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#projection_of
+<http://www.onto-med.de/ontologies/gfo.owl#projection_of> rdf:type owl:ObjectProperty ;
+                                                          owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#projects_to> ;
+                                                          rdf:type owl:InverseFunctionalProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#projects_to
+<http://www.onto-med.de/ontologies/gfo.owl#projects_to> rdf:type owl:ObjectProperty ,
+                                                                 owl:FunctionalProperty ;
+                                                        rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Occurrent> ;
+                                                        rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Temporal_region> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#proper_part_of
+<http://www.onto-med.de/ontologies/gfo.owl#proper_part_of> rdf:type owl:ObjectProperty ;
+                                                           rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                           rdf:type owl:TransitiveProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#realized_by
+<http://www.onto-med.de/ontologies/gfo.owl#realized_by> rdf:type owl:ObjectProperty ;
+                                                        owl:inverseOf <http://www.onto-med.de/ontologies/gfo.owl#realizes> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#realizes
+<http://www.onto-med.de/ontologies/gfo.owl#realizes> rdf:type owl:ObjectProperty ;
+                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Individual> ;
+                                                     rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Function> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#requirement_of
+<http://www.onto-med.de/ontologies/gfo.owl#requirement_of> rdf:type owl:ObjectProperty ;
+                                                           rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#function_determinant_of> ;
+                                                           rdfs:domain [ rdf:type owl:Class ;
+                                                                         owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Configuration>
+                                                                                       <http://www.onto-med.de/ontologies/gfo.owl#Configuroid>
+                                                                                     )
+                                                                       ] ;
+                                                           rdfs:comment "\"requirement\" here refers to \"initial state\" in (Burek, 2006)."@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#right_boundary_of
+<http://www.onto-med.de/ontologies/gfo.owl#right_boundary_of> rdf:type owl:ObjectProperty ,
+                                                                       owl:InverseFunctionalProperty ;
+                                                              rdfs:comment "Right boundary of a chronoid." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#role_of
+<http://www.onto-med.de/ontologies/gfo.owl#role_of> rdf:type owl:ObjectProperty ;
+                                                    rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Role> ;
+                                                    rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Individual> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#sequence_constituent_of
+<http://www.onto-med.de/ontologies/gfo.owl#sequence_constituent_of> rdf:type owl:ObjectProperty ;
+                                                                    rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                    rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Token> ;
+                                                                    rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Symbol_sequence> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#spatial_boundary_of
+<http://www.onto-med.de/ontologies/gfo.owl#spatial_boundary_of> rdf:type owl:ObjectProperty ;
+                                                                rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#boundary_of> ;
+                                                                rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Spatial_boundary> ;
+                                                                rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Space> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#stratum_of
+<http://www.onto-med.de/ontologies/gfo.owl#stratum_of> rdf:type owl:ObjectProperty ;
+                                                       rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#layer_of> ;
+                                                       rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Stratum> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#time_boundary_of
+<http://www.onto-med.de/ontologies/gfo.owl#time_boundary_of> rdf:type owl:ObjectProperty ;
+                                                             rdfs:subPropertyOf <http://www.onto-med.de/ontologies/gfo.owl#boundary_of> ;
+                                                             rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Time_boundary> ;
+                                                             rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Chronoid> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#token_of
+<http://www.onto-med.de/ontologies/gfo.owl#token_of> rdf:type owl:ObjectProperty .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#value_of
+<http://www.onto-med.de/ontologies/gfo.owl#value_of> rdf:type owl:ObjectProperty ;
+                                                     rdfs:domain <http://www.onto-med.de/ontologies/gfo.owl#Property_value> ;
+                                                     rdfs:range <http://www.onto-med.de/ontologies/gfo.owl#Property> .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Adenine_symbol
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Adenine_symbol> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_symbol> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_molecule
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_molecule> rdf:type owl:Class ;
+                                                                    owl:equivalentClass <http://www.co-ode.org/ontologies/amino-acid/2005/10/11/amino-acid.owl#AminoAcid> ;
+                                                                    rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Molecule> ,
+                                                                                    [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                                                      owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_symbol>
+                                                                                    ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_sequence
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_sequence> rdf:type owl:Class ;
+                                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Symbol_sequence> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_symbol
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_symbol> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Symbol> ,
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> ;
+                                                                                    owl:allValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_molecule>
+                                                                                  ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_development
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_development> rdf:type owl:Class ;
+                                                                       rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_process> ,
+                                                                                       [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                         owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part>
+                                                                                       ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part> rdf:type owl:Class ;
+                                                                owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                      owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism>
+                                                                                    ] ;
+                                                                rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_material_object> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_animal
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_animal> rdf:type owl:Class ;
+                                                                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                                owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal>
+                                                                                              ] ;
+                                                                          rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_arabidopsis
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_arabidopsis> rdf:type owl:Class ;
+                                                                               rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_plant> ,
+                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                 owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                                 owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis>
+                                                                                               ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_dictyostelium_discoideum
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_dictyostelium_discoideum> rdf:type owl:Class ;
+                                                                                            rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_fungus
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_fungus> rdf:type owl:Class ;
+                                                                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                                owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Fungus>
+                                                                                              ] ;
+                                                                          rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_mouse
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_mouse> rdf:type owl:Class ;
+                                                                         owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                               owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Mouse>
+                                                                                             ] ;
+                                                                         rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_plant
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_plant> rdf:type owl:Class ;
+                                                                         owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                               owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant>
+                                                                                             ] ;
+                                                                         rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Multicellular_organism> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_anatomical_development
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_anatomical_development> rdf:type owl:Class ;
+                                                                                   rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_development> ,
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                                     owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_arabidopsis>
+                                                                                                   ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_development
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_development> rdf:type owl:Class ;
+                                                                        rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism_development> ,
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                          owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis>
+                                                                                        ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_development_stage
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_development_stage> rdf:type owl:Class ;
+                                                                              rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Development_stage> ,
+                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                                owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis>
+                                                                                              ] ,
+                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                                owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_development>
+                                                                                              ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Atom
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Atom> rdf:type owl:Class ;
+                                                     owl:equivalentClass <http://reliant.teknowledge.com/DAML/SUMO.owl#ElementalSubstance> ;
+                                                     rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_presential> ,
+                                                                     <http://www.onto-med.de/ontologies/gfo.owl#Material_object> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_action
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_action> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Action> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_configuration
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_configuration> rdf:type owl:Class ;
+                                                                         owl:equivalentClass [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Configuration>
+                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                      owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                                                                                      owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Biological_level>
+                                                                                                                    ]
+                                                                                                                  ) ;
+                                                                                               rdf:type owl:Class
+                                                                                             ] ;
+                                                                         rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Configuration> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_configuroid
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_configuroid> rdf:type owl:Class ;
+                                                                       rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Configuroid> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_experiment
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_experiment> rdf:type owl:Class ;
+                                                                      rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Experiment> ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                        owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_presential>
+                                                                                      ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_function
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_function> rdf:type owl:Class ;
+                                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Function> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_individual
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_individual> rdf:type owl:Class ;
+                                                                      rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                                                        owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Biological_level>
+                                                                                      ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_material_object
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_material_object> rdf:type owl:Class ;
+                                                                           owl:equivalentClass [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Material_object>
+                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                        owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                                                                                        owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Biological_level>
+                                                                                                                      ]
+                                                                                                                    ) ;
+                                                                                                 rdf:type owl:Class
+                                                                                               ] ;
+                                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Material_object> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_occurent
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_occurent> rdf:type owl:Class ;
+                                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Occurrent> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_presential
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_presential> rdf:type owl:Class ;
+                                                                      owl:equivalentClass [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Presential>
+                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                   owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                                                                                   owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Biological_level>
+                                                                                                                 ]
+                                                                                                               ) ;
+                                                                                            rdf:type owl:Class
+                                                                                          ] ;
+                                                                      rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Presential> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_process
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_process> rdf:type owl:Class ;
+                                                                   owl:equivalentClass [ owl:intersectionOf ( [ owl:intersectionOf ( [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Process>
+                                                                                                                                                          ) ;
+                                                                                                                                       rdf:type owl:Class
+                                                                                                                                     ]
+                                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                                       owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                                                                                                       owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Biological_level>
+                                                                                                                                     ]
+                                                                                                                                   ) ;
+                                                                                                                rdf:type owl:Class
+                                                                                                              ]
+                                                                                                            ) ;
+                                                                                         rdf:type owl:Class
+                                                                                       ] ;
+                                                                   rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Process> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_situation
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_situation> rdf:type owl:Class ;
+                                                                     owl:equivalentClass [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Situation>
+                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                  owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                                                                                  owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Biological_level>
+                                                                                                                ]
+                                                                                                              ) ;
+                                                                                           rdf:type owl:Class
+                                                                                         ] ;
+                                                                     rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Situation> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_situoid
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_situoid> rdf:type owl:Class ;
+                                                                   rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Situoid> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Caenorhabditis_elegans
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Caenorhabditis_elegans> rdf:type owl:Class ;
+                                                                       rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_material_object> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell_component
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell_component> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_material_object> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cereal_plant
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cereal_plant> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_presential
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_presential> rdf:type owl:Class ;
+                                                                    owl:equivalentClass [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Presential>
+                                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                                 owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                                                                                 owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Chemical_level>
+                                                                                                               ]
+                                                                                                             ) ;
+                                                                                          rdf:type owl:Class
+                                                                                        ] ;
+                                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Presential> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_process
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_process> rdf:type owl:Class ;
+                                                                 owl:equivalentClass [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Process>
+                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                              owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#on_level> ;
+                                                                                                              owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Chemical_level>
+                                                                                                            ]
+                                                                                                          ) ;
+                                                                                       rdf:type owl:Class
+                                                                                     ] ;
+                                                                 rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Process> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_reaction
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_reaction> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_process> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cytosine_symbol
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cytosine_symbol> rdf:type owl:Class ;
+                                                                rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_symbol> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#DNA
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#DNA> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Polynucleotide_molecule> ,
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                                      owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#DNA_sequence>
+                                                                    ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#DNA_sequence
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#DNA_sequence> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_sequence> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Development_stage
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Development_stage> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_process> ,
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                    owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism_development>
+                                                                                  ] ,
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                                  ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Dictyostelium_discoideum
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Dictyostelium_discoideum> rdf:type owl:Class ;
+                                                                         rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Drosophila
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Drosophila> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Experiment
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Experiment> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Action> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Experiment_method
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Experiment_method> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Method> ,
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> ;
+                                                                                    owl:allValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Experiment>
+                                                                                  ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Fungus
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Fungus> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Guanine_symbol
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Guanine_symbol> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_symbol> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Habronattus_californicus
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Habronattus_californicus> rdf:type owl:Class ;
+                                                                         rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Human
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Human> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Loggerhead_sea_turtle
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Loggerhead_sea_turtle> rdf:type owl:Class ;
+                                                                      rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Maize
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Maize> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Mammal
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Mammal> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Medaka_fish
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Medaka_fish> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Method
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Method> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concept> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Molecule
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Molecule> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_presential> ,
+                                                                         <http://www.onto-med.de/ontologies/gfo.owl#Material_object> ,
+                                                                         [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                                                                  owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Atom>
+                                                                                                ]
+                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                                                                  owl:minCardinality "2"^^xsd:nonNegativeInteger
+                                                                                                ]
+                                                                                              ) ;
+                                                                           rdf:type owl:Class
+                                                                         ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Monocellular_organism
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Monocellular_organism> rdf:type owl:Class ;
+                                                                      owl:equivalentClass [ owl:intersectionOf ( <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell>
+                                                                                                                 <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism>
+                                                                                                               ) ;
+                                                                                            rdf:type owl:Class
+                                                                                          ] ;
+                                                                      rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Mosquito
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Mosquito> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Mouse
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Mouse> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Multicellular_organism
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Multicellular_organism> rdf:type owl:Class ;
+                                                                       rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism> ,
+                                                                                       [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                                                                                owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell>
+                                                                                                              ]
+                                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                                                                                owl:minCardinality "2"^^xsd:nonNegativeInteger
+                                                                                                              ]
+                                                                                                            ) ;
+                                                                                         rdf:type owl:Class
+                                                                                       ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_molecule
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_molecule> rdf:type owl:Class ;
+                                                                    rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Molecule> ,
+                                                                                    [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                                                      owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_symbol>
+                                                                                    ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_sequence
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_sequence> rdf:type owl:Class ;
+                                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Symbol_sequence> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_symbol
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_symbol> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Symbol> ,
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> ;
+                                                                                    owl:allValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_molecule>
+                                                                                  ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_material_object> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism_development
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism_development> rdf:type owl:Class ;
+                                                                     rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_process> ,
+                                                                                     [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                       owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism>
+                                                                                     ] ,
+                                                                                     [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                       owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                                     ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Pathway
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Pathway> rdf:type owl:Class ;
+                                                        owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                                                                     owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_reaction>
+                                                                                                   ]
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                                                                     owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                                                                                   ]
+                                                                                                 ) ;
+                                                                              rdf:type owl:Class
+                                                                            ] ;
+                                                        rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Chemical_reaction> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_anatomical_development
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_anatomical_development> rdf:type owl:Class ;
+                                                                             rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_development> ,
+                                                                                             [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                               owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_plant>
+                                                                                             ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_development
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_development> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Organism_development> ,
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                    owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant>
+                                                                                  ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_development_stage
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_development_stage> rdf:type owl:Class ;
+                                                                        rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Development_stage> ,
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_participant> ;
+                                                                                          owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant>
+                                                                                        ] ,
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                                                                                          owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_development>
+                                                                                        ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plasmodium_falciparum
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plasmodium_falciparum> rdf:type owl:Class ;
+                                                                      rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Monocellular_organism> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Polynucleotide_molecule
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Polynucleotide_molecule> rdf:type owl:Class ;
+                                                                        rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Molecule> ,
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                                                          owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_molecule>
+                                                                                        ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Protein
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Protein> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Molecule> ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_part> ;
+                                                                          owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_molecule>
+                                                                        ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#RNA
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#RNA> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Polynucleotide_molecule> ,
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                                      owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#RNA_sequence>
+                                                                    ] .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#RNA_sequence
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#RNA_sequence> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_sequence> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Species
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Species> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concept> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Thymine_symbol
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Thymine_symbol> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_symbol> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Tissue
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Tissue> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Biological_material_object> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Uracil_symbol
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Uracil_symbol> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Nucleotide_symbol> .
+
+
+###  http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Zebrafish
+<http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Zebrafish> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Animal> .
+
+
+###  http://reliant.teknowledge.com/DAML/SUMO.owl#ElementalSubstance
+<http://reliant.teknowledge.com/DAML/SUMO.owl#ElementalSubstance> rdf:type owl:Class ;
+                                                                  rdfs:comment """This is the entry point for a Period Table OWL File. Unfortunately, Pellet seems to die with
+every publicly available Period Table in OWL, therefore this is just the entry point. Declare
+the appropriate class equivalent with this one or Atom if you want to use elements."""@en .
+
+
+###  http://www.co-ode.org/ontologies/amino-acid/2005/10/11/amino-acid.owl#AminoAcid
+<http://www.co-ode.org/ontologies/amino-acid/2005/10/11/amino-acid.owl#AminoAcid> rdf:type owl:Class ;
+                                                                                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                                                                    owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Amino_acid_symbol>
+                                                                                                  ] .
+
+
+###  http://www.geneontology.org/owl/#DDANAT_0000001
+<http://www.geneontology.org/owl/#DDANAT_0000001> rdf:type owl:Class .
+
+
+###  http://www.geneontology.org/owl/#GO_0005575
+<http://www.geneontology.org/owl/#GO_0005575> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell_component> .
+
+
+###  http://www.geneontology.org/owl/#MA_0000001
+<http://www.geneontology.org/owl/#MA_0000001> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_mouse> .
+
+
+###  http://www.geneontology.org/owl/#PO_0007021
+<http://www.geneontology.org/owl/#PO_0007021> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_anatomical_development> .
+
+
+###  http://www.geneontology.org/owl/#PO_0007033
+<http://www.geneontology.org/owl/#PO_0007033> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Plant_development_stage> .
+
+
+###  http://www.geneontology.org/owl/#TAIR_0000021
+<http://www.geneontology.org/owl/#TAIR_0000021> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_development_stage> .
+
+
+###  http://www.geneontology.org/owl/#TAIR_0000022
+<http://www.geneontology.org/owl/#TAIR_0000022> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Arabidopsis_anatomical_development> .
+
+
+###  http://www.geneontology.org/owl/#TAIR_0000205
+<http://www.geneontology.org/owl/#TAIR_0000205> rdf:type owl:Class .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Abstract
+<http://www.onto-med.de/ontologies/gfo.owl#Abstract> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> ;
+                                                     owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Concrete> ,
+                                                                      <http://www.onto-med.de/ontologies/gfo.owl#Space_time> ;
+                                                     rdfs:comment """Abstract individuals are independent from time and space (they are not in time and space).
+Examples: the number \"2\" or pi."""@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Action
+<http://www.onto-med.de/ontologies/gfo.owl#Action> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Occurrent> ,
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_agent> ;
+                                                                     owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Presential>
+                                                                   ] ;
+                                                   rdfs:comment "Actions are occurents which are caused by some presential (the agent) at every (inner and outer) time-boundary of the chronoid framing the occurent."@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Amount_of_substrate
+<http://www.onto-med.de/ontologies/gfo.owl#Amount_of_substrate> rdf:type owl:Class ;
+                                                                owl:equivalentClass <http://www.onto-med.de/ontologies/gfo.owl#Mass_entity> ;
+                                                                rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Continuous> ,
+                                                                                <http://www.onto-med.de/ontologies/gfo.owl#Presential> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Awareness_level
+<http://www.onto-med.de/ontologies/gfo.owl#Awareness_level> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Level> ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                                              owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Mental_stratum>
+                                                                            ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Biological_level
+<http://www.onto-med.de/ontologies/gfo.owl#Biological_level> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Level> ,
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                                               owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Material_stratum>
+                                                                             ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Category
+<http://www.onto-med.de/ontologies/gfo.owl#Category> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Item> ;
+                                                     owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Individual> ;
+                                                     rdfs:comment """Categories satisfy the following conditions: (1) Categories can be instantiated; (2) Categories can be predicated of other entities.
+Categories are defined intensional-with-an-s. They are, therefore, closely related to language.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Change
+<http://www.onto-med.de/ontologies/gfo.owl#Change> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Occurrent> ;
+                                                   owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#History> ,
+                                                                    <http://www.onto-med.de/ontologies/gfo.owl#Process> ;
+                                                   rdfs:comment """A change in the technical sense refers to a pair of process
+boundaries. Either at coinciding boundaries (then it comes close to
+notions like ``punctual'' or ``instantaneous event'' as well as
+``moment'' -- in a temporal reading), or at boundaries at the opposite
+ends of a process of arbitrary extension.
+
+The notion of change is relative to contradictory conditions
+between which a transition takes place. These contradictions refer to
+some collection of pairwise disjoint universals.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Chemical_level
+<http://www.onto-med.de/ontologies/gfo.owl#Chemical_level> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Level> ,
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                                             owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Material_stratum>
+                                                                           ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Chronoid
+<http://www.onto-med.de/ontologies/gfo.owl#Chronoid> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Temporal_region> ;
+                                                     rdfs:comment """Chronoids are entities sui generis.
+
+Every chronoid has exactly two extremal and
+infinitely many inner time boundaries which are
+equivalently called time-points.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Concept
+<http://www.onto-med.de/ontologies/gfo.owl#Concept> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Category> ;
+                                                    owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Symbol_structure> ,
+                                                                     <http://www.onto-med.de/ontologies/gfo.owl#Universal> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Concrete
+<http://www.onto-med.de/ontologies/gfo.owl#Concrete> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> ;
+                                                     owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Space_time> ;
+                                                     rdfs:comment "Concrete individuals have a relation to time or space (they are in time and space)." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Configuration
+<http://www.onto-med.de/ontologies/gfo.owl#Configuration> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Presential> ;
+                                                          owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Material_boundary> ,
+                                                                           <http://www.onto-med.de/ontologies/gfo.owl#Material_object> ;
+                                                          rdfs:comment """We consider a collection of presential facts which exist at the same time-boundary. Such collections may be considered themselves as presentials, and we call them configurations.
+
+It is further required that configurations contain at least one material object.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Configuroid
+<http://www.onto-med.de/ontologies/gfo.owl#Configuroid> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Process> ;
+                                                        rdfs:comment "Configuroids are, in the simplest case, integrated wholes made up of material structure processes and property processes." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Continuous
+<http://www.onto-med.de/ontologies/gfo.owl#Continuous> rdf:type owl:Class ;
+                                                       owl:equivalentClass [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Individual>
+                                                                                                  [ rdf:type owl:Class ;
+                                                                                                    owl:complementOf <http://www.onto-med.de/ontologies/gfo.owl#Discrete>
+                                                                                                  ]
+                                                                                                ) ;
+                                                                             rdf:type owl:Class
+                                                                           ] ;
+                                                       rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Continuous_change
+<http://www.onto-med.de/ontologies/gfo.owl#Continuous_change> rdf:type owl:Class ;
+                                                              owl:equivalentClass <http://www.onto-med.de/ontologies/gfo.owl#Intrinsic_change> ;
+                                                              rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Change> ;
+                                                              rdfs:comment "For the purpose of formalizing continuous changes, a minimal chronoid universal D(c) is employed in order to capture the idea of observable differences during certain chronoids, whereas the change itself does not allow the observation of a difference. The predicate change(e1,e2, u1, u2, u, D(c)) is intended to formalize this approach. Continous changes occur over time (a chronoid)."@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Continuous_process
+<http://www.onto-med.de/ontologies/gfo.owl#Continuous_process> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Continuous> ,
+                                                                               <http://www.onto-med.de/ontologies/gfo.owl#Process> ;
+                                                               owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Discrete_process> ;
+                                                               rdfs:comment """Processes where all non-coinciding internal boundaries are intrinsic changes. 
+These turn out as purely continuous processes, described e.g.
+in physics by differential equations.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Dependent
+<http://www.onto-med.de/ontologies/gfo.owl#Dependent> rdf:type owl:Class ;
+                                                      owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#depends_on> ;
+                                                                            owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Item>
+                                                                          ] ;
+                                                      rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> ;
+                                                      owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Independent> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Discrete
+<http://www.onto-med.de/ontologies/gfo.owl#Discrete> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Discrete_presential
+<http://www.onto-med.de/ontologies/gfo.owl#Discrete_presential> rdf:type owl:Class ;
+                                                                rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Discrete> ,
+                                                                                <http://www.onto-med.de/ontologies/gfo.owl#Presential> ,
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                                                  owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Persistant>
+                                                                                ] ;
+                                                                owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Mass_entity> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Discrete_process
+<http://www.onto-med.de/ontologies/gfo.owl#Discrete_process> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Discrete> ,
+                                                                             <http://www.onto-med.de/ontologies/gfo.owl#Process> ;
+                                                             rdfs:comment "Discrete processes are made up of alterations of extrinsic changes and states." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Entity
+<http://www.onto-med.de/ontologies/gfo.owl#Entity> rdf:type owl:Class ;
+                                                   owl:equivalentClass [ rdf:type owl:Class ;
+                                                                         owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Item>
+                                                                                       <http://www.onto-med.de/ontologies/gfo.owl#Set>
+                                                                                     )
+                                                                       ] ;
+                                                   rdfs:comment "Everything which exists is called an entity." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Extrinsic_change
+<http://www.onto-med.de/ontologies/gfo.owl#Extrinsic_change> rdf:type owl:Class ;
+                                                             owl:equivalentClass <http://www.onto-med.de/ontologies/gfo.owl#Instantanuous_change> ;
+                                                             rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Change> ;
+                                                             owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Intrinsic_change> ;
+                                                             rdfs:comment "Deprecated. Extrinsic changes are represented by change(e1,e2, u1, u2, u), where e1 and e2 are a pair of coincident process boundaries, and u1 and u2 are disjoint sub-universals of u."@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Function
+<http://www.onto-med.de/ontologies/gfo.owl#Function> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concept> ;
+                                                     rdfs:comment "A function F is a universal (conceptual structure) defined in purely teleological terms with respect to a given goal G which commonly is ascribed by means of has-function relation to entities that are the realizations of the function F, execute such a realization or are intended to do it." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#History
+<http://www.onto-med.de/ontologies/gfo.owl#History> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Occurrent> ;
+                                                    owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Process> ;
+                                                    rdfs:comment """Histories consist of a number of process boundaries.
+
+We assume that any history can be embedded into a process, which then
+forms a foundation of the history. If it were not for this foundation,
+one would face the problem of singling out the right boundaries in
+order to get a natural history: It is not sensible to measure the
+temperature of a patient first, then determine his weight, followed by
+measuring his blood pressure and to consider these strangely arbitrary
+process boundaries as a history of the patient's body data.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Independent
+<http://www.onto-med.de/ontologies/gfo.owl#Independent> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Individual
+<http://www.onto-med.de/ontologies/gfo.owl#Individual> rdf:type owl:Class ;
+                                                       owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Abstract>
+                                                                                                                  <http://www.onto-med.de/ontologies/gfo.owl#Concrete>
+                                                                                                                  <http://www.onto-med.de/ontologies/gfo.owl#Space_time>
+                                                                                                                )
+                                                                                                  ]
+                                                                                                  [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Dependent>
+                                                                                                                  <http://www.onto-med.de/ontologies/gfo.owl#Independent>
+                                                                                                                )
+                                                                                                  ]
+                                                                                                  [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Role>
+                                                                                                                  [ owl:intersectionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Individual>
+                                                                                                                                         [ rdf:type owl:Class ;
+                                                                                                                                           owl:complementOf <http://www.onto-med.de/ontologies/gfo.owl#Role>
+                                                                                                                                         ]
+                                                                                                                                       ) ;
+                                                                                                                    rdf:type owl:Class
+                                                                                                                  ]
+                                                                                                                )
+                                                                                                  ]
+                                                                                                ) ;
+                                                                             rdf:type owl:Class
+                                                                           ] ;
+                                                       rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Item> ,
+                                                                       [ rdf:type owl:Class ;
+                                                                         owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> ;
+                                                                                            owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Item>
+                                                                                          ]
+                                                                       ] ;
+                                                       rdfs:comment "Individuals are entities which cannot be further instantiated." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Instantanuous_change
+<http://www.onto-med.de/ontologies/gfo.owl#Instantanuous_change> rdf:type owl:Class ;
+                                                                 rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Change> ;
+                                                                 rdfs:comment "Instantanuous changes are represented by change(e1,e2, u1, u2, u), where e1 and e2 are a pair of coincident process boundaries, and u1 and u2 are disjoint sub-universals of u. Instantanuous changes are therefore changes of properties on two coinciding time boundaries."@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Intrinsic_change
+<http://www.onto-med.de/ontologies/gfo.owl#Intrinsic_change> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Change> ;
+                                                             rdfs:comment """Deprecated. 
+For the purpose of formalizing intrinsic changes, a minimal chronoid universal D(c) is employed in order to capture the idea of observable differences during certain chronoids, whereas the change itself does not allow the observation of a difference. The predicate change(e1,e2, u1, u2, u, D(c)) is intended to formalize this approach."""@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Item
+<http://www.onto-med.de/ontologies/gfo.owl#Item> rdf:type owl:Class ;
+                                                 owl:equivalentClass [ rdf:type owl:Class ;
+                                                                       owl:unionOf ( <http://www.onto-med.de/ontologies/gfo.owl#Category>
+                                                                                     <http://www.onto-med.de/ontologies/gfo.owl#Individual>
+                                                                                   )
+                                                                     ] ;
+                                                 rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Entity> ,
+                                                                 [ rdf:type owl:Class ;
+                                                                   owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#has_member> ;
+                                                                                      owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Entity>
+                                                                                    ]
+                                                                 ] ;
+                                                 owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Set> ;
+                                                 rdfs:comment "An item is everything which is not a set. Also called ur-element." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Level
+<http://www.onto-med.de/ontologies/gfo.owl#Level> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Ontological_layer> ,
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                                    owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Stratum>
+                                                                  ] ;
+                                                  owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Stratum> ;
+                                                  rdfs:comment "An ontological level, which is sth. more restricted and \"part of\" some gfo:Stratum." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Line
+<http://www.onto-med.de/ontologies/gfo.owl#Line> rdf:type owl:Class ;
+                                                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#spatial_boundary_of> ;
+                                                                       owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Surface>
+                                                                     ] ;
+                                                 rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Spatial_boundary> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Mass_entity
+<http://www.onto-med.de/ontologies/gfo.owl#Mass_entity> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Continuous> ,
+                                                                        <http://www.onto-med.de/ontologies/gfo.owl#Presential> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Material_boundary
+<http://www.onto-med.de/ontologies/gfo.owl#Material_boundary> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Dependent> ,
+                                                                              <http://www.onto-med.de/ontologies/gfo.owl#Presential> ,
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#depends_on> ;
+                                                                                owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Material_object>
+                                                                              ] ;
+                                                              owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Material_object> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Material_line
+<http://www.onto-med.de/ontologies/gfo.owl#Material_line> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Material_boundary> ,
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#boundary_of> ;
+                                                                            owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Material_surface>
+                                                                          ] ;
+                                                          owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Material_point> ,
+                                                                           <http://www.onto-med.de/ontologies/gfo.owl#Material_surface> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Material_object
+<http://www.onto-med.de/ontologies/gfo.owl#Material_object> rdf:type owl:Class ;
+                                                            owl:equivalentClass <http://www.onto-med.de/ontologies/gfo.owl#Material_structure> ;
+                                                            rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Discrete_presential> ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#framed_by> ;
+                                                                              owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Topoid>
+                                                                            ] ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#framed_by> ;
+                                                                              owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                            ] ;
+                                                            rdfs:comment """A material structure is an individual which satisfies the following conditions: 
+it is a presential, it occupies space, it is a bearer of qualities,  but other entities cannot have
+it as quality, and it consists of an amount of substrate, and it instantiates a persistant (\"has identity\").""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Material_persistant
+<http://www.onto-med.de/ontologies/gfo.owl#Material_persistant> rdf:type owl:Class ;
+                                                                rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Persistant> ,
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> ;
+                                                                                  owl:allValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Material_object>
+                                                                                ] ;
+                                                                rdfs:comment """Material persistants are particular universals whose instances are 
+material structures; they are related to those entities which are called 
+sometimes continuants or objects, as apples, cars or houses. 
+Material persistants capture the phenomenon of persistance through time of a material 
+object. A material persistant P satisfies a number of neccessary conditions. For every
+material persistant P there exists a process P such that
+the set of instances of P coincides with the set of process-boundaries
+of P. This implies the existence of a chronoid c
+such that for every time-point t of c there exists exactly 
+one instance of P at time point t.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Material_point
+<http://www.onto-med.de/ontologies/gfo.owl#Material_point> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Material_boundary> ,
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#boundary_of> ;
+                                                                             owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Material_line>
+                                                                           ] ;
+                                                           owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Material_surface> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Material_stratum
+<http://www.onto-med.de/ontologies/gfo.owl#Material_stratum> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Stratum> ;
+                                                             rdfs:comment """According to (Poli,2001), the basic structure of the material stratum is a distinction of physical, chemical and biological levels.
+These levels can be further refined."""@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Material_structure
+<http://www.onto-med.de/ontologies/gfo.owl#Material_structure> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Discrete_presential> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Material_surface
+<http://www.onto-med.de/ontologies/gfo.owl#Material_surface> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Material_boundary> ,
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#boundary_of> ;
+                                                                               owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Material_object>
+                                                                             ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Mental_stratum
+<http://www.onto-med.de/ontologies/gfo.owl#Mental_stratum> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Stratum> ;
+                                                           rdfs:comment """In accordance with the work of R. Poli, we divide the
+psychological/mental stratum into the layer of
+awareness and the layer of
+personality. Awareness comprises most
+of what is studied by cognitive science (perception, memory,
+reasoning, etc). Personality on the other hand concerns the phenomenon
+of will and the way in which someone reacts to her experiences."""@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Occurrent
+<http://www.onto-med.de/ontologies/gfo.owl#Occurrent> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concrete> ;
+                                                      owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Presential> ;
+                                                      rdfs:comment """Occurents have temporal parts and thus cannot be present at a time-boundary. Time
+belongs to them, because they happen in time and the time of the occurent
+is built into it. The relation between an occurent and a chronoid is
+determined by the projection relation.
+
+Occurents are also called generalized processes in the GFO.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Ontological_layer
+<http://www.onto-med.de/ontologies/gfo.owl#Ontological_layer> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Category> ;
+                                                              rdfs:comment "Ontological_layer, all of its subconcepts and the properties layer_of and on_layer are work in progress in a premature beta state."@en ,
+                                                                           "a collective term for gfo:stratum and gfo:level" ;
+                                                              owl:versionInfo "Beta"@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Persistant
+<http://www.onto-med.de/ontologies/gfo.owl#Persistant> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Universal> ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> ;
+                                                                         owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Presential>
+                                                                       ] ;
+                                                       rdfs:comment """Persistants are GFO's way to capture identity over time.
+
+GFO pursues an approach which
+accounts for persistence by means of a suitable
+universal whose instances are presentials. Such universals are called
+persistants. These do not change and they can be used to
+explain how presentials which have different properties at different
+times can nevertheless be the same.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Personality_level
+<http://www.onto-med.de/ontologies/gfo.owl#Personality_level> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Level> ,
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                                                owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Mental_stratum>
+                                                                              ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Physical_level
+<http://www.onto-med.de/ontologies/gfo.owl#Physical_level> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Level> ,
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#abstract_part_of> ;
+                                                                             owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Material_stratum>
+                                                                           ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Point
+<http://www.onto-med.de/ontologies/gfo.owl#Point> rdf:type owl:Class ;
+                                                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#spatial_boundary_of> ;
+                                                                        owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Line>
+                                                                      ] ;
+                                                  rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Spatial_boundary> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Presential
+<http://www.onto-med.de/ontologies/gfo.owl#Presential> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concrete> ,
+                                                                       <http://www.onto-med.de/ontologies/gfo.owl#Individual> ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#exists_at> ;
+                                                                         owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Time_boundary>
+                                                                       ] ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#exists_at> ;
+                                                                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                       ] ;
+                                                       rdfs:comment "A presential exists wholly at exactly one time boundary." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Process
+<http://www.onto-med.de/ontologies/gfo.owl#Process> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Occurrent> ;
+                                                    rdfs:comment "Processes are a special kind of occurent. Processes are directly in time, they have characteristics which cannot be captured by a collection of time boundaries." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Processual_role
+<http://www.onto-med.de/ontologies/gfo.owl#Processual_role> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Process> ,
+                                                                            <http://www.onto-med.de/ontologies/gfo.owl#Role> ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#role_of> ;
+                                                                              owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Process>
+                                                                            ] ;
+                                                            owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Relational_role> ,
+                                                                             <http://www.onto-med.de/ontologies/gfo.owl#Social_role> ;
+                                                            rdfs:comment "Processual roles are dependent processes. They are roles with a process as context." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Property
+<http://www.onto-med.de/ontologies/gfo.owl#Property> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concrete> ,
+                                                                     <http://www.onto-med.de/ontologies/gfo.owl#Dependent> ;
+                                                     owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Relator> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Property_value
+<http://www.onto-med.de/ontologies/gfo.owl#Property_value> rdf:type owl:Class ;
+                                                           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#value_of> ;
+                                                                                 owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Property>
+                                                                               ] ;
+                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concrete> ,
+                                                                           <http://www.onto-med.de/ontologies/gfo.owl#Dependent> ;
+                                                           rdfs:comment "The concept of a property value reflects a relationship between the property of x and the same property as exhibited by another entity y." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Relational_role
+<http://www.onto-med.de/ontologies/gfo.owl#Relational_role> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Dependent> ,
+                                                                            <http://www.onto-med.de/ontologies/gfo.owl#Role> ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#role_of> ;
+                                                                              owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Relator>
+                                                                            ] ;
+                                                            owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Social_role> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Relator
+<http://www.onto-med.de/ontologies/gfo.owl#Relator> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Role
+<http://www.onto-med.de/ontologies/gfo.owl#Role> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concrete> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Set
+<http://www.onto-med.de/ontologies/gfo.owl#Set> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Entity> ;
+                                                rdfs:comment "Set is a category pertaining to the individuals in the ZFC set theory." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Situation
+<http://www.onto-med.de/ontologies/gfo.owl#Situation> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Configuration> ;
+                                                      rdfs:comment "A situation is a special configuration which can be comprehended as a whole and satisfies certain conditions of unity, which are imposed by relations and categories associated with the situation. Herein, we consider situations to be the most complex kind of presentials." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Situoid
+<http://www.onto-med.de/ontologies/gfo.owl#Situoid> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Configuroid> ;
+                                                    rdfs:comment """Situoids are processes whose boundaries are situations and which satisfy certain principles of coherence, comprehensibility, and continuity. They are regarded as the most complex integrated wholes of the world. A situoid is, intuitively, a part of the
+world which is a coherent and comprehensible whole and does not need other entities in order to exist. Every situoid has a temporal extent and is framed by a topoid.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Social_role
+<http://www.onto-med.de/ontologies/gfo.owl#Social_role> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Independent> ,
+                                                                        <http://www.onto-med.de/ontologies/gfo.owl#Role> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Social_stratum
+<http://www.onto-med.de/ontologies/gfo.owl#Social_stratum> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Stratum> ;
+                                                           rdfs:comment """On the one hand, the social stratum is
+divided into Agents and
+Institutions. Agents are the bearers of the social
+roles that humans play. Institutions are defined as systems of
+interrelated social components. On the other hand, a social system can
+be seen as a network in which businesses, politics, art, language (and
+many other facets) both present their own features and
+influence each other."""@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Space
+<http://www.onto-med.de/ontologies/gfo.owl#Space> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Space_time> ;
+                                                  owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Time> ;
+                                                  rdfs:comment "GFO uses Brentano space." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Space_time
+<http://www.onto-med.de/ontologies/gfo.owl#Space_time> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Individual> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Spatial_boundary
+<http://www.onto-med.de/ontologies/gfo.owl#Spatial_boundary> rdf:type owl:Class ;
+                                                             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#spatial_boundary_of> ;
+                                                                                   owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Space>
+                                                                                 ] ;
+                                                             rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Space> ;
+                                                             owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Spatial_region> ;
+                                                             rdfs:comment """Boundaries of regions are surfaces, boundaries of
+surfaces are lines, and boundaries of lines are
+points. As in the case of time-boundaries, spatial
+boundaries have no independent existence, i.e. they depend on the
+spatial entity of which they are  boundaries.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Spatial_region
+<http://www.onto-med.de/ontologies/gfo.owl#Spatial_region> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Space> ;
+                                                           rdfs:comment "Space regions are mereological sums of topoids." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#State
+<http://www.onto-med.de/ontologies/gfo.owl#State> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Process> ;
+                                                  rdfs:comment "A process without an instantanuous change at any of its inner time boundaries is called a state."@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Stratum
+<http://www.onto-med.de/ontologies/gfo.owl#Stratum> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Ontological_layer> ;
+                                                    rdfs:comment """According to (Poli, 2001, 2002)  (based 
+on the philosopher Hartmann) we distinguish at least three ontological
+strata of the world: the material stratum, the
+mental/psychological stratum, and the
+social stratum stratum. 
+
+Every entity of the world participates in certain
+strata and levels. We take the position that the layers are
+characterized by integrated systems of categories. Hence, a layer can
+be understood as a meta-category whose instances are categories of
+certain kinds. Among these levels specific forms of categorial and
+existential dependencies hold. For example, a mental entity requires
+an animate material object as its existential bearer."""@en .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Surface
+<http://www.onto-med.de/ontologies/gfo.owl#Surface> rdf:type owl:Class ;
+                                                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#spatial_boundary_of> ;
+                                                                          owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Topoid>
+                                                                        ] ;
+                                                    rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Spatial_boundary> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Symbol
+<http://www.onto-med.de/ontologies/gfo.owl#Symbol> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Symbol_structure> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Symbol_sequence
+<http://www.onto-med.de/ontologies/gfo.owl#Symbol_sequence> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Symbol_structure> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Symbol_structure
+<http://www.onto-med.de/ontologies/gfo.owl#Symbol_structure> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Category> ;
+                                                             owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Universal> .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Temporal_region
+<http://www.onto-med.de/ontologies/gfo.owl#Temporal_region> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Time> ;
+                                                            owl:disjointWith <http://www.onto-med.de/ontologies/gfo.owl#Time_boundary> ;
+                                                            rdfs:comment """Time Regions are defined as the mereological sum of chronoids,
+i.e. time regions may consist of non-connected intervals of time.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Time
+<http://www.onto-med.de/ontologies/gfo.owl#Time> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Space_time> ;
+                                                 rdfs:comment "The time model of GFO is based on Brentano and the glass continuum of Allen&Hayes." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Time_boundary
+<http://www.onto-med.de/ontologies/gfo.owl#Time_boundary> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Time> ,
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#time_boundary_of> ;
+                                                                            owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Chronoid>
+                                                                          ] ;
+                                                          rdfs:comment """Time boundaries depend on a chronoids (i.e. they have no independent
+existence) and can coincide.""" .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Token
+<http://www.onto-med.de/ontologies/gfo.owl#Token> rdf:type owl:Class ;
+                                                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                                        owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Symbol_structure>
+                                                                      ] ;
+                                                  rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Concrete> ,
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instance_of> ;
+                                                                    owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Symbol_structure>
+                                                                  ] .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Topoid
+<http://www.onto-med.de/ontologies/gfo.owl#Topoid> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Spatial_region> ;
+                                                   rdfs:comment "Topoids are connected compact regions of space. They have spatial boundaries." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Universal
+<http://www.onto-med.de/ontologies/gfo.owl#Universal> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Category> ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#instantiated_by> ;
+                                                                        owl:someValuesFrom <http://www.onto-med.de/ontologies/gfo.owl#Item>
+                                                                      ] ;
+                                                      rdfs:comment "Universals are immanent universals. They exist in re." .
+
+
+###  http://www.onto-med.de/ontologies/gfo.owl#Value_space
+<http://www.onto-med.de/ontologies/gfo.owl#Value_space> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://www.onto-med.de/ontologies/gfo.owl#Universal> ;
+                                                        rdfs:comment """Property values usually appear in groups which are called value structures, value spaces or measurement systems.
+Each of these structures corresponds to some property. More intuitively, one could say that the property may be measured with respect to some measurement system.
+For instance, sizes may be measured with the values ``small'' ``big'' or ``very big'', which are the elements of one value structure.
+
+The notion of a value structure of a property is similar to a quality dimension in (Gardenfors, 2000).
+
+Further, value structures are related to quality spaces in DOLCE (Masolo, 2003}. A quality space consists of all ``quales'' (our property values) of some ``quality'' (our property).
+
+Often it seems to be the case that a notion of distance can be defined, and that certain layers of value structures are isomorphic to some subset of real numbers, which allows for a mapping of values to pairs of a real number and a unit, as in the case of ``10 kg''.""" .
+
+
+###  http://www.w3.org/2002/07/owl#Nothing
+owl:Nothing rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.onto-med.de/ontologies/gfo.owl#empty_set
+<http://www.onto-med.de/ontologies/gfo.owl#empty_set> rdf:type owl:NamedIndividual ,
+                                                               <http://www.onto-med.de/ontologies/gfo.owl#Set> ,
+                                                               owl:Thing .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:Class ;
+  owl:unionOf ( [ rdf:type owl:Restriction ;
+                  owl:onProperty <http://www.geneontology.org/owl/#develops_from> ;
+                  owl:someValuesFrom <http://www.geneontology.org/owl/#DDANAT_0000001>
+                ]
+                [ rdf:type owl:Restriction ;
+                  owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+                  owl:someValuesFrom <http://www.geneontology.org/owl/#DDANAT_0000001>
+                ]
+              ) ;
+  rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_dictyostelium_discoideum>
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty <http://www.geneontology.org/owl/#part_of> ;
+  owl:someValuesFrom <http://www.geneontology.org/owl/#GO_0005575> ;
+  rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell_component>
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty <http://www.geneontology.org/owl/#part_of> ;
+  owl:someValuesFrom <http://www.geneontology.org/owl/#MA_0000001> ;
+  rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Anatomical_part_of_mouse>
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty <http://www.onto-med.de/ontologies/gfo.owl#part_of> ;
+  owl:someValuesFrom <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell> ;
+  rdfs:subClassOf <http://onto.eva.mpg.de/ontologies/gfo-bio.owl#Cell_component>
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

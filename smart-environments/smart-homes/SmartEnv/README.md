@@ -12,7 +12,7 @@ website
 The master ontology, `SmartEnv.owl`, imports 8 other component ontologies.
 * time, geometry, event, object, sensing, situation, place, network
 
-We used Protege to merge the master and component ontologies together into one ontology file: * `SmartEnvFull.ttl`
+We used Protege to merge the master and component ontologies together into one ontology file: * `SmartEnvMerged.ttl`
 
 
 see also ...
